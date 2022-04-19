@@ -2,7 +2,7 @@
 
 ## Flowchart Demo
 
-<http://10.214.211.207:10086>
+<http://10.214.211.207:10088>
 
 ## 前端工具
 
@@ -42,7 +42,7 @@ npm run serve
 ```
 npm run build
 
-docker run -p 10096:10086 -d --name aix-cy --restart=always \
+docker run -p 10088:10088 -d --name aix-cy --restart=always \
 -v /nfs/cy/AI-Platform-frontend/dist/:/usr/share/nginx/html/ \
 -v /nfs/cy/AI-Platform-frontend/nginx.conf:/etc/nginx/nginx.conf  \
 nginx:latest
