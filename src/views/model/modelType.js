@@ -1,0 +1,20 @@
+export const modelToType = {
+    "autopruning-b43d4f18518111ebb6c6484d7ed749a8": "ResNet-18",
+    "X光安检违禁品检测（3类）": "Cascade R-CNN",
+    "X光安检违禁品检测（7类）": "Cascade R-CNN",
+    "deeplabv3_resnet50_nyuv2_240x240_seg": "DeepLabv3",
+    "deeplabv3_resnet50_nyuv2_240x240_depth": "DeepLabv3",
+    "resnet18_cub200_224x224_cls": "ResNet-18",
+    "resnet18_fgvcaircraft_224x224_cls": "ResNet-18",
+    "resnet18_stanfordcars_224x224_cls": "ResNet-18",
+    "resnet18_stanforddogs_224x224_cls": "ResNet-18",
+    "resnet18_classification_1610537854":  "ResNet-18",
+    "yolov5x_detection_coco": "YOLOv5",
+    "yolov5l_detection_coco": "YOLOv5",
+    "yolov5m_detection_coco": "YOLOv5",
+    "yolov5s_detection_coco": "YOLOv5",
+    "vgg19_classification_imagenet": "VGG19",
+    "vgg16_classification_imagenet": "VGG16",
+    "yolov5s": "YOLOv5",
+    "I3D_action_recognition": "I3D"
+}

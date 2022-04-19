@@ -1,0 +1,76 @@
+{
+	"name": "frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve & docsify serve ./src/views/doc -p 10087",
+		"build": "vue-cli-service build & docsify serve ./src/views/doc -p 10087",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"axios": "^0.19.0",
+		"bootstrap": "^4.4.1",
+		"bootstrap-vue": "^2.2.0",
+		"compression-webpack-plugin": "^4.0.0",
+		"core-js": "^3.4.3",
+		"d3": "^5.15.0",
+		"dagre-d3": "^0.6.4",
+		"docsify-cli": "^4.4.2",
+		"echarts": "^4.9.0",
+		"element-ui": "^2.13.2",
+		"html-loader": "^1.3.2",
+		"jshint": "^2.12.0",
+		"less": "^3.11.1",
+		"less-loader": "^5.0.0",
+		"normalize.css": "^8.0.1",
+		"path-to-regexp": "^6.1.0",
+		"portal-vue": "^2.1.6",
+		"uglifyjs-webpack-plugin": "^2.2.0",
+		"vue": "^2.6.10",
+		"vue-flowchart-editor": "^1.0.2",
+		"vue-json-viewer": "^2.2.19",
+		"vue-router": "^3.1.3",
+		"vuex": "^3.1.2"
+	},
+	"devDependencies": {
+		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
+		"@vue/cli-plugin-babel": "^4.1.0",
+		"@vue/cli-plugin-eslint": "^4.1.0",
+		"@vue/cli-service": "^4.1.0",
+		"babel-core": "^6.26.3",
+		"babel-eslint": "^10.0.3",
+		"babel-loader": "^8.1.0",
+		"babel-plugin-transform-remove-console": "^6.9.4",
+		"babel-preset-env": "^1.7.0",
+		"eslint": "^5.16.0",
+		"eslint-plugin-vue": "^5.0.0",
+		"fibers": "^4.0.2",
+		"font-awesome": "^4.7.0",
+		"node-sass": "^4.14.1",
+		"sass": "^1.23.7",
+		"sass-loader": "^8.0.0",
+		"vue-template-compiler": "^2.6.10",
+		"webpack-bundle-analyzer": "^3.8.0"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended"
+		],
+		"rules": {
+			"no-console": "off",
+			"no-unused-vars": "off"
+		},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions"
+	]
+}
