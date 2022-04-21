@@ -91,16 +91,16 @@ const VisStages = () => import(/* webpackChunkName: "task" */ '@/views/task_deta
 const TrainingLog = () => import(/* webpackChunkName: "task" */ '@/views/task_detail/training_log/index.vue')
 
 export const constantRoutes = [
-  { path: '', redirect: '/home' },
+  { path: '/', name: 'Home', redirect: { name: 'Welcome' }, show: false },
   {
     path: '/',
-    name: 'headerLayout',
-    redirect: "/home",
+    name: 'Welcome',
+    redirect: "/welcome",
     component: HeaderLayout,
     children: [
       {
-        path: '/home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+        path: '/welcome',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/welcome/index.vue'),
         meta: {
           title: "平台介绍",
         },

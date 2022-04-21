@@ -1,7 +1,7 @@
 <template>
-  <div style="margin-top:-24px; margin-bottom:-25px; !important;">
+  <div style="width: 100%">
     <div id="static" class="common-container">
-      <div class="banner lite">
+      <!-- <div class="banner lite">
         <section class="section">
           <div class="banner-title">
             <h1 class="banner-title-text">AIVision开发平台</h1>
@@ -122,13 +122,59 @@
             </div>
           </div>
         </section>
+      </div> -->
+
+      <div class="introduction">
+        <div class="intro-title">AIVision - 视频图像范式平台</div>
+        <div class="intro-subtitle">
+          通过普适化技术，以API调用方式，零门槛快速具备AI检测能力
+        </div>
+        <div class="intro-describe">
+          <p>
+            基于已有数据进行训练，定制多种图像处理和图像分析的AI模型，解决图像增强、图像分类、物体检测、语义
+          </p>
+          <p>
+            分割、视频分析等问题，适用于安检图像识别、物品分类统计、视频动作识别等各类应用场景。
+          </p>
+        </div>
+        <div class="intro-button">
+          <el-button
+            type="primary"
+            style="
+              margin-left: 0px;
+              margin-bottom: 6%;
+              width: 128px;
+              height: 45px;
+              letter-spacing: 1px;
+              font-size: 18px;
+              font-weight: 500;
+            "
+            @click="handleClickJump('task')"
+            >立即使用</el-button
+          >
+          <a href="http://10.214.211.207:10087" target="_blank">
+            <el-button
+              type="info"
+              style="
+                margin-left: 20px;
+                margin-bottom: 6%;
+                width: 128px;
+                height: 45px;
+                letter-spacing: 1px;
+                font-size: 18px;
+                font-weight: 500;
+              "
+              >查看文档</el-button
+            >
+          </a>
+        </div>
       </div>
 
       <div
         style="padding-top: 0"
         class="section-wrap section-white modal_section"
       >
-        <section id="" class="section">
+        <section id="generic_template" class="section">
           <div class="section-title_container">
             <div class="section-title">预置通用模板</div>
           </div>
@@ -139,8 +185,9 @@
                 :key="item.id"
                 @click="createExample(item.key, 'general')"
                 class="modeltype-item"
+                id="generic_template_item"
               >
-                <div class="modeltype-icon">
+                <div class="modeltype-icon" id="generic_template_icon">
                   <img :src="require(item.img + '')" :alt="item.name" />
                 </div>
                 <div class="modeltype-title">
@@ -237,12 +284,7 @@
 import { mapState, mapActions, mapMutations } from "vuex";
 import _ from "lodash";
 
-import {
-  keyToIndustry,
-  realApplication,
-  typeToDesc,
-  OCRApplication,
-} from "./industries";
+import { keyToIndustry, realApplication, typeToDesc } from "./industries";
 
 export default {
   name: "MyFlowcharts",
@@ -435,7 +477,6 @@ export default {
   background-repeat: no-repeat;
   background-position: 50%;
 }
-
 .banner.lite .lite-swiper-pagination {
   position: absolute;
   bottom: 86px;
@@ -444,6 +485,33 @@ export default {
   height: 19px;
   z-index: 10;
 }
+
+.introduction {
+  width: 100%;
+  background-image: url("./assets/head.jpg");
+  margin: 0 auto 5%;
+  text-align: center;
+}
+.intro-title {
+  padding: 5% 0 0;
+  color: white;
+  font-size: 48px;
+}
+.intro-subtitle {
+  padding: 5px;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+}
+.intro-describe {
+  padding: 3% 0 2%;
+  color: white;
+  font-size: 18px;
+}
+.intro-button {
+  text-align: center;
+}
+
 .modeltype.lite {
   font-size: 16px;
   display: -webkit-box;
@@ -530,6 +598,16 @@ export default {
   margin-right: 10px;
   margin-bottom: 6px;
   background: #f5f5f5;
+}
+
+#generic_template {
+  width: 924px;
+}
+#generic_template_item {
+  width: 462px;
+}
+#generic_template_icon {
+  width: 400px;
 }
 
 :root {
@@ -689,10 +767,8 @@ ul {
   font-weight: 400;
   letter-spacing: normal;
 }
-.common-container {
-}
 .common-container .section {
-  width: 1180px;
+  width: 1146px;
 }
 .alink {
   display: inline-block;
