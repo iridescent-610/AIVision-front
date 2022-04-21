@@ -17,6 +17,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import HeaderLayout from '@/layout/headerLayout.vue'
+import MenuLayout from '@/layout/menuLayout.vue'
 
 import Sync from '@/views/user/sync/index.vue'
 import SignIn from "@/views/user/signin/index.vue"
@@ -89,14 +91,36 @@ const VisStages = () => import(/* webpackChunkName: "task" */ '@/views/task_deta
 const TrainingLog = () => import(/* webpackChunkName: "task" */ '@/views/task_detail/training_log/index.vue')
 
 export const constantRoutes = [
-  { path: '/', name: 'Home', redirect: { name: 'Welcome' }, show: false },
+  { path: '', redirect: '/home' },
   {
-    path: '/welcome',
-    name: 'Welcome',
-    component: Welcome,
-    meta: {
-      title: "平台介绍",
-    },
+    path: '/',
+    name: 'headerLayout',
+    redirect: "/home",
+    component: HeaderLayout,
+    children: [
+      {
+        path: '/home',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+        meta: {
+          title: "平台介绍",
+        },
+      },
+      {
+        path: '/dashboard',
+        component: MenuLayout,
+        redirect: "/dashboard/modelZoo",
+        children: [
+          {
+            path: '/dashboard/modelZoo',
+            name: 'Model Zoo',
+            component: () => import(/* webpackChunkName: "modelZoo" */'@/views/metric_graph/modelzoo/index.vue'),
+            meta: {
+              title: "图谱列表",
+            },
+          },
+        ]
+      }
+    ]
   },
   {
     path: '/industry/:industry',

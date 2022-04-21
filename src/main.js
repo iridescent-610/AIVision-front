@@ -30,6 +30,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
+import SvgIcon from '@/components/svg_icon'
+Vue.component('svg-icon', SvgIcon)
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('./assets', false, /\.svg$/)
+requireAll(req)
+
 Vue.use(BootstrapVue)
 Vue.use(ElementUI, { locale })
 

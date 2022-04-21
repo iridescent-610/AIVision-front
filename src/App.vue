@@ -16,14 +16,14 @@
 
 <template>
   <div id="app">
-    <b-navbar toggleable="sm" type="dark" variant="primary" sticky>
+<!--    <b-navbar toggleable="sm" type="dark" variant="primary" sticky>
       <b-navbar-brand :to="{ name: 'Welcome' }" id="brand">
         <img height="30px" src="@/assets/AIVision.png" alt="AI+X" id="title" />
-        <!-- <img height="21px" src="@/assets/aix_logo.png" alt="AI+X" id="title" /> -->
-        <!-- <img height="21px"
+        &lt;!&ndash; <img height="21px" src="@/assets/aix_logo.png" alt="AI+X" id="title" /> &ndash;&gt;
+        &lt;!&ndash; <img height="21px"
              src="@/assets/atlas_title.png"
              alt="AI+X"
-             id="title" /> -->
+             id="title" /> &ndash;&gt;
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -63,9 +63,9 @@
     <div class="main pt-4">
       <router-view></router-view>
     </div>
-    <!-- <div class="footer">
+    &lt;!&ndash; <div class="footer">
       <small>© 2020 模型炼知平台</small>
-    </div>-->
+    </div>&ndash;&gt;
     <b-modal
       title="用户"
       no-close-on-backdrop
@@ -78,7 +78,8 @@
       :title-class="{ style: { fontSize: '50px' } }"
     >
       <div class="text-center">{{ dialog_content }}</div>
-    </b-modal>
+    </b-modal>-->
+    <router-view />
   </div>
 </template>
 
@@ -119,6 +120,9 @@ export default {
 </script>
 
 <style scoped>
+#app {
+  height: 100vh;
+}
 #brand {
   display: -webkit-flex; /* Safari */
   -webkit-align-items: center; /* Safari 7.0+ */

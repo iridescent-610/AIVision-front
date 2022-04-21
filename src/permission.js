@@ -10,12 +10,13 @@ router.beforeEach((to, from, next) => {
     document.title = getPageTitle(to.meta.title)
     if (!store.getters.is_loggedin) {
         // 未登录
-        if (whiteList.indexOf(to.name) !== -1) {
-            next()
-        }
-        else {
-            next({ name: 'Sign In' })
-        }
+        next()
+        // if (whiteList.indexOf(to.name) !== -1) {
+        //     next()
+        // }
+        // else {
+        //     next({ name: 'Sign In' })
+        // }
     }
     else if (store.getters.is_loggedin) {
         if (!store.state.auth.username) {
