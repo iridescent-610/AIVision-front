@@ -12,7 +12,7 @@ export const industries = [
         key: "image_classification",
         name: "通用图像分类",
         id: 0,
-        img: "./assets/ex-ic.jpg",  // 320*240
+        img: "./assets/ex-ic.png",
         elements: ['图像分类'],
         desc: "定制基于图像的图像分类模型，适用于猫狗分类等场景"
       },
@@ -20,7 +20,7 @@ export const industries = [
         key: "object_detection",
         name: "通用物体检测",
         id: 1,
-        img: "./assets/ex-od.jpg",
+        img: "./assets/ex-od.png",
         elements: ['目标检测'],
         desc: "定制基于图像的目标检测模型，适用于行人检测等场景"
       },
@@ -28,7 +28,7 @@ export const industries = [
         key: "fine_grained_image_recognition",
         name: "细粒度图像识别",
         id: 2,
-        img: "./assets/ex-fgir.jpg",
+        img: "./assets/ex-fgir.png",
         elements: ['目标检测', '图像分类'],
         desc: "定制基于图像的细粒度识别模型，实现图像目标检测、细粒度识别等任务，适用于猫狗分类、行人检测等场景"
       },
@@ -36,7 +36,7 @@ export const industries = [
         key: "text_spotting",
         name: "多场景文本识别",
         id: 3,
-        img: "./assets/ex-ts.jpg",
+        img: "./assets/ex-ts.png",
         elements: ['文本检测', '文本识别'],
         desc: "定制基于图像的文本识别模型，实现文档、票据、手写、自然场景等多种场景的图像文本识别，适用于OCR、关键信息提取等任务"
       },
@@ -44,7 +44,7 @@ export const industries = [
         key: "image_segmentation",
         name: "通用图像分割",
         id: 4,
-        img: "./assets/ex-is.jpg",
+        img: "./assets/ex-is.png",
         elements: ['图像分割'],
         desc: "定制基于图像的图像分割模型，是为场景理解铺平了道路的一种高层任务，可用于自动驾驶、人机交互、计算摄影学、图像搜索引擎、增强现实等场景"
       },
@@ -52,7 +52,7 @@ export const industries = [
         key: "multi_kind_image_augmentation",
         name: "多功能图像质量增强",
         id: 5,
-        img: "./assets/ex-mkia.jpg",
+        img: "./assets/ex-mkia.png",
         elements: ['去模糊', '去印章', '超分辨率', '去阴影', '去褶皱', '去雨', '去噪声', '...'],
         desc: "定制基于图像进行多样化增强的图像到图像AI模型，实现图像去模糊、图像去阴影等增强功能，适用于图片文本内容识别、图像分类、文档关键信息提取等下流任务场景"
       }
@@ -324,7 +324,7 @@ export const realApplication = [
   {
     id: "security_check",
     name: "安检图像识别",
-    img: "./assets/fac-ob.jpg",
+    img: "./assets/fac-ob.png",
     back: "./assets/factory_back.jpg",
     desc: "基于目标检测技术，X光安检图像智能识别可识别常见的刀具、枪支、烟花爆竹、压力容器罐等违禁品，可应用于大型活动、轨交铁路、机场海关、快递物流等多个领域",
     key: "object_detection",
@@ -336,7 +336,7 @@ export const realApplication = [
   {
     id: "retail_detect",
     name: "香烟零售计数",
-    img: "./assets/retail_detect.jpg",
+    img: "./assets/retail_detect.png",
     back: "./assets/retail_back.jpg",
     desc: "基于目标检测技术，对新零售场景图像中的烟草进行检测和品类分类，可应用于视频中的各品类烟草计数，实现烟草销售量自动统计分析",
     key: "object_detection",
@@ -345,30 +345,30 @@ export const realApplication = [
     demo_type: "IMAGE",
     note: "检测"
   },
-  // {
-  //   id: "card_recognition",
-  //   name: "卡证文字识别",
-  //   img: "./assets/idcard_rec.jpg",
-  //   back: "./assets/idcard_back.png",
-  //   desc: "基于文本检测和文本识别技术，丰富身份证信息录入的方式，辅助用户录入信息，极高的识别率让繁琐、低效的业务环节体现更好的用户体验",
-  //   key: "text_spotting",
-  //   elements: ['文本检测', '文本识别'],
-  //   industry: "financial",
-  //   demo_type: "IMAGE",
-  //   note: "识别"
-  // },
   {
-    id: "driver_action_recognition",
-    name: "列车司机行为识别",
-    img: "./assets/driver_action_recognition.jpg",
-    back: "./assets/driver_back.jpg",
-    desc: "基于视频动作检测和视频动作识别技术，提取列车车厢内司机进行手势动作的时间片段，并识别司机手势的语义，极大降低人工审核的工作量",
-    key: "spatio_temporal_action_detection",
-    elements: ['视频动作检测', '视频动作识别'],
-    industry: "factory",
-    demo_type: "VIDEO",
+    id: "card_recognition",
+    name: "卡证文字识别",
+    img: "./assets/idcard_rec.png",
+    back: "./assets/idcard_back.png",
+    desc: "基于文本检测和文本识别技术，丰富身份证信息录入的方式，辅助用户录入信息，极高的识别率让繁琐、低效的业务环节体现更好的用户体验",
+    key: "text_spotting",
+    elements: ['文本检测', '文本识别'],
+    industry: "financial",
+    demo_type: "IMAGE",
     note: "识别"
   },
+  // {
+  //   id: "driver_action_recognition",
+  //   name: "列车司机行为识别",
+  //   img: "./assets/driver_action_recognition.jpg",
+  //   back: "./assets/driver_back.jpg",
+  //   desc: "基于视频动作检测和视频动作识别技术，提取列车车厢内司机进行手势动作的时间片段，并识别司机手势的语义，极大降低人工审核的工作量",
+  //   key: "spatio_temporal_action_detection",
+  //   elements: ['视频动作检测', '视频动作识别'],
+  //   industry: "factory",
+  //   demo_type: "VIDEO",
+  //   note: "识别"
+  // },
 ]
 
 export const typeToDesc = realApplication.reduce((s, cur) => {
