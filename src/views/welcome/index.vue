@@ -126,9 +126,11 @@
 
       <div class="introduction">
         <div class="intro-title">AIVision - 视频图像范式平台</div>
+        <div class="intro-line1"></div>
         <div class="intro-subtitle">
           通过普适化技术，以API调用方式，零门槛快速具备AI检测能力
         </div>
+        <div class="intro-line2"></div>
         <div class="intro-describe">
           <p>
             基于已有数据进行训练，定制多种图像处理和图像分析的AI模型，解决图像增强、图像分类、物体检测、语义
@@ -137,44 +139,23 @@
             分割、视频分析等问题，适用于安检图像识别、物品分类统计、视频动作识别等各类应用场景。
           </p>
         </div>
-        <div class="intro-button">
+        <div>
           <el-button
             type="primary"
-            style="
-              margin-left: 0px;
-              margin-bottom: 6%;
-              width: 128px;
-              height: 45px;
-              letter-spacing: 1px;
-              font-size: 18px;
-              font-weight: 500;
-            "
+            class="intro-button"
             @click="handleClickJump('task')"
             >立即使用</el-button
           >
           <a href="http://10.214.211.207:10087" target="_blank">
-            <el-button
-              type="info"
-              style="
-                margin-left: 20px;
-                margin-bottom: 6%;
-                width: 128px;
-                height: 45px;
-                letter-spacing: 1px;
-                font-size: 18px;
-                font-weight: 500;
-              "
+            <el-button type="info" class="intro-button" id="intro-button2"
               >查看文档</el-button
             >
           </a>
         </div>
       </div>
 
-      <div
-        style="padding-top: 0"
-        class="section-wrap section-white modal_section"
-      >
-        <section id="generic_template" class="section">
+      <div class="section-wrap section-white modal_section">
+        <section class="section">
           <div class="section-title_container">
             <div class="section-title">预置通用模板</div>
           </div>
@@ -185,31 +166,26 @@
                 :key="item.id"
                 @click="createExample(item.key, 'general')"
                 class="modeltype-item"
-                id="generic_template_item"
               >
-                <div class="modeltype-icon" id="generic_template_icon">
+                <div class="modeltype-icon">
                   <img :src="require(item.img + '')" :alt="item.name" />
                 </div>
                 <div class="modeltype-title">
                   {{ item.name }}
-                  <i class="el-icon-arrow-right" style="font-size: 18px"></i>
                 </div>
+                <div class="modeltype-desc">{{ item.desc }}</div>
                 <div class="modeltype-type">
                   <span v-for="element in item.elements" :key="element">{{
                     element
                   }}</span>
                 </div>
-                <div class="modeltype-desc">{{ item.desc }}</div>
               </a>
             </div>
           </div>
         </section>
       </div>
 
-      <div
-        style="padding-top: 0"
-        class="section-wrap section-white modal_section"
-      >
+      <div class="section-wrap section-white modal_section">
         <section id="" class="section">
           <div class="section-title_container">
             <div class="section-title">行业应用案例</div>
@@ -220,30 +196,38 @@
                 v-for="item in realApplication"
                 :key="item.id"
                 class="modeltype-item"
+                id="modeltype-item2"
               >
-                <div class="modeltype-icon">
+                <div class="modeltype-icon" id="modeltype-icon2">
                   <img :src="require(item.img + '')" :alt="item.name" />
                 </div>
-                <div class="modeltype-title">
+                <div class="modeltype-title" id="modeltype-title2">
                   {{ item.name }}
-                  <i class="el-icon-arrow-right" style="font-size: 18px"></i>
-
-                  <el-button
-                    class="button"
-                    plain
-                    @click="createExample(item.key, item.industry)"
-                    >创建</el-button
-                  >
-                  <el-button class="button" plain @click="demoExample(item.id)"
-                    >演示</el-button
-                  >
                 </div>
-                <div class="modeltype-type">
+                <div class="modeltype-type2">
                   <span v-for="element in item.elements" :key="element">{{
                     element
                   }}</span>
                 </div>
-                <div class="modeltype-desc">{{ item.desc }}</div>
+                <div class="modeltype-desc" id="modeltype-desc2">
+                  {{ item.desc }}
+                </div>
+                <div class="modeltype-show">
+                  <button
+                    class="modeltype-button1"
+                    size="mini"
+                    @click="createExample(item.key, item.industry)"
+                  >
+                    创建
+                  </button>
+                  <button
+                    class="modeltype-button2"
+                    size="mini"
+                    @click="demoExample(item.id)"
+                  >
+                    演示
+                  </button>
+                </div>
               </a>
             </div>
           </div>
@@ -488,28 +472,60 @@ export default {
 
 .introduction {
   width: 100%;
-  background-image: url("./assets/head.jpg");
-  margin: 0 auto 5%;
+  background-image: url("./assets/head_background.png");
+  background-size: 100%;
+  margin: 0 auto 21px;
   text-align: center;
 }
 .intro-title {
-  padding: 5% 0 0;
+  padding-top: 120px;
   color: white;
-  font-size: 48px;
+  font-size: 51px;
+}
+.intro-line1 {
+  margin: 11px auto 3px;
+  width: 719px;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    white,
+    rgba(255, 255, 255, 0)
+  );
+}
+.intro-line2 {
+  margin: 2px auto 48px;
+  width: 719px;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    white,
+    rgba(255, 255, 255, 0)
+  );
 }
 .intro-subtitle {
-  padding: 5px;
   color: white;
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 20px;
 }
 .intro-describe {
-  padding: 3% 0 2%;
+  padding-bottom: 44px;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
 }
 .intro-button {
   text-align: center;
+  margin-bottom: 115px;
+  width: 124px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #1976d2;
+}
+#intro-button2 {
+  margin-left: 32px;
+  background-color: transparent;
+  border: 1px solid white;
 }
 
 .modeltype.lite {
@@ -521,93 +537,64 @@ export default {
   flex-wrap: wrap;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  /* justify-content: space-between; */
 }
-.modeltype.lite .modeltype-item {
+.modeltype-item {
   display: block;
+  border-radius: 15px;
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
-  /* flex-grow: 1; */
-  width: 382px;
-  padding: 30px;
-  border: 1px solid rgba(0, 0, 0, 0);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+  width: 470px;
+  height: 471px;
+  margin-bottom: 32px;
+  background: white;
+  position: relative;
 }
-.modeltype.lite .modeltype-item:hover {
-  border: 1px solid #036fe2;
-  -webkit-box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+.modeltype-item:nth-child(even) {
+  margin-left: 21px;
 }
-
+.modeltype-item:hover {
+  border: 2px solid #036fe2;
+}
 .modeltype.lite .modeltype-item:hover .modeltype-title {
   color: #503ef3;
 }
 
-.modeltype.lite .modeltype-item .modeltype-title .button {
-  padding: 6px 10px 6px 10px;
-  float: right;
-  margin: 2px 3px 0 3px;
+.modeltype-icon {
+  width: 466px;
+  height: 290px;
+  background-size: 100%;
 }
-/* .modeltype.lite .modeltype-item:last-child {
-  -webkit-box-flex: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-  margin-bottom: 0;
-} */
-.modeltype.lite .modeltype-icon {
-  width: 320px;
-  margin-bottom: 24px;
-}
-.modeltype.lite .modeltype-title {
+.modeltype-title {
   display: block;
   font-size: 20px;
   line-height: 30px;
-  padding-bottom: 20px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid #e1e1e1;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  margin-top: 20px;
+  margin-left: 32px;
 }
-.modeltype.lite .modeltype-title > i {
-  font-size: 12px;
-  padding-left: 10px;
-}
-.modeltype.lite .modeltype-title:hover {
-  color: #503ef3;
-}
-.modeltype.lite .modeltype-desc {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+.modeltype-desc {
   font-size: 14px;
   color: #666;
-  line-height: 24px;
+  line-height: 22px;
+  margin-top: 6px;
+  margin-left: 32px;
+  margin-right: 32px;
 }
-.modeltype.lite .modeltype-type {
-  font-size: 14px;
-  line-height: 24px;
-  margin-bottom: 10px;
-  /* margin-right: 10px; */
+.modeltype-type {
+  font-size: 12px;
+  height: 25px;
   overflow: hidden;
-  color: #000;
+  color: #9ba6ab;
+  position: absolute;
+  bottom: 20px;
+  left: 32px;
 }
-.modeltype.lite .modeltype-type > span {
+.modeltype-type > span {
   display: inline-block;
-  height: 24px;
-  padding: 0 12px;
-  margin-right: 10px;
-  margin-bottom: 6px;
-  background: #f5f5f5;
-}
-
-#generic_template {
-  width: 924px;
-}
-#generic_template_item {
-  width: 462px;
-}
-#generic_template_icon {
-  width: 400px;
+  line-height: 17px;
+  padding: 4px 12px;
+  margin-right: 20px;
+  background: #eceeef;
 }
 
 :root {
@@ -629,7 +616,6 @@ export default {
 .footer {
   vertical-align: top;
   background-color: rgba(3, 3, 122, 0.8);
-  /* padding-right: 220px; */
 }
 .footer .footer_cover {
   width: 100%;
@@ -639,14 +625,12 @@ export default {
 .footer .ai_items_img {
   padding-top: 158px;
   color: #ffffff;
-
   font-size: 14px;
   width: 138px;
   text-align: center;
   margin-top: 80px;
   margin-left: 200px;
   background-image: url("./assets/QRcode.png");
-  /* background-size: 200px 200px; */
   background-repeat: no-repeat;
 }
 .footer .ai_items_class {
@@ -712,7 +696,6 @@ body,
 html {
   height: 100%;
   width: 100%;
-  /* min-width: 1200px; */
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial,
     sans-serif;
@@ -743,32 +726,27 @@ ul {
   padding: 0;
   list-style: none;
 }
-.modal_section .section-title_container {
-  padding-bottom: 30px;
+.section-title_container {
+  padding-bottom: 56px;
 }
 .section {
   margin: 0 auto;
-  font-size: 0;
+  width: 961px;
 }
 .section-wrap {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  width: 1400px;
+  margin: 0 auto 20px;
+  padding-top: 56px;
+  padding-bottom: 25px;
 }
 .section-white {
-  background: rgba(0, 0, 0, 0);
-}
-.section-title_container {
-  padding-bottom: 60px;
+  background-color: #f2f3f4;
 }
 .section-title {
   width: 100%;
-  font-size: 32px;
+  height: 56px;
+  font-size: 40px;
   text-align: center;
-  font-weight: 400;
-  letter-spacing: normal;
-}
-.common-container .section {
-  width: 1146px;
 }
 .alink {
   display: inline-block;
@@ -785,6 +763,73 @@ ul {
 }
 .alink-grounp.alink-grounp-left {
   text-align: left;
+}
+
+#modeltype-item2 {
+  width: 307px;
+  height: 560px;
+}
+#modeltype-icon2 {
+  width: 303px;
+}
+#modeltype-title2 {
+  line-height: 28px;
+  margin-left: 20px;
+}
+#modeltype-item2 {
+  position: relative;
+}
+#modeltype-item2:not(:first-child) {
+  margin-left: 20px;
+}
+#modeltype-desc2 {
+  margin-top: 11px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.modeltype-type2 {
+  font-size: 12px;
+  height: 25px;
+  margin: 8px 20px 11px;
+  overflow: hidden;
+  color: #9ba6ab;
+}
+.modeltype-type2 > span {
+  display: inline-block;
+  line-height: 17px;
+  padding: 4px 12px;
+  margin-right: 8px;
+  background: #eceeef;
+}
+
+.modeltype-show {
+  position: absolute;
+  bottom: 24px;
+  left: 20px;
+}
+.modeltype-show > button {
+  width: 52px;
+  height: 32px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.modeltype-button1 {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+}
+.modeltype-button2 {
+  margin-left: 12px;
+  background-color: white;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+}
+.modeltype-show > button:hover {
+  background-color: #edf3ff;
+  color: #409efe;
+  border: none;
 }
 </style>
 
