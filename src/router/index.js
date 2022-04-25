@@ -100,7 +100,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/welcome',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/welcome/index.vue'),
+        component: () => import('@/views/welcome/index.vue'),
         meta: {
           title: "平台介绍",
         },
@@ -113,10 +113,62 @@ export const constantRoutes = [
           {
             path: '/dashboard/modelZoo',
             name: 'Model Zoo',
-            component: () => import(/* webpackChunkName: "modelZoo" */'@/views/metric_graph/modelzoo/index.vue'),
+            component: ModelZoo,
             meta: {
               title: "图谱列表",
             },
+          },
+          {
+            path: '/dashboard/visgraph',
+            name: 'Visualize Graph',
+            component: VisGraph,
+            meta: {
+              title: "图谱可视化",
+            },
+          },
+          {
+            path: '/dashboard/dataset',
+            name: 'Dataset',
+            component: Dataset,
+            redirect: { name: 'My Datasets' },
+            show: true,
+            meta: {
+              title: "数据集"
+            },
+            children: [
+              { path: 'my_datasets', name: 'My Datasets', component: MyDatasets, meta: { title: "我的数据集" } },
+              { path: 'public_datasets', name: 'Public Datasets', component: PublicDatasets, meta: { title: "公开数据集" } },
+            ]
+          },
+          {
+            path: '/dashboard/model',
+            name: 'Model',
+            component: Model,
+            redirect: { name: 'My Models' },
+            meta: {
+              title: "模型"
+            },
+            children: [
+              { path: 'my_models', name: 'My Models', component: MyModels, meta: { title: "我的模型" } },
+              { path: 'public_models', name: 'Public Models', component: PublicModels, meta: { title: "公开模型" } },
+            ]
+          },
+          {
+            path: '/dashboard/flowchart',
+            name: 'Flowchart',
+            component: Flowchart,
+            redirect: { name: 'My Flowcharts' },
+            show: true,
+            meta: {
+              title: "流程图"
+            },
+            children: [
+              { path: 'my_flowcharts', name: 'My Flowcharts', component: MyFlowcharts, meta: { title: "我的流程图" } },
+              { path: 'flowcharting', name: 'Flowcharting', component: Flowcharting, meta: { title: "创建流程图" } },
+              // { path: 'flowcharting/:task/:industry', name: 'Flowcharting', component: Flowcharting, meta: { title: "创建流程图" } },
+              { path: 'inspecting/:id', name: 'Inspecting', component: Inspecting, meta: { title: "流程图状态" } },
+              { path: 'predicting/:id', name: 'Predicting', component: Predicting, meta: { title: "流程图预测" } }
+            ]
           },
         ]
       }

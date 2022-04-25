@@ -1,25 +1,28 @@
 <template>
   <div class="menu-layout">
     <el-aside class="layout-aside">
-      <div class="menu-title">
-        AIVision 控制台
-      </div>
+      <div class="menu-title">AIVision 控制台</div>
       <el-menu
-          class="el-menu-vertical"
-          background-color="#F9FAFA"
-          text-color="#000"
-          router
-          :default-active="activeMenu"
-          active-text-color="#fff">
-        <el-menu-item v-for="item in menuList" :key="item.title" :index="item.path">
-          <svg-icon class="menu-icon" :svg-name="item.icon"/>
+        class="el-menu-vertical"
+        background-color="#F9FAFA"
+        text-color="#000"
+        router
+        :default-active="activeMenu"
+        active-text-color="#fff"
+      >
+        <el-menu-item
+          v-for="item in menuList"
+          :key="item.title"
+          :index="item.path"
+        >
+          <svg-icon class="menu-icon" :svg-name="item.icon" />
           <span>{{ item.title }}</span>
         </el-menu-item>
         <div class="collapse" @click="collapse = !collapse">xxx</div>
       </el-menu>
     </el-aside>
     <el-main class="layout-main">
-      <router-view/>
+      <router-view />
     </el-main>
   </div>
 </template>
@@ -27,50 +30,50 @@
 export default {
   data() {
     return {
-      activeMenu: '',
+      activeMenu: "",
       collapse: false,
       menuList: [
         {
-          title: '图谱列表',
-          path: '/dashboard/modelZoo',
-          icon: 'menu_icon_1'
+          title: "图谱列表",
+          path: "/dashboard/modelZoo",
+          icon: "menu_icon_1",
         },
         {
-          title: '图谱可视化',
-          path: '/dashboard/1',
-          icon: 'menu_icon_2'
+          title: "图谱可视化",
+          path: "/dashboard/visgraph",
+          icon: "menu_icon_2",
         },
         {
-          title: '我的数据集',
-          path: '/dashboard/2',
-          icon: 'menu_icon_3'
+          title: "我的数据集",
+          path: "/dashboard/dataset",
+          icon: "menu_icon_3",
         },
         {
-          title: '模型管理',
-          path: '/dashboard/3',
-          icon: 'menu_icon_4'
+          title: "模型管理",
+          path: "/dashboard/model",
+          icon: "menu_icon_4",
         },
         {
-          title: '业务机理建模',
-          path: '/dashboard/4',
-          icon: 'menu_icon_5'
+          title: "业务机理建模",
+          path: "/dashboard/flowchart",
+          icon: "menu_icon_5",
         },
         {
-          title: '我的容器',
-          path: '/dashboard/5',
-          icon: 'menu_icon_6'
-        }
-      ]
-    }
+          title: "我的容器",
+          path: "/dashboard/5",
+          icon: "menu_icon_6",
+        },
+      ],
+    };
   },
   created() {
-    const {path} = this.$route;
-    const findMenu = this.menuList.find(menu => path.includes(menu.path))
+    const { path } = this.$route;
+    const findMenu = this.menuList.find((menu) => path.includes(menu.path));
     if (findMenu) {
-      this.activeMenu = findMenu.path
+      this.activeMenu = findMenu.path;
     }
-  }
-}
+  },
+};
 </script>
 <style lang="less" scoped>
 .menu-layout {
@@ -81,7 +84,7 @@ export default {
 .layout-aside {
   height: 100%;
   width: 192px !important;
-  border-right: 1px solid #CFD8DC;
+  border-right: 1px solid #cfd8dc;
 
   .menu-title {
     font-size: 20px;
