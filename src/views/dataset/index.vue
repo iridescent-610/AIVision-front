@@ -15,21 +15,47 @@
 -->
 
 <template>
-  <b-container>
-    <b-col>
-      <b-nav tabs>
-        <b-nav-item active-class="active" :to="{ name: 'My Datasets'}">我的数据集</b-nav-item>
-        <b-nav-item active-class="active" :to="{ name: 'Public Datasets'}">公开数据集</b-nav-item>
-      </b-nav>
-      <div class="pt-4">
-        <router-view></router-view>
-      </div>
-    </b-col>
-  </b-container>
+ <div>
+   <el-tabs class="el-tab" v-model="activeName" @tab-click="handleTabClick">
+     <el-tab-pane label="我的数据集" name="first">
+       <my-datasets/>
+     </el-tab-pane>
+     <el-tab-pane label="公开数据集" name="second">
+       <public-datasets/>
+     </el-tab-pane>
+   </el-tabs>
+ </div>
 </template>
 
 <script>
+import MyDatasets from "@/views/dataset/my_datasets/index.vue"
+import PublicDatasets from "@/views/dataset/public_datasets/index.vue"
 export default {
   name: "Dataset",
+  components: {
+    MyDatasets,
+    PublicDatasets
+  },
+  data() {
+    return {
+      activeName: 'first'
+    }
+  },
+  methods: {
+    handleTabClick() {}
+  }
 };
 </script>
+<style lang="less" scoped>
+.el-tab {
+  /deep/ .el-tabs__item {
+    font-size: 18px;
+    color: rgba(69, 90, 100, 0.65);
+    font-weight: 400;
+
+    &.is-active {
+      color: rgba(25, 118, 210, 1);
+    }
+  }
+}
+</style>

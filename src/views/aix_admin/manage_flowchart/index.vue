@@ -67,25 +67,25 @@
           style="width: 100%"
           :data="allFlowChartData"
         >
-          <el-table-column label="ID" prop="id" align="center" width="80">
+          <el-table-column label="ID" prop="id" align="left" width="80">
             <template slot-scope="{ row }">
               <span>{{ row.id }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="流程图名称" prop="type" align="center">
+          <el-table-column label="流程图名称" prop="type" align="left">
             <template slot-scope="{ row }">
               <span>{{ row.name }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="行业方向" prop="type" align="center">
+          <el-table-column label="行业方向" prop="type" align="left">
             <template slot-scope="{ row }">
               <span>{{ keyToIndustry[row.industry].name }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="流程图状态" align="center">
+          <el-table-column label="流程图状态" align="left">
             <template slot="header">
               流程图状态&nbsp;&nbsp;
               <el-button
@@ -98,7 +98,7 @@
 
             <template slot-scope="{ row }">
               <!-- <el-tag :type="row.status | statusFilter">
-            {{ messageDict[row.status] }} 
+            {{ messageDict[row.status] }}
           </el-tag> -->
               <!--              <el-tag :type="row.is_completed | statusFilter">-->
               <!--                {{messageDict[row.is_completed]}}-->
@@ -111,7 +111,7 @@
 
           <el-table-column
             label="操作"
-            align="center"
+            align="left"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="{ row }">

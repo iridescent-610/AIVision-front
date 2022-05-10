@@ -1,98 +1,109 @@
 <template>
   <div class="app-container">
-    <h1>在线容器列表</h1>
-    <el-button @click="fetchData">强制刷新</el-button>
-    <br />
-    <br />
-
+    <div style="font-size: 18px; line-height: 25px; margin: 9px 0 16px 0; display: flex; align-items: center">
+      <span>
+        在线容器列表
+      </span>
+      <el-button
+          size="small"
+          class="refresh-button"
+          @click="fetchData">
+        <i class="el-icon-refresh-right" style="font-size: 16px"></i>
+        强制刷新
+      </el-button>
+    </div>
     <el-table
-      style="width: auto"
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
+        style="width: auto"
+        v-loading="listLoading"
+        :data="list"
+        element-loading-text="Loading"
+        :border="false"
+        fit
+        highlight-current-row
+        class="table"
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="80"/>
       <!-- @click="jumpToLog" -->
-      <el-table-column align="center" label="名称" prop="name" width="95" />
+      <el-table-column align="left" label="名称" prop="name" width="95"/>
       <el-table-column
-        align="center"
-        label="宿主IP"
-        prop="hostIp"
-        width="120"
+          align="left"
+          label="宿主IP"
+          prop="hostIp"
+          width="120"
       />
-      <el-table-column align="center" label="描述" prop="info" width="155" />
+      <el-table-column align="left" label="描述" prop="info" width="155"/>
       <el-table-column
-        align="center"
-        label="创建者ID"
-        prop="userId"
-        width="60"
-      />
-      <el-table-column
-        align="center"
-        label="活动时间"
-        prop="since"
-        width="100"
+          align="left"
+          label="创建者ID"
+          prop="userId"
+          width="100"
       />
       <el-table-column
-        align="center"
-        label="GPU驱动"
-        prop="gpuInfo.driverVersion"
-        width="80"
+          align="left"
+          label="活动时间"
+          prop="since"
+          width="100"
       />
       <el-table-column
-        align="center"
-        label="CUDA"
-        prop="gpuInfo.cudaVersion"
-        width="80"
+          align="left"
+          label="GPU驱动"
+          prop="gpuInfo.driverVersion"
+          width="120"
       />
-      <el-table-column align="center" label="GPU数量" width="90">
+      <el-table-column
+          align="left"
+          label="CUDA"
+          prop="gpuInfo.cudaVersion"
+          width="100"
+      />
+      <el-table-column align="left" label="GPU数量" width="110">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.gpuInfo.gpus">
-              <el-table-column prop="id" label="编号" width="55" />
-              <el-table-column prop="name" label="型号" width="150" />
-              <el-table-column prop="calPower" label="算力" width="50" />
-              <el-table-column prop="temperature" label="温度" width="55" />
-              <el-table-column prop="powerDraw" label="当前功率" width="99" />
-              <el-table-column prop="powerLimit" label="最大功率" width="99" />
-              <el-table-column prop="memUsed" label="已用显存" width="99" />
-              <el-table-column prop="memAll" label="显存总量" width="99" />
+              <el-table-column prop="id" label="编号" width="55"/>
+              <el-table-column prop="name" label="型号" width="150"/>
+              <el-table-column prop="calPower" label="算力" width="50"/>
+              <el-table-column prop="temperature" label="温度" width="55"/>
+              <el-table-column prop="powerDraw" label="当前功率" width="99"/>
+              <el-table-column prop="powerLimit" label="最大功率" width="99"/>
+              <el-table-column prop="memUsed" label="已用显存" width="99"/>
+              <el-table-column prop="memAll" label="显存总量" width="99"/>
             </el-table>
             <el-button slot="reference">{{
-              scope.row.gpuInfo.gpuNum
-            }}</el-button>
+                scope.row.gpuInfo.gpuNum
+              }}
+            </el-button>
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="当前任务" width="200">
+      <el-table-column align="left" label="当前任务" width="200">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.taskBriefInfoList">
-              <el-table-column prop="name" label="名称" width="200" />
-              <el-table-column prop="type" label="类型" width="100" />
-              <el-table-column prop="accessType" label="权限" width="100" />
-              <el-table-column prop="info" label="简介" width="250" />
+              <el-table-column prop="name" label="名称" width="200"/>
+              <el-table-column prop="type" label="类型" width="100"/>
+              <el-table-column prop="accessType" label="权限" width="100"/>
+              <el-table-column prop="info" label="简介" width="250"/>
               <el-table-column
-                prop="createdTime"
-                label="创建时间"
-                width="230"
+                  prop="createdTime"
+                  label="创建时间"
+                  width="230"
               />
-              <el-table-column prop="status" label="状态" width="100" />
+              <el-table-column prop="status" label="状态" width="100"/>
             </el-table>
             <el-button slot="reference">{{
-              scope.row.firstTaskName
-            }}</el-button>
+                scope.row.firstTaskName
+              }}
+            </el-button>
           </el-popover>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="详情" width="205">
+      <el-table-column align="left" label="详情" width="205">
         <template slot-scope="scope">
           <el-button type="primary" @click="jumpToManageDialog(scope.$index)"
-            >更多</el-button
+          >更多
+          </el-button
           >
           <el-button @click="jumpToLogs(scope.row.id)">实时日志</el-button>
         </template>
@@ -100,81 +111,82 @@
     </el-table>
 
     <el-dialog
-      :title="dialogDeviceInfo.name"
-      :visible.sync="dialogVisible"
-      width="1100px"
+        :title="dialogDeviceInfo.name"
+        :visible.sync="dialogVisible"
+        width="1100px"
     >
       <!--      :before-close="handleClose">-->
       <div style="display: flex">
         <div style="margin-right: 5px; font-size: 17px">Token:</div>
         <div>
           <span style="font-size: 17px; color: darkred; margin-right: 20px">{{
-            dialogDeviceInfo.token
-          }}</span>
+              dialogDeviceInfo.token
+            }}</span>
         </div>
         <div>
           <el-link
-            class="copyBtn"
-            style="font-size: 17px"
-            :data-clipboard-text="dialogDeviceInfo.token"
-            >复制</el-link
+              class="copyBtn"
+              style="font-size: 17px"
+              :data-clipboard-text="dialogDeviceInfo.token"
+          >复制
+          </el-link
           >
         </div>
       </div>
       <h3 v-if="dialogDeviceInfo.taskBriefInfoList.length > 0">任务详情</h3>
       <el-table
-        v-if="dialogDeviceInfo.taskBriefInfoList.length > 0"
-        :data="dialogDeviceInfo.taskBriefInfoList"
+          v-if="dialogDeviceInfo.taskBriefInfoList.length > 0"
+          :data="dialogDeviceInfo.taskBriefInfoList"
       >
-        <el-table-column prop="name" label="名称" width="200" />
-        <el-table-column prop="type" label="类型" width="100" />
-        <el-table-column prop="accessType" label="权限" width="100" />
-        <el-table-column prop="info" label="简介" width="250" />
-        <el-table-column prop="createdTime" label="创建时间" width="230" />
-        <el-table-column prop="status" label="状态" width="100" />
+        <el-table-column prop="name" label="名称" width="200"/>
+        <el-table-column prop="type" label="类型" width="100"/>
+        <el-table-column prop="accessType" label="权限" width="100"/>
+        <el-table-column prop="info" label="简介" width="250"/>
+        <el-table-column prop="createdTime" label="创建时间" width="230"/>
+        <el-table-column prop="status" label="状态" width="100"/>
       </el-table>
       <div
-        style="display: flex; margin-top: 15px"
-        v-if="dialogDeviceInfo.runningCmds != ''"
+          style="display: flex; margin-top: 15px"
+          v-if="dialogDeviceInfo.runningCmds != ''"
       >
         <div style="margin-top: 8px; margin-right: 5px; font-size: 17px">
           执行指令:
         </div>
         <el-input
-          type="textarea"
-          style="width: 90%; font-size: 17px"
-          color="darkred"
-          readonly="true"
-          resize="none"
-          :autosize="{ minRows: 1, maxRows: 5 }"
-          v-model="dialogDeviceInfo.runningCmds"
+            type="textarea"
+            style="width: 90%; font-size: 17px"
+            color="darkred"
+            readonly="true"
+            resize="none"
+            :autosize="{ minRows: 1, maxRows: 5 }"
+            v-model="dialogDeviceInfo.runningCmds"
         >
         </el-input>
       </div>
       <div
-        style="display: flex; margin-top: 10px"
-        v-if="dialogDeviceInfo.latestErrors != ''"
+          style="display: flex; margin-top: 10px"
+          v-if="dialogDeviceInfo.latestErrors != ''"
       >
         <div style="margin-top: 8px; margin-right: 5px; font-size: 17px">
           报错信息:
         </div>
         <el-input
-          type="textarea"
-          style="width: 90%; font-size: 17px"
-          color="darkred"
-          readonly="true"
-          resize="none"
-          :autosize="{ minRows: 1, maxRows: 12 }"
-          v-model="dialogDeviceInfo.latestErrors"
+            type="textarea"
+            style="width: 90%; font-size: 17px"
+            color="darkred"
+            readonly="true"
+            resize="none"
+            :autosize="{ minRows: 1, maxRows: 12 }"
+            v-model="dialogDeviceInfo.latestErrors"
         >
         </el-input>
       </div>
       <el-button
-        style="float: left"
-        slot="footer"
-        v-if="dialogDeviceInfo.taskBriefInfoList.length > 0"
-        type="primary"
-        @click="
+          style="float: left"
+          slot="footer"
+          v-if="dialogDeviceInfo.taskBriefInfoList.length > 0"
+          type="primary"
+          @click="
           stopTask(
             dialogDeviceInfo.token,
             dialogDeviceInfo.taskBriefInfoList[0].name
@@ -186,7 +198,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false"
-          >确 定</el-button
+        >确 定</el-button
         >
       </span>
     </el-dialog>
@@ -223,7 +235,7 @@ export default {
         taskBriefInfoList: [],
         latestErrors: "",
       },
-      listLoading: true,
+      listLoading: false,
     };
   },
   created() {
@@ -304,18 +316,20 @@ export default {
     handleClose(done) {
       // close dialog
       this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
+          .then((_) => {
+            done();
+          })
+          .catch((_) => {
+          });
     },
     stopTask(token, taskName) {
       this.$confirm("确认终止？")
-        .then((_) => {
-          client_api.stopTask(token);
-          this.fullScreenWaiting(token, taskName);
-        })
-        .catch((_) => {});
+          .then((_) => {
+            client_api.stopTask(token);
+            this.fullScreenWaiting(token, taskName);
+          })
+          .catch((_) => {
+          });
     },
     fullScreenWaiting(token, taskName) {
       const loading = this.$loading({
@@ -354,3 +368,61 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.refresh-button {
+  color: rgba(25, 118, 210, 1);
+  border-color: rgba(25, 118, 210, 1);
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  padding: 0 12px;
+  font-weight: unset;
+  margin-left: auto;
+}
+
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+
+  &:before {
+    content: unset;
+  }
+
+  &:after {
+    content: unset;
+  }
+  /deep/ table {
+    border: unset !important;
+  }
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+  }
+
+  /deep/ tbody td {
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+  }
+}
+</style>

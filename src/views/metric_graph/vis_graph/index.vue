@@ -15,30 +15,24 @@
 -->
 
 <template>
-  <b-container fluid>
-
-      <div id="graphdiv" class="graphdiv" style="z-index: -100" >
-          <!-- 只贴出item部分 -->
-        <div class="chartTooltip">
-          <strong class="name"></strong>
-        </div>
-      </div>
-
-      <b-row style="margin-left: 10px">
-        <b-form label="" label-cols-sm="3" label-cols-lg="2">
-              <b-form-select  ref="select" v-model="item_value" @change="handler()">
-                <option  disabled="disabled">请选择属性图</option>
-                <option
-                        v-for="item in metric_names"
-                        :key="item"
-                        :value="item"
-                        @click="handler()"
-                >{{item}}</option>
-              </b-form-select>
-        </b-form>
-      </b-row>
-
-  </b-container>
+ <div class="vis-container">
+   <div id="graphdiv" class="graphdiv" style="z-index: -100" >
+     <!-- 只贴出item部分 -->
+     <div class="chartTooltip">
+       <strong class="name"></strong>
+     </div>
+   </div>
+   <b-row style="margin-left: 10px">
+     <el-select v-model="item_value" @change="handler()" placeholder="请选择属性图">
+       <el-option
+           v-for="item in metric_names"
+           :key="item"
+           :label="item"
+           :value="item">
+       </el-option>
+     </el-select>
+   </b-row>
+ </div>
 </template>
 
 <script>
@@ -89,7 +83,7 @@
                         .on('zoom', function () {
                           g.attr('transform', d3.event.transform) })
         )
-        
+
         let forceSimulation = d3.forceSimulation()
                 .force('link', d3.forceLink())
                 .force('charge', d3.forceManyBody().strength(-200))
@@ -165,7 +159,7 @@
                           .select(".chartTooltip")
                           .style("left", xPosition + "px")
                           .style("top", yPosition + "px");
-                  
+
                   // 更新浮层内容
                     var content = "<span style='color: #4466aa'>id: "+d.tags.id+"</span><br>"
                     content+="<span style='color: #4466aa'>name: "+d.tags.name+"</span><br>"
@@ -181,13 +175,13 @@
                   // 添加浮层hidden样式，隐藏浮层
                   d3.select(".chartTooltip").classed("hidden", true);
                 }).on("click", nodeClick);
-        
+
         function nodeClick(snode) {
           d3.select(this).transition()
               .duration(750)
               .style("fill", function(){
                 let selected = this
- 
+
                 if (snode.highlighted==null)
                     snode.highlighted = false
 
@@ -231,7 +225,7 @@
             l.highlighted=0;
             return "#12558444";
           });
-          
+
       });
 
         gs.append('text')
@@ -241,12 +235,12 @@
                 .text(function(d) {
                   return d.tags.name;
                 }).attr('font-size',function(d){
-                  return d.tags.num_params/10000000 + 10 
+                  return d.tags.num_params/10000000 + 10
                 })
                 .style('font-family', 'Arial')
                 .style('pointer-events', 'none') // to prevent mouseover/drag capture
                 .style('opacity', '60%')
-        
+
         function ticked() {
           links
                   .attr('x1', function(d) {
@@ -315,7 +309,7 @@
         }
       },
       handler(){
-        d3.selectAll("svg").selectAll("g").remove()
+        // d3.select("svg").selectAll("g").remove()
         let params = []
         params.push(this.$refs.select.value)
         this.$store.dispatch("metric_graph/getGraphs",params)
@@ -367,6 +361,12 @@
   .nodes circle {
     stroke: #fff;
     stroke-width: 1.5px;
+  }
+
+  .vis-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   .graphdiv {

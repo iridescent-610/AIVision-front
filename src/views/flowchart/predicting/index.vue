@@ -154,25 +154,25 @@
           style="width: 100%"
           :data="predictingTaskList"
         >
-          <el-table-column label="ID" prop="id" align="center" width="80">
+          <el-table-column label="ID" prop="id" align="left" width="80">
             <template slot-scope="{ row }">
               <span>{{ row.id }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="流程图名称" prop="type" align="center">
+          <el-table-column label="流程图名称" prop="type" align="left">
             <template slot-scope="{ row }">
               <span>{{ row.flowchartName }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="数据集名称" align="center">
+          <el-table-column label="数据集名称" align="left">
             <template slot-scope="{ row }">
               <span>{{ row.datasetName }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="任务状态" align="center">
+          <el-table-column label="任务状态" align="left">
             <template slot="header">
               任务状态&nbsp;&nbsp;
               <el-button
@@ -185,7 +185,7 @@
 
             <template slot-scope="{ row }">
               <!-- <el-tag :type="row.status | statusFilter">
-            {{ messageDict[row.status] }} 
+            {{ messageDict[row.status] }}
           </el-tag> -->
               <el-tag :type="row.status | statusFilter">
                 {{ messageDict[row.status] }}
@@ -195,7 +195,7 @@
 
           <el-table-column
             label="操作"
-            align="center"
+            align="left"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="{ row }">

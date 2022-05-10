@@ -1,26 +1,27 @@
 <template>
   <div class="app-container">
-    <div style="font-size: 17px">请输入容器ID:</div>
+    <div style="font-size: 14px">请输入容器ID:</div>
     <div style="display: flex; margin-top: 15px">
       <el-autocomplete
         class="inline-input"
         v-model="id"
+        size="small"
         :fetch-suggestions="querySearch"
         placeholder="请输入id"
         @oninput="refreshTime"
         @select="handleSelect"
       >
       </el-autocomplete>
-      <el-button style="margin-left: 10px" @click="getLog">强制刷新</el-button>
+      <el-button style="margin-left: 10px" @click="getLog" size="small">强制刷新</el-button>
     </div>
 
-    <div style="margin-top: 18px; margin-bottom: 15px; font-size: 17px">
+    <div style="margin-top: 18px; margin-bottom: 15px; font-size: 14px">
       容器{{ id }}日志信息:
     </div>
     <el-input
       type="textarea"
       wrap="off"
-      style="width: 90%; font-size: 17px"
+      size="small"
       color="darkred"
       readonly="true"
       resize="none"

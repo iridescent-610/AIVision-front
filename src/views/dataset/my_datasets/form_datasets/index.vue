@@ -15,11 +15,11 @@
 -->
 
 <template>
-  <div>
+  <div class="form-datasets">
     <b-form>
       <b-row>
         <b-col md="12">
-          <b-form-group label="任务：" label-cols-sm="2" label-cols-lg="1" label-align="right">
+          <b-form-group label="任务" label-cols-sm="3" label-cols-lg="2" label-align="left" style="margin-bottom: 16px;">
             <b-form-checkbox
               v-for="item in options.tasks"
               :key="item.id"
@@ -27,41 +27,39 @@
               v-model="file_info.task"
               button
               button-variant="outline-primary"
-              :style="style.checkbox"
+              class="check-box"
             >{{item.name}}</b-form-checkbox>
           </b-form-group>
         </b-col>
 
-        <b-col md="6">
-          <b-form-group label="名称：" label-cols-sm="3" label-cols-lg="2" label-align="right">
+        <b-col md="12">
+          <b-form-group label="名称" label-cols-sm="3" label-cols-lg="2" label-align="left">
             <b-form-input v-model="file_info.dataset_name" type="text" placeholder="请输入数据集名称"></b-form-input>
           </b-form-group>
         </b-col>
 
-        <b-col md="3">
-          <b-form-group label="公开：" label-cols-sm="6" label-cols-lg="4" label-align="right">
+        <b-col md="12">
+          <b-form-group label="公开" label-cols-sm="3" label-cols-lg="2" label-align="left">
             <b-form-checkbox
               v-model="file_info.is_public"
               :value="true"
               :unchecked-value="false"
-              class="pt-2"
             >是</b-form-checkbox>
           </b-form-group>
         </b-col>
 
-        <b-col md="3">
-          <b-form-group label="标注：" label-cols-sm="6" label-cols-lg="4" label-align="right">
+        <b-col md="12">
+          <b-form-group label="标注" label-cols-sm="3" label-cols-lg="2" label-align="left">
             <b-form-checkbox
               v-model="file_info.is_annotated"
               :value="true"
               :unchecked-value="false"
-              class="pt-2"
             >是</b-form-checkbox>
           </b-form-group>
         </b-col>
 
-        <b-col v-if="update_key=='post'" md="6">
-          <b-form-group :label="'数据集：'" label-cols-sm="3" label-cols-lg="2" label-align="right">
+        <b-col v-if="update_key=='post'" md="12">
+          <b-form-group :label="'数据集'" label-cols-sm="3" label-cols-lg="2" label-align="left">
             <b-form-file
               v-model="file"
               placeholder="请选择或拖动文件"
@@ -72,7 +70,7 @@
         </b-col>
 
         <b-col md="12">
-          <b-form-group :label="'备注：'" label-cols-sm="2" label-cols-lg="1" label-align="right">
+          <b-form-group :label="'备注'" label-cols-sm="3" label-cols-lg="2" label-align="left">
             <b-form-textarea v-model="file_info.info" placeholder="请键入数据集其它信息（可选）" rows="4"></b-form-textarea>
           </b-form-group>
         </b-col>
@@ -104,7 +102,7 @@
         block
         @click="updateOrUpload()"
         variant="primary"
-        :style="style.submitBtn"
+        style="margin-top: 20px; background-color: rgba(25, 118, 210, 1)"
       >{{update_key=='put'?'更新': '上传'}}</b-button>
     </b-form>
     <b-modal
@@ -138,12 +136,6 @@ export default {
         submitBtn: {
           marginTop: "20px",
         },
-        checkbox: {
-          marginLeft: "0px",
-          marginRight: "10px",
-          marginTop: "5px",
-          marginBottom: "5px",
-        },
       },
       errors: "",
       options: [],
@@ -174,8 +166,71 @@ export default {
 };
 </script>
 
-<style scoped>
-form {
-  margin: 20px 20px 20px 20px;
+<style scoped lang="less">
+.form-datasets {
+  /deep/ input {
+    font-size: 14px !important;
+    height: 32px;
+
+    &::-webkit-input-placeholder {
+      color: rgba(69, 90, 100, 0.35);
+    }
+  }
+
+  /deep/ .custom-file-label {
+    height: 32px;
+    line-height: 20px;
+    padding: 6px 12px;
+    font-size: 14px !important;
+    color: rgba(69, 90, 100, 0.35);
+
+    &:after {
+      height: 30px;
+      line-height: 19px;
+      padding: 6px 12px;
+    }
+  }
+
+  /deep/ textarea {
+    font-size: 14px !important;
+    &::-webkit-input-placeholder {
+      color: rgba(69, 90, 100, 0.35);
+    }
+  }
+
+  /deep/ .col-form-label {
+    font-size: 14px;
+    padding: 6px 12px;
+    line-height: 20px;
+  }
+
+  /deep/ .custom-checkbox {
+    padding-top: 5px;
+  }
+}
+.check-box {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  /deep/ label {
+    box-sizing: border-box;
+    color: rgba(73, 93, 103, 1) !important;
+    border-color: rgba(207, 216, 220, 1);
+    line-height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+
+    &:hover {
+      color: #fff !important;
+      border-color: #007bff;
+    }
+
+    &.active {
+      color: #fff !important;
+    }
+  }
+}
+
+/deep/ .form-group {
+  margin-bottom: 24px;
 }
 </style>

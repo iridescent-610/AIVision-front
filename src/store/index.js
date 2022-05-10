@@ -78,8 +78,8 @@ const store = new Vuex.Store({
     removeAuth (state) {
       removeLocalToken()
       state.auth = { username: '', is_staff: false, token: '' };
-      // router.push({ name: 'Sign In' })
-      router.push({ name: 'Welcome' })
+      router.push({ name: 'Sign In' })
+      // router.push({ name: 'Welcome' })
     },
     setIsDialogOpen, setDialogContent,
     setUsername (state, username) {

@@ -147,7 +147,7 @@ export default {
   z-index: 9999;
 }
 </style>
-<style>
+<style lang="less">
 .modal-header .close {
   outline: none;
 }
@@ -164,5 +164,12 @@ th > div {
   position: -webkit-sticky;
   position: sticky;
   right: 0px;
+}
+
+/deep/ .el-button {
+&:focus {
+   outline: unset;
+   border: unset;
+ }
 }
 </style>

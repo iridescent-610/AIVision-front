@@ -15,28 +15,51 @@
 -->
 
 <template>
-  <b-container>
-    <div class="input-group mb-3">
-      <!-- <b-form-group class="mb-3"> -->
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">
-          <i class="fa fa-search"></i>
-        </span>
-      </div>
-      <b-form-input
-        type="text"
+  <div>
+    <el-input
         v-model="model_search"
-        class="form-control"
+        class="input-container"
         placeholder="搜索"
-        aria-label="搜索"
-        aria-describedby="basic-addon1"
-      />
-    </div>
-    <!-- </b-form-group> -->
-    <hr class="divider" />
+    >
+      <template slot="prepend"><svg-icon class="menu-icon" svg-name="search_icon" /></template>
+      <el-button class="search-button" slot="append" type="primary" @click="get_model">搜索</el-button>
+    </el-input>
+    <el-row :gutter="20" class="card-list">
+      <el-col :span="8" v-for="(item, index) in get_model(model_search)"  :key="item.tags.name">
+        <div class="card-container">
+          <div class="title">{{item.tags.name}}</div>
+          <div class="desc">{{item.tags.readme}}</div>
+          <div class="tag-list">
+            <div class="tag" v-for="(attr, index) in get_attr(item.tags)" :key="index+attr">{{attr}}: {{get_value(item.tags, attr)}}</div>
+          </div>
+          <b-button class="detail-button" :id="'b_'+index" variant="outline-secondary">详情</b-button>
+        </div>
+        <b-popover
+            :target="'b_'+index"
+            title="Model Properties"
+            triggers="focus"
+            :placement="judge_position(index)"
+        >
+          <b-list-group>
+            <div v-for="attr in get_attr(item.tags)" :key="item+attr">
 
-    <div v-if="Object.keys(graphs).length>0" class="row">
-      <div
+              <b v-if="attr!='readme'">{{attr}}
+                : {{get_value(item.tags, attr)}}</b>
+            </div>
+            <div>
+              <b>URL: </b>
+              <a target="_blank" :href="item.tags.url">homepage</a>
+            </div>
+            &lt;!&ndash; text-align:center &ndash;&gt;
+            <div style="margin-top: 8px; margin-bottom: 2px; margin-left: 25px">
+              <el-button size="mini" plain @click="vis_structure(item.tags.name)">查看模型结构</el-button>
+            </div>
+          </b-list-group>
+        </b-popover>
+      </el-col>
+    </el-row>
+    <div class="card-list">
+<!--      <div
         v-for="(item, index) in get_model(model_search)"
         :key="index"
         :value="item.tags.id"
@@ -80,16 +103,16 @@
                 <b>URL: </b>
                 <a target="_blank" :href="item.tags.url">homepage</a>
               </div>
-              <!-- text-align:center -->
-              <div style="margin-top: 8px; margin-bottom: 2px; margin-left: 25px">  
+              &lt;!&ndash; text-align:center &ndash;&gt;
+              <div style="margin-top: 8px; margin-bottom: 2px; margin-left: 25px">
                  <el-button size="mini" plain @click="vis_structure(item.tags.name)">查看模型结构</el-button>
               </div>
             </b-list-group>
           </b-popover>
         </div>
-      </div>
+      </div>-->
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -168,3 +191,109 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.input-container {
+  margin-bottom: 24px;
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+  width: 100%;
+  height: 32px;
+
+  ::v-deep input {
+    border: unset;
+    font-size: 14px;
+    padding-left: 0;
+    width: 100%;
+    height: 32px;
+  }
+  .menu-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  ::v-deep .el-input-group__prepend {
+    background-color: unset;
+    border: unset;
+    padding: 0 8px 0 12px;
+  }
+
+  ::v-deep .el-input-group__append {
+    background-color: unset;
+    border: unset;
+  }
+
+  .search-button {
+    color: #fff;
+    background-color: rgba(25, 118, 210, 1);
+    height: 34px;
+    line-height: 32px;
+    padding: 0 12px;
+    width: 52px;
+    position: relative;
+    top: -1px;
+    right: -1px;
+    border-radius: unset;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+}
+
+.card-list {
+  .card-container {
+    height: 258px;
+    border: 1px solid rgba(207, 216, 220, 1);
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    .title {
+      padding: 0 24px;
+      height: 31px;
+      background: rgba(207, 216, 220, 0.35);
+      line-height: 31px;
+      color: rgba(73, 93, 103, 1);
+    }
+
+    .desc {
+      padding: 18px 24px;
+      color: rgba(73, 93, 103, 1);
+      line-height: 24px;
+      height: 98px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      height: 66px;
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .tag {
+      height: 25px;
+      background: rgba(73, 93, 103, 0.1);
+      padding: 0 12px;
+      border-radius: 2px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      line-height: 25px;
+      color: rgba(69, 90, 100, 0.65);
+      font-size: 12px;
+    }
+
+    .detail-button {
+      margin-left: 24px;
+      color: rgba(25, 118, 210, 1);
+      border: 1px solid rgba(25, 118, 210, 1);
+      height: 32px;
+      line-height: 32px;
+      padding: 0 12px;
+      margin-top: 8px;
+
+      &:hover {
+        background-color: rgba(25, 118, 210, 1);
+        color: #fff;
+      }
+    }
+  }
+}
+</style>

@@ -14,41 +14,41 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="55" />
       <!-- @click="jumpToLog" -->
-      <el-table-column align="center" label="名称" prop="name" width="95" />
+      <el-table-column align="left" label="名称" prop="name" width="95" />
       <el-table-column
-        align="center"
+        align="left"
         label="宿主IP"
         prop="hostIp"
         width="120"
       />
-      <el-table-column align="center" label="描述" prop="info" width="155" />
+      <el-table-column align="left" label="描述" prop="info" width="155" />
       <el-table-column
-        align="center"
+        align="left"
         label="创建者ID"
         prop="userId"
         width="60"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="活动时间"
         prop="since"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="GPU驱动"
         prop="gpuInfo.driverVersion"
         width="80"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="CUDA"
         prop="gpuInfo.cudaVersion"
         width="80"
       />
-      <el-table-column align="center" label="GPU数量" width="90">
+      <el-table-column align="left" label="GPU数量" width="90">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.gpuInfo.gpus">
@@ -67,7 +67,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="当前任务" width="200">
+      <el-table-column align="left" label="当前任务" width="200">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.taskBriefInfoList">
@@ -89,7 +89,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="详情" width="205">
+      <el-table-column align="left" label="详情" width="205">
         <template slot-scope="scope">
           <el-button type="primary" @click="jumpToManageDialog(scope.$index)"
             >更多</el-button

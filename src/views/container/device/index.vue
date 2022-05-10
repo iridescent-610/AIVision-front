@@ -1,57 +1,60 @@
 <template>
   <div
     class="app-container"
-    style="display: flex; flex-direction: column; align-items: center"
   >
-    <h1 style="align-self: center">已注册算力设备</h1>
+    <div style="font-size: 18px; line-height: 25px; margin: 9px 0 16px 0;">
+      <span>
+        已注册算力设备
+      </span>
+    </div>
     <el-table
       style="width: auto"
       v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"
-      border
       fit
+      class="table"
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="80" />
       <el-table-column
-        align="center"
+        align="left"
         label="名称"
         prop="deviceName"
-        width="65"
+        width="100"
       />
-      <el-table-column align="center" label="描述" prop="info" width="155" />
+      <el-table-column align="left" label="描述" prop="info" width="155" />
       <el-table-column
-        align="center"
+        align="left"
         label="创建者ID"
         prop="userId"
-        width="60"
+        width="120"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="创建时间"
         prop="createdTime"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="活动时间"
         prop="lastLogin"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="GPU驱动"
         prop="driverVersion"
-        width="90"
+        width="120"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="CUDA版本"
         prop="cudaVersion"
-        width="90"
+        width="140"
       />
-      <el-table-column align="center" label="GPU数量" width="95">
+      <el-table-column align="left" label="GPU数量" width="120">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.gpus">
@@ -66,31 +69,34 @@
         </template>
       </el-table-column>
       <el-table-column
-        align="center"
+        align="left"
         label="显存(MB)"
         prop="gpuMemSum"
-        width="100"
+        width="120"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="算力"
         prop="calPowerSum"
-        width="55"
+        width="100"
       />
-      <el-table-column align="center" label="操作" width="105">
+      <el-table-column align="left" label="操作" width="105">
         <template slot-scope="scope">
           <el-button @click="jumpToManageDialog(scope.row)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-size="pageSize"
-      layout="total, prev, pager, next, jumper"
-      :total="totalCount"
-    >
-    </el-pagination>
+    <div style="display: flex; justify-content: flex-end">
+      <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          layout="slot, prev, pager, next"
+          :total="totalCount"
+      >
+        <span class="pagination-total">共 {{ totalCount }} 条</span>
+      </el-pagination>
+    </div>
     <el-dialog title="设备管理" :visible.sync="dialogVisible" width="1000px">
       <el-form label-position="right" label-width="auto">
         <el-form-item style="margin-right: 450px" label="ID">
@@ -250,5 +256,58 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+
+  &:before {
+    content: unset;
+  }
+
+  &:after {
+    content: unset;
+  }
+
+  /deep/ table {
+    border: unset !important;
+  }
+
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+  }
+
+  /deep/ tbody td {
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+  }
+}
+
+.pagination-total {
+  color: rgba(69, 90, 100, 0.65);
+  font-size: 14px !important;
+  font-weight: normal;
+}
 </style>

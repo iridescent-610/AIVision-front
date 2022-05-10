@@ -26,24 +26,27 @@
       :per-page="perPage"
       outlined
       sort-by="created_time"
+      class="table"
     >
       <template v-slot:cell(is_annotated)="row">{{row.item.is_annotated? "是": "否"}}</template>
       <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
       <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
-          <b-button
+          <el-button
             size="sm"
             @click="row.toggleDetails"
-            variant="outline-primary"
+            type="text"
+            class="action-button"
             :style="style.methodBtn"
-          >详情</b-button>
-          <b-button
+          >详情</el-button>
+          <el-button
             size="sm"
             @click="download(row.item.url)"
-            variant="outline-primary"
+            type="text"
+            class="action-button"
             :style="style.methodBtn"
-          >下载</b-button>
+          >下载</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
@@ -59,6 +62,7 @@
       :per-page="perPage"
       align="right"
       :style="style.pagination"
+      class="pagination"
     ></b-pagination>
   </div>
 </template>
@@ -135,3 +139,91 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+  /deep/ table {
+    border: unset !important;
+  }
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+    text-align: left !important;
+  }
+
+  /deep/ tr {
+    background: unset !important;
+  }
+
+  /deep/ tbody td {
+    line-height: 20px;
+    padding: 10px 12px;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+    text-align: left !important;
+    background: unset !important;
+    border-color: rgba(238, 242, 243, 1);
+
+    button {
+      font-weight: 400;
+      margin-left: 6px !important;
+      margin-right: 6px !important;
+      padding: 0;
+      line-height: 20px;
+      border: 0;
+    }
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+
+    &.update {
+      color: rgba(183, 28, 28, 1);
+
+      &:disabled {
+        color: #C0C4CC;
+      }
+    }
+  }
+}
+
+.pagination {
+  /deep/ .page-link {
+    border: unset !important;
+    font-size: 14px;
+    color: rgba(69, 90, 100, 0.65);
+
+    &:focus {
+      outline: unset;
+      box-shadow: unset;
+    }
+  }
+
+  /deep/ .page-item.active .page-link {
+    background-color: #fff;
+    color: #007bff;
+  }
+}
+
+/deep/ .el-button {
+  &:focus {
+    outline: unset;
+    border: unset;
+  }
+}
+</style>

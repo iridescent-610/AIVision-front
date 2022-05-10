@@ -26,8 +26,9 @@
       :per-page="perPage"
       outlined
       sort-by="created_time"
+      class="table"
     >
-      <template v-slot:cell(model_type)="row">{{ 
+      <template v-slot:cell(model_type)="row">{{
         modelToType.hasOwnProperty(row.item.model_name)?modelToType[row.item.model_name]:'squeezenet'
         }}</template>
       <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
@@ -40,18 +41,18 @@
             variant="outline-primary"
             :style="style.methodBtn"
           >详情</b-button> -->
-          <b-button
+          <el-button
             size="sm"
             @click="vis_structure(row.item.model_name)"
-            variant="outline-primary"
+            type="text"
             :style="style.methodBtn"
-          >模型结构</b-button>
-          <b-button
+          >模型结构</el-button>
+          <el-button
             size="sm"
             @click="download(row.item.url)"
-            variant="outline-primary"
+            type="text"
             :style="style.methodBtn"
-          >下载</b-button>
+          >下载</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
@@ -64,6 +65,7 @@
       :per-page="perPage"
       align="right"
       :style="style.pagination"
+      class="pagination"
     ></b-pagination>
   </div>
 </template>
@@ -164,3 +166,91 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+  /deep/ table {
+    border: unset !important;
+  }
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+    text-align: left !important;
+  }
+
+  /deep/ tr {
+    background: unset !important;
+  }
+
+  /deep/ tbody td {
+    line-height: 20px;
+    padding: 10px 12px;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+    text-align: left !important;
+    background: unset !important;
+    border-color: rgba(238, 242, 243, 1);
+
+    button {
+      font-weight: 400;
+      margin-left: 6px !important;
+      margin-right: 6px !important;
+      padding: 0;
+      line-height: 20px;
+      border: 0;
+    }
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+
+    &.update {
+      color: rgba(183, 28, 28, 1);
+
+      &:disabled {
+        color: #C0C4CC;
+      }
+    }
+  }
+}
+
+.pagination {
+  /deep/ .page-link {
+    border: unset !important;
+    font-size: 14px;
+    color: rgba(69, 90, 100, 0.65);
+
+    &:focus {
+      outline: unset;
+      box-shadow: unset;
+    }
+  }
+
+  /deep/ .page-item.active .page-link {
+    background-color: #fff;
+    color: #007bff;
+  }
+}
+
+/deep/ .el-button {
+  &:focus {
+    outline: unset;
+    border: unset;
+  }
+}
+</style>

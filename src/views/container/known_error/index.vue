@@ -1,34 +1,38 @@
 <template>
   <div
-    class="app-container"
-    style="display: flex; flex-direction: column; align-items: center"
+      class="app-container"
+      style="display: flex; flex-direction: column; align-items: center"
   >
-    <h1 style="align-self: center">环境错误修复管理</h1>
-    <el-button @click="insertError">添加</el-button>
-    <br />
+    <div style="font-size: 18px; line-height: 25px; margin: 24px 0 16px 0; display: flex; align-items: center">
+      <span>
+        环境错误修复管理
+      </span>
+      <el-button size="small" class="refresh-button" @click="insertError">添加</el-button>
+    </div>
     <el-table
-      style="width: auto"
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
+        style="width: auto"
+        v-loading="listLoading"
+        :data="list"
+        element-loading-text="Loading"
+        :border="false"
+        fit
+        highlight-current-row
+        class="table"
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="55"/>
       <el-table-column
-        align="center"
-        label="错误名称"
-        prop="name"
-        width="155"
+          align="left"
+          label="错误名称"
+          prop="name"
+          width="155"
       />
       <el-table-column
-        align="center"
-        label="错误描述"
-        prop="keyWords"
-        width="455"
+          align="left"
+          label="错误描述"
+          prop="keyWords"
+          width="455"
       />
-      <el-table-column align="center" label="修复指令" width="260">
+      <el-table-column align="left" label="修复指令" width="260">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <p v-for="cmd in scope.row.repairCmds" :key="cmd">{{ cmd }}</p>
@@ -36,7 +40,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作" width="200px">
+      <el-table-column align="left" label="操作" width="200px">
         <template slot-scope="scope">
           <div style="display: flex">
             <el-button @click="jumpToManageDialog(scope.row)">修改</el-button>
@@ -46,11 +50,11 @@
       </el-table-column>
     </el-table>
     <el-pagination
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-size="pageSize"
-      layout="total, prev, pager, next, jumper"
-      :total="totalCount"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next, jumper"
+        :total="totalCount"
     >
     </el-pagination>
     <el-dialog title="管理" :visible.sync="dialogVisible" width="1000px">
@@ -61,48 +65,51 @@
         <el-form-item label="错误名称">
           <div style="display: flex">
             <el-input
-              style="margin-right: 20px"
-              v-model="inputErrorName"
+                style="margin-right: 20px"
+                v-model="inputErrorName"
             ></el-input>
             <el-button
-              style="margin-right: 450px"
-              size="small"
-              @click="updateName"
-              >修改名称</el-button
+                style="margin-right: 450px"
+                size="small"
+                @click="updateName"
+            >修改名称
+            </el-button
             >
           </div>
         </el-form-item>
         <el-form-item label="错误描述">
           <div style="display: flex">
             <el-input
-              type="textarea"
-              style="margin-right: 20px"
-              :autosize="{ minRows: 3, maxRows: 7 }"
-              maxlength="1000"
-              v-model="inputKeyWords"
+                type="textarea"
+                style="margin-right: 20px"
+                :autosize="{ minRows: 3, maxRows: 7 }"
+                maxlength="1000"
+                v-model="inputKeyWords"
             >
             </el-input>
             <el-button
-              style="height: 35px; margin-right: 50px"
-              size="small"
-              @click="updateKeywords"
-              >修改描述</el-button
+                style="height: 35px; margin-right: 50px"
+                size="small"
+                @click="updateKeywords"
+            >修改描述
+            </el-button
             >
           </div>
         </el-form-item>
-        <br />
+        <br/>
         <el-form-item
-          v-for="(cmd, index) in inputRepairCmds"
-          :label="'修复指令' + index"
-          :key="index"
+            v-for="(cmd, index) in inputRepairCmds"
+            :label="'修复指令' + index"
+            :key="index"
         >
           <div style="display: flex">
             <el-input
-              style="margin-right: 20px"
-              v-model="inputRepairCmds[index]"
+                style="margin-right: 20px"
+                v-model="inputRepairCmds[index]"
             ></el-input>
             <el-button style="margin-right: 150px" @click="removeCmd(index)"
-              >删除</el-button
+            >删除
+            </el-button
             >
           </div>
         </el-form-item>
@@ -120,7 +127,8 @@
         <el-form-item>
           <el-button @click="addCmd">新增修复指令</el-button>
           <el-button type="primary" @click="updateRepairCmds"
-            >提交修复指令</el-button
+          >提交修复指令
+          </el-button
           >
           <!--          <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>-->
         </el-form-item>
@@ -133,29 +141,30 @@
         </el-form-item>
         <el-form-item label="错误描述">
           <el-input
-            type="textarea"
-            style="margin-right: 20px"
-            :autosize="{ minRows: 3, maxRows: 7 }"
-            maxlength="1000"
-            v-model="insertKeyWords"
+              type="textarea"
+              style="margin-right: 20px"
+              :autosize="{ minRows: 3, maxRows: 7 }"
+              maxlength="1000"
+              v-model="insertKeyWords"
           >
           </el-input>
         </el-form-item>
-        <br />
+        <br/>
         <el-form-item
-          v-for="(cmd, index) in insertRepairCmds"
-          :label="'修复指令' + index"
-          :key="index"
+            v-for="(cmd, index) in insertRepairCmds"
+            :label="'修复指令' + index"
+            :key="index"
         >
           <div style="display: flex">
             <el-input
-              style="margin-right: 20px"
-              v-model="insertRepairCmds[index]"
+                style="margin-right: 20px"
+                v-model="insertRepairCmds[index]"
             ></el-input>
             <el-button
-              style="margin-right: 50px"
-              @click="removeInsertCmd(index)"
-              >删除</el-button
+                style="margin-right: 50px"
+                @click="removeInsertCmd(index)"
+            >删除
+            </el-button
             >
           </div>
         </el-form-item>
@@ -214,25 +223,25 @@ export default {
   methods: {
     updateName() {
       known_error_api
-        .updateNameById(this.dialogErrorId + "", this.inputErrorName)
-        .then((response) => {
-          this.$message({
-            message: "修改成功",
-            type: "success",
+          .updateNameById(this.dialogErrorId + "", this.inputErrorName)
+          .then((response) => {
+            this.$message({
+              message: "修改成功",
+              type: "success",
+            });
+            this.refreshPage();
           });
-          this.refreshPage();
-        });
     },
     updateKeywords() {
       known_error_api
-        .updateKeywordsById(this.dialogErrorId + "", this.inputKeyWords)
-        .then((response) => {
-          this.$message({
-            message: "修改成功",
-            type: "success",
+          .updateKeywordsById(this.dialogErrorId + "", this.inputKeyWords)
+          .then((response) => {
+            this.$message({
+              message: "修改成功",
+              type: "success",
+            });
+            this.refreshPage();
           });
-          this.refreshPage();
-        });
     },
     updateRepairCmds() {
       let canUpdate = true;
@@ -247,33 +256,34 @@ export default {
         return;
       }
       known_error_api
-        .updateRepairCmdsById(
-          this.dialogErrorId + "",
-          JSON.stringify(this.inputRepairCmds)
-        )
-        .then((response) => {
-          this.$message({
-            message: "更新成功",
-            type: "success",
+          .updateRepairCmdsById(
+              this.dialogErrorId + "",
+              JSON.stringify(this.inputRepairCmds)
+          )
+          .then((response) => {
+            this.$message({
+              message: "更新成功",
+              type: "success",
+            });
+            this.refreshPage();
           });
-          this.refreshPage();
-        });
     },
     insertError() {
       this.dialogInsertVisible = true;
     },
     deleteById(id) {
       this.$confirm("确认删除？")
-        .then((_) => {
-          known_error_api.deleteById(id).then((response) => {
-            this.$message({
-              message: "删除成功",
-              type: "success",
+          .then((_) => {
+            known_error_api.deleteById(id).then((response) => {
+              this.$message({
+                message: "删除成功",
+                type: "success",
+              });
+              this.refreshPage();
             });
-            this.refreshPage();
+          })
+          .catch((_) => {
           });
-        })
-        .catch((_) => {});
     },
     insertCmds() {
       let canUpdate = true;
@@ -285,8 +295,8 @@ export default {
         }
       }
       if (
-        this.insertErrorName.trim() === "" ||
-        this.insertKeyWords.trim() === ""
+          this.insertErrorName.trim() === "" ||
+          this.insertKeyWords.trim() === ""
       ) {
         canUpdate = false;
         this.$message.error("不能有空字段!");
@@ -295,18 +305,18 @@ export default {
         return;
       }
       known_error_api
-        .insert(
-          this.insertErrorName.trim(),
-          this.insertKeyWords.trim(),
-          JSON.stringify(this.insertRepairCmds)
-        )
-        .then((response) => {
-          this.$message({
-            message: "添加成功",
-            type: "success",
+          .insert(
+              this.insertErrorName.trim(),
+              this.insertKeyWords.trim(),
+              JSON.stringify(this.insertRepairCmds)
+          )
+          .then((response) => {
+            this.$message({
+              message: "添加成功",
+              type: "success",
+            });
+            this.refreshPage();
           });
-          this.refreshPage();
-        });
     },
     jumpToManageDialog(knownError) {
       this.dialogVisible = true;
@@ -328,11 +338,11 @@ export default {
         this.totalCount = response.data;
       });
       known_error_api
-        .getErrorListByPage(this.currentPage, this.pageSize)
-        .then((response) => {
-          this.list = response.data;
-          this.listLoading = false;
-        });
+          .getErrorListByPage(this.currentPage, this.pageSize)
+          .then((response) => {
+            this.list = response.data;
+            this.listLoading = false;
+          });
     },
     removeCmd(index) {
       this.inputRepairCmds.splice(index, 1);
@@ -350,5 +360,61 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.refresh-button {
+  color: rgba(25, 118, 210, 1);
+  border-color: rgba(25, 118, 210, 1);
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  padding: 0 12px;
+  font-weight: unset;
+  margin-left: auto;
+}
+
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+
+  &:before {
+    content: unset;
+  }
+
+  &:after {
+    content: unset;
+  }
+  /deep/ table {
+    border: unset !important;
+  }
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+  }
+
+  /deep/ tbody td {
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+  }
+}
 </style>

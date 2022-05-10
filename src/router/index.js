@@ -33,8 +33,6 @@ import VisGraph from "@/views/metric_graph/vis_graph/index.vue"
 import ModelZoo from '@/views/metric_graph/modelzoo/index.vue'
 
 import Dataset from "@/views/dataset/index.vue"
-import PublicDatasets from "@/views/dataset/public_datasets/index.vue"
-import MyDatasets from "@/views/dataset/my_datasets/index.vue"
 
 import Model from "@/views/model/index.vue"
 import MyModels from "@/views/model/my_models/index.vue"
@@ -118,27 +116,22 @@ export const constantRoutes = [
               title: "图谱列表",
             },
           },
-          {
+         /* {
             path: '/dashboard/visgraph',
             name: 'Visualize Graph',
             component: VisGraph,
             meta: {
               title: "图谱可视化",
             },
-          },
+          },*/
           {
             path: '/dashboard/dataset',
             name: 'Dataset',
             component: Dataset,
-            redirect: { name: 'My Datasets' },
             show: true,
             meta: {
               title: "数据集"
             },
-            children: [
-              { path: 'my_datasets', name: 'My Datasets', component: MyDatasets, meta: { title: "我的数据集" } },
-              { path: 'public_datasets', name: 'Public Datasets', component: PublicDatasets, meta: { title: "公开数据集" } },
-            ]
           },
           {
             path: '/dashboard/model',
@@ -170,8 +163,57 @@ export const constantRoutes = [
               { path: 'predicting/:id', name: 'Predicting', component: Predicting, meta: { title: "流程图预测" } }
             ]
           },
+          {
+            path: '/dashboard/container',
+            name: 'Container',
+            component: Container,
+            redirect: { name: 'ContainerList' },
+            meta: {
+              title: "容器管理",
+              roles: ["staff"],
+            },
+            children: [
+              {
+                path: 'detail/:token',
+                component: () => import('@/views/container/cli-detail/cli-detail')
+              },
+              { path: '/dashboard/container/container_list', name: 'ContainerList', component: ContainerList, meta: { title: "容器列表" } },
+              { path: '/dashboard/container/manage_device', name: 'ManageDevice', component: ManageDevice, meta: { title: "设备管理" } },
+              { path: '/dashboard/container/container_task', name: 'ContainerTask', component: ContainerTask, meta: { title: "任务管理" } },
+              { path: '/dashboard/container/container_log', name: 'ContainerLog', component: ContainerLog, meta: { title: "容器日志" } },
+              {
+                path: '/dashboard/container/package_source', name: 'PackageSource', component: PackageSource, meta: { title: "源管理" }, children: [
+                  { path: 'apt', name: 'AptSource', component: AptSource, meta: { title: "Apt源" } },
+                  { path: 'pip', name: 'PipSource', component: PipSource, meta: { title: "Pip源" } },
+                ]
+              },
+              { path: '/dashboard/container/manage_error', name: 'ErrorManage', component: ErrorManage, meta: { title: "错误修复" } },
+              // {
+              //   path: 'http://10.214.211.205:5601/',
+              //   meta: { title: '平台日志管理', icon: 'link' }
+              // }
+            ]
+          },
         ]
-      }
+      },
+      {
+        path: '/signin',
+        name: 'Sign In',
+        component: SignIn,
+        show: false,
+        meta: {
+          title: "登录"
+        },
+      },
+      {
+        path: '/signup',
+        name: 'Sign Up',
+        component: SignUp,
+        show: false,
+        meta: {
+          title: "注册"
+        },
+      },
     ]
   },
   {
@@ -257,7 +299,6 @@ export const constantRoutes = [
     path: '/model',
     name: 'Model',
     component: Model,
-    redirect: { name: 'My Models' },
     meta: {
       title: "模型"
     },
@@ -284,10 +325,6 @@ export const constantRoutes = [
     meta: {
       title: "数据集"
     },
-    children: [
-      { path: 'my_datasets', name: 'My Datasets', component: MyDatasets, meta: { title: "我的数据集" } },
-      { path: 'public_datasets', name: 'Public Datasets', component: PublicDatasets, meta: { title: "公开数据集" } },
-    ]
   },
   // flowchart
   {
@@ -317,24 +354,6 @@ export const constantRoutes = [
       title: "流程图任务"
     }
   },
-  {
-    path: '/signin',
-    name: 'Sign In',
-    component: SignIn,
-    show: false,
-    meta: {
-      title: "登录"
-    },
-  },
-  {
-    path: '/signup',
-    name: 'Sign Up',
-    component: SignUp,
-    show: false,
-    meta: {
-      title: "注册"
-    },
-  },
 ]
 
 // 管理员
@@ -355,7 +374,7 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/container',
+    path: '/dashboard/container',
     name: 'Container',
     component: Container,
     redirect: { name: 'ContainerOverview' },

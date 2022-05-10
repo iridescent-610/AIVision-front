@@ -13,45 +13,45 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="55" />
       <el-table-column
-        align="center"
+        align="left"
         label="名称"
         prop="deviceName"
         width="65"
       />
-      <el-table-column align="center" label="描述" prop="info" width="155" />
+      <el-table-column align="left" label="描述" prop="info" width="155" />
       <el-table-column
-        align="center"
+        align="left"
         label="创建者ID"
         prop="userId"
         width="60"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="创建时间"
         prop="createdTime"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="活动时间"
         prop="lastLogin"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="GPU驱动"
         prop="driverVersion"
         width="90"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="CUDA版本"
         prop="cudaVersion"
         width="90"
       />
-      <el-table-column align="center" label="GPU数量" width="95">
+      <el-table-column align="left" label="GPU数量" width="95">
         <template slot-scope="scope">
           <el-popover placement="right" width="100%" trigger="hover">
             <el-table :data="scope.row.gpus">
@@ -66,13 +66,13 @@
         </template>
       </el-table-column>
       <el-table-column
-        align="center"
+        align="left"
         label="显存(MB)"
         prop="gpuMemSum"
         width="100"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="算力"
         prop="calPowerSum"
         width="55"

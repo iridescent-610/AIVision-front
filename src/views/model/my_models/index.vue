@@ -16,15 +16,14 @@
 
 <template>
   <div>
-    <b-row align-h="start" :style="style.down">
-      <b-col lg="2" cols="3">
-        <b-button
-          block
-          variant="primary"
-          @click="update_key='post'; cleanForm(); setIsUpdateDialogOpen(true)"
-        >新建</b-button>
-      </b-col>
-    </b-row>
+    <el-button
+        class="add-button"
+        icon="el-icon-plus"
+        type="primary"
+        size="small"
+        style="font-size: 14px"
+        @click="update_key='post'; cleanForm(); setIsUpdateDialogOpen(true)"
+    >新建数据集</el-button>
     <b-table
       striped
       hover
@@ -35,8 +34,9 @@
       :per-page="perPage"
       outlined
       sort-by="created_time"
+      class="table"
     >
-      <template v-slot:cell(model_type)="row">{{ 
+      <template v-slot:cell(model_type)="row">{{
         modelToType.hasOwnProperty(row.item.model_name)?modelToType[row.item.model_name]:'squeezenet'
          }}</template>
       <template v-slot:cell(is_public)="row">{{row.item.is_public? "是": "否"}}</template>
@@ -50,39 +50,40 @@
             variant="outline-primary"
             :style="style.methodBtn"
           >详情</b-button> -->
-          <b-button
+          <el-button
             size="sm"
             @click="vis_structure(row.item.model_name)"
-            variant="outline-primary"
+            type="text"
             :style="style.methodBtn"
-          >模型结构</b-button>
-          <b-button
+          >模型结构</el-button>
+          <el-button
             size="sm"
             @click="download(row.item.url)"
-            variant="outline-primary"
+            type="text"
             :style="style.methodBtn"
-          >下载</b-button>
-          <b-button
+          >下载</el-button>
+          <el-button
             size="sm"
             @click="shareData({file_id: row.item.id, file_type: 'm', is_public: row.item.is_public})"
-            :variant="row.item.is_possessed?'outline-primary': 'outline-secondary'"
+            type="text"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >分享</b-button>
-          <b-button
+          >分享</el-button>
+          <el-button
             size="sm"
             @click="update_key='put'; fillForm(row.item); setIsUpdateDialogOpen(true)"
-            :variant="row.item.is_possessed?'outline-danger': 'outline-secondary'"
+            type="text"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >更新</b-button>
-          <b-button
+          >更新</el-button>
+          <el-button
             size="sm"
             @click="deleteModels([row.item.id])"
-            :variant="row.item.is_possessed?'outline-danger': 'outline-secondary'"
+            type="text"
+            style="color: rgba(183, 28, 28, 1)"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >删除</b-button>
+          >删除</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
@@ -95,6 +96,7 @@
       :per-page="perPage"
       align="right"
       :style="style.pagination"
+      class="pagination"
     ></b-pagination>
     <b-modal
       :title="updateDialogTitle"
@@ -102,11 +104,9 @@
       scrollable
       no-close-on-backdrop
       hide-footer
-      size="xl"
       :visible="is_update_dialog_open"
       @close="closeUpdateDialog"
       @cancel="closeUpdateDialog"
-      :title-class="{style: {fontSize:'50px'}}"
     >
       <form-models :initial_file_info="file_info" :update_key="update_key" :model_id="model_id"></form-models>
     </b-modal>
@@ -119,7 +119,7 @@
       ok-title="确定"
       @close="closeDialog"
       @ok="closeDialog"
-      :title-class="{style: {fontSize:'50px'}}"
+      :title-class="{style: {fontSize:'18px'}}"
     >
       <div class="text-center" :style="style.modal">{{dialog_content}}</div>
     </b-modal>
@@ -258,7 +258,7 @@ export default {
       console.log(this.file, this.file_info);
     },
     fillForm: function (item) {
-      // if(!modelToType.hasOwnProperty(item.model_name)){  
+      // if(!modelToType.hasOwnProperty(item.model_name)){
       //   console.log(item.model_name);
       //   modelToType[item.model_name] = 'squeezenet'
       // }
@@ -302,3 +302,102 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.add-button {
+  margin-bottom: 24px;
+  margin-top: 9px;
+  border: unset;
+}
+
+.table {
+  border: 1px solid rgba(207, 216, 220, 1);
+  border-radius: 4px;
+  /deep/ table {
+    border: unset !important;
+  }
+  /deep/ thead {
+    line-height: 14px;
+  }
+
+  /deep/ th {
+    background-color: rgba(248, 249, 249, 1) !important;
+    color: rgba(38, 50, 56, 1);
+    font-size: 14px;
+    font-weight: 400;
+    border: unset;
+    text-align: left !important;
+  }
+
+  /deep/ tr {
+    background: unset !important;
+  }
+
+  /deep/ tbody td {
+    line-height: 20px;
+    padding: 10px 12px;
+    color: rgba(73, 93, 103, 1);
+    font-size: 14px;
+    text-align: left !important;
+    background: unset !important;
+    border-color: rgba(238, 242, 243, 1);
+
+    button {
+      font-weight: 400;
+      margin-left: 6px !important;
+      margin-right: 6px !important;
+      padding: 0;
+      line-height: 20px;
+      border: 0;
+    }
+  }
+
+  /deep/ .card {
+    border-radius: unset;
+    border: unset !important;
+  }
+
+  .action-button {
+    &:focus {
+      outline: unset;
+    }
+
+    &.update {
+      color: rgba(183, 28, 28, 1);
+
+      &:disabled {
+        color: #C0C4CC;
+      }
+    }
+  }
+}
+
+.pagination {
+  /deep/ .page-link {
+    border: unset !important;
+    font-size: 14px;
+    color: rgba(69, 90, 100, 0.65);
+
+    &:focus {
+      outline: unset;
+      box-shadow: unset;
+    }
+  }
+
+  /deep/ .page-item.active .page-link {
+    background-color: #fff;
+    color: #007bff;
+  }
+}
+
+/deep/ .el-button {
+  &:focus {
+    outline: unset;
+    border: unset;
+  }
+}
+
+/deep/.modal-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+</style>

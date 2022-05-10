@@ -1,129 +1,6 @@
 <template>
   <div style="width: 100%">
     <div id="static" class="common-container">
-      <!-- <div class="banner lite">
-        <section class="section">
-          <div class="banner-title">
-            <h1 class="banner-title-text">AIVision开发平台</h1>
-            <div class="alink-grounp alink-grounp-center">
-              <el-button
-                type="primary"
-                style="
-                  margin-left: 0px;
-                  width: 128px;
-                  height: 45px;
-                  letter-spacing: 1px;
-                  font-size: 18px;
-                  font-weight: 500;
-                "
-                @click="handleClickJump('task')"
-                >立即体验</el-button
-              >
-              <a href="http://10.214.211.207:10087" target="_blank">
-                <el-button
-                  type="info"
-                  style="
-                    margin-left: 20px;
-                    width: 128px;
-                    height: 45px;
-                    letter-spacing: 1px;
-                    font-size: 18px;
-                    font-weight: 500;
-                  "
-                  >使用文档</el-button
-                >
-              </a>
-            </div>
-          </div>
-
-          <div class="banner-main">
-            <div class="banner-main-nav">
-              <div class="banner-main-nav_title">
-                零算法基础四步 <br />定制复杂AI模型
-              </div>
-              <ul>
-                <li>
-                  <a
-                    target="__black"
-                    href="#"
-                    @click="handleClickJump('dataset')"
-                    class="banner-main-nav_item"
-                    >【数据】上传业务数据
-                    <i class="icon el-icon-picture-outline"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    target="__black"
-                    href="#"
-                    @click="handleClickJump('task')"
-                    class="banner-main-nav_item"
-                    >【任务】快速定制任务
-                    <i class="icon el-icon-magic-stick"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    target="__black"
-                    href="#"
-                    @click="handleClickJump('task')"
-                    class="banner-main-nav_item"
-                    >【训练】自动串行训练 <i class="icon el-icon-files"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    target="__black"
-                    href="#"
-                    @click="handleClickJump('task')"
-                    class="banner-main-nav_item"
-                    >【部署】本地一键部署 <i class="icon el-icon-coin"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-            <div class="banner-main-swiper">
-              <div class="swiper-container">
-                <el-carousel height="350px">
-                  <el-carousel-item>
-                    <img
-                      src="./assets/dataset.jpg"
-                      style="height: 100%; width: 100%"
-                      alt="上传数据集"
-                      title="上传数据集"
-                    />
-                  </el-carousel-item>
-                  <el-carousel-item>
-                    <img
-                      src="./assets/task.jpg"
-                      style="height: 100%; width: 100%"
-                      alt="创建任务"
-                      title="创建任务"
-                    />
-                  </el-carousel-item>
-                  <el-carousel-item>
-                    <img
-                      src="./assets/train.jpg"
-                      style="height: 100%; width: 100%"
-                      alt="训练"
-                      title="训练"
-                    />
-                  </el-carousel-item>
-                  <el-carousel-item>
-                    <img
-                      src="./assets/deploy.jpg"
-                      style="height: 100%; width: 100%"
-                      alt="本地部署"
-                      title="本地部署"
-                    />
-                  </el-carousel-item>
-                </el-carousel>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div> -->
-
       <div class="introduction">
         <div class="intro-title">AIVision - 视频图像范式平台</div>
         <div class="intro-line1"></div>
@@ -146,11 +23,11 @@
             @click="handleClickJump('task')"
             >立即使用</el-button
           >
-          <a href="http://10.214.211.207:10087" target="_blank">
+          <span @click="jumpDoc" target="_blank">
             <el-button type="info" class="intro-button" id="intro-button2"
               >查看文档</el-button
             >
-          </a>
+          </span>
         </div>
       </div>
 
@@ -236,30 +113,8 @@
     </div>
 
     <div class="footer">
-      <div class="footer_cover">
-        <el-row>
-          <el-col :span="6" :offset="6">
-            <div class="ai_items_class connect">
-              <div class="ai_title">联系地址</div>
-              <div>
-                <div class="ai_items qq">浙江省杭州市西湖区浙大路38号</div>
-                <div class="ai_items qq">浙江大学玉泉校区</div>
-                <div class="ai_items qq">曹光彪西楼404室</div>
-                <div class="ai_items qq">视觉智能和模式识别实验室</div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="6">
-            <div class="ai_items_img">新浪微博</div>
-          </el-col>
-        </el-row>
-      </div>
-      <div class="footer_copyright" style="text-align: center">
-        <p style="color: rgb(255, 255, 255)">
-          ©2017-2019 Laboratory of Visual Intelligence and Pattern Analysis All
-          Rights Reserved
-        </p>
-      </div>
+      <p>AI+X 普适化平台</p>
+      <p>Copyright © 2022 浙江大学计算机创新技术研究院</p>
     </div>
   </div>
 </template>
@@ -272,9 +127,6 @@ import { keyToIndustry, realApplication, typeToDesc } from "./industries";
 
 export default {
   name: "MyFlowcharts",
-  //   components: {
-  //     FlowchartOverview
-  //   },
   data() {
     return {
       keyToIndustry: keyToIndustry,
@@ -286,6 +138,9 @@ export default {
   computed: {},
 
   methods: {
+    jumpDoc() {
+      window.location.replace(process.env.VUE_APP_DOC_URL)
+    },
     handleClickIndustry(industry) {
       var routeUrl = this.$router.resolve({
         name: "Industry",
@@ -473,7 +328,8 @@ export default {
 .introduction {
   width: 100%;
   background-image: url("./assets/head_background.png");
-  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0 auto 21px;
   text-align: center;
 }
@@ -553,12 +409,6 @@ export default {
 .modeltype-item:nth-child(even) {
   margin-left: 21px;
 }
-.modeltype-item:hover {
-  border: 2px solid #036fe2;
-}
-.modeltype.lite .modeltype-item:hover .modeltype-title {
-  color: #503ef3;
-}
 
 .modeltype-icon {
   width: 466px;
@@ -600,96 +450,14 @@ export default {
 :root {
   --swiper-theme-color: #007aff;
 }
-.swiper-container {
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  overflow: hidden;
-  list-style: none;
-  padding: 0;
-  z-index: 1;
-}
-.swiper-container /deep/ .el-carousel__button {
-  background-color: #0c24ad;
-}
 
 .footer {
-  vertical-align: top;
-  background-color: rgba(3, 3, 122, 0.8);
-}
-.footer .footer_cover {
-  width: 100%;
-  height: 300px;
-  margin: 0 auto;
-}
-.footer .ai_items_img {
-  padding-top: 158px;
-  color: #ffffff;
-  font-size: 14px;
-  width: 138px;
-  text-align: center;
-  margin-top: 80px;
-  margin-left: 200px;
-  background-image: url("./assets/QRcode.png");
-  background-repeat: no-repeat;
-}
-.footer .ai_items_class {
-  width: 259px;
-  text-align: center;
-  font-size: 18px;
-  color: #fff;
-  display: block;
-  margin: 0 auto;
-}
-.footer .ai_items_class .title {
-  font-size: 18px;
-  margin: 20px 0 20px;
-}
-.footer .ai_items_class .desc {
-  font-size: 14px;
+  color: rgba(69, 90, 100, 0.35);
   line-height: 20px;
-  opacity: 0.66;
-  max-width: 302px;
-}
-.footer .ai_items_class.logo {
-  width: 405px;
-}
-.footer .ai_items_class.resource {
-  width: 158px;
-}
-.footer .ai_items_class.market {
-  width: 170px;
-}
-.footer .ai_items {
-  font-size: 14px;
-  color: #fff;
-  opacity: 0.66;
-  line-height: 36px;
-  cursor: pointer;
-}
-.footer .ai_items.qq {
-  cursor: default;
-  white-space: nowrap;
-}
-.footer .ai_items.qq:hover {
-  color: #fff;
-}
-.footer .ai_items:hover {
-  opacity: 1;
-  color: #036fe2;
-  /* #3B5998 */
-}
-.footer .ai_title {
-  margin: 48px 0 27px;
+  font-size: 12px;
   text-align: center;
-  color: #fff;
-  font-size: 36px;
-  opacity: 1;
-  cursor: default;
-}
-.footer .footer_copyright {
-  line-height: 50px;
-  font-size: 14px;
+  padding: 4px 0 7px 0;
+  border-top: 1px solid rgba(69, 90, 100, 0.1);
 }
 
 body,

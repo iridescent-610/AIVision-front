@@ -15,21 +15,45 @@
 -->
 
 <template>
-  <b-container>
-    <b-col>
-      <b-nav tabs>
-        <b-nav-item active-class="active" :to="{name: 'My Models'}">我的模型</b-nav-item>
-        <b-nav-item active-class="active" :to="{name: 'Public Models'}">公开模型</b-nav-item>
-      </b-nav>
-      <div class="pt-4">
-        <router-view></router-view>
-      </div>
-    </b-col>
-  </b-container>
+  <el-tabs class="el-tab" v-model="activeName" @tab-click="handleTabClick">
+    <el-tab-pane label="我的模型" name="first">
+      <my-models/>
+    </el-tab-pane>
+    <el-tab-pane label="公开模型" name="second">
+      <public-models/>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
+import MyModels from "@/views/model/my_models/index.vue"
+import PublicModels from "@/views/model/public_models/index.vue"
 export default {
   name: "Model",
+  components: {
+    MyModels,
+    PublicModels
+  },
+  data() {
+    return {
+      activeName: 'first'
+    }
+  },
+  methods: {
+    handleTabClick() {}
+  }
 };
 </script>
+<style lang="less" scoped>
+.el-tab {
+  /deep/ .el-tabs__item {
+    font-size: 18px;
+    color: rgba(69, 90, 100, 0.65);
+    font-weight: 400;
+
+    &.is-active {
+      color: rgba(25, 118, 210, 1);
+    }
+  }
+}
+</style>

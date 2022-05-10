@@ -15,10 +15,10 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
-      <el-table-column align="center" label="名称" prop="name" width="155" />
-      <el-table-column align="center" label="url" prop="url" width="455" />
-      <el-table-column align="center" label="操作" width="200px">
+      <el-table-column align="left" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="名称" prop="name" width="155" />
+      <el-table-column align="left" label="url" prop="url" width="455" />
+      <el-table-column align="left" label="操作" width="200px">
         <template slot-scope="scope">
           <div style="display: flex">
             <el-button @click="jumpToManageDialog(scope.row)">修改</el-button>

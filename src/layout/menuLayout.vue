@@ -21,8 +21,14 @@
         <div class="collapse" @click="collapse = !collapse">xxx</div>
       </el-menu>
     </el-aside>
-    <el-main class="layout-main">
-      <router-view />
+    <el-main class="main">
+      <div class="layout-main">
+        <router-view />
+      </div>
+      <div class="footer">
+        <p>AI+X 普适化平台</p>
+        <p>Copyright © 2022 浙江大学计算机创新技术研究院</p>
+      </div>
     </el-main>
   </div>
 </template>
@@ -38,11 +44,11 @@ export default {
           path: "/dashboard/modelZoo",
           icon: "menu_icon_1",
         },
-        {
+       /* {
           title: "图谱可视化",
           path: "/dashboard/visgraph",
           icon: "menu_icon_2",
-        },
+        },*/
         {
           title: "我的数据集",
           path: "/dashboard/dataset",
@@ -60,7 +66,7 @@ export default {
         },
         {
           title: "我的容器",
-          path: "/dashboard/5",
+          path: "/dashboard/container",
           icon: "menu_icon_6",
         },
       ],
@@ -77,11 +83,13 @@ export default {
 </script>
 <style lang="less" scoped>
 .menu-layout {
+  width: 100%;
   display: flex;
   height: calc(100vh - 58px);
 }
 
 .layout-aside {
+  background: #F9FAFA;
   height: 100%;
   width: 192px !important;
   border-right: 1px solid #cfd8dc;
@@ -98,14 +106,39 @@ export default {
   }
 }
 
-.layout-main {
+.main {
   height: 100%;
   overflow: auto;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+
+  .layout-main {
+    height: 100%;
+    overflow: auto;
+    flex: 1;
+    padding: 18px 32px;
+  }
+
+  .footer {
+    color: rgba(69, 90, 100, 0.35);
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    padding: 4px 0 7px 0;
+    border-top: 1px solid rgba(69, 90, 100, 0.1);
+    margin-top: auto;
+
+    p {
+      margin: 0 !important;
+    }
+  }
 }
 
 .el-menu-vertical {
   font-size: 16px;
+  border-right: unset !important;
 
   /deep/ .el-menu-item {
     height: 40px;

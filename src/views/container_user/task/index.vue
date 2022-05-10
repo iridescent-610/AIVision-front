@@ -13,39 +13,39 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" width="55" />
+      <el-table-column align="left" label="ID" prop="id" width="55" />
       <el-table-column
-        align="center"
+        align="left"
         label="设备ID"
         prop="deviceId"
         width="65"
       />
       <el-table-column
-        align="center"
+        align="left"
         label="AIX任务ID"
         prop="taskId"
         width="75"
       />
-      <el-table-column align="center" label="状态" prop="status" width="110" />
+      <el-table-column align="left" label="状态" prop="status" width="110" />
       <el-table-column
-        align="center"
+        align="left"
         label="开始时间"
         prop="begin"
         width="100"
       />
-      <el-table-column align="center" label="结束时间" prop="end" width="100" />
+      <el-table-column align="left" label="结束时间" prop="end" width="100" />
       <el-table-column
-        align="center"
+        align="left"
         label="持续时长(分钟)"
         prop="durationMin"
         width="90"
       />
-      <el-table-column align="center" label="任务日志" width="500">
+      <el-table-column align="left" label="任务日志" width="500">
         <template slot-scope="scope">
           <span>{{ scope.row.logs | ellipsis }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作" width="205">
+      <el-table-column align="left" label="操作" width="205">
         <template slot-scope="scope">
           <el-button @click="deleteById(scope.row.id)">删除</el-button>
           <el-button @click="showLog(scope.row.logs)">完整日志</el-button>

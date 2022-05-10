@@ -17,6 +17,7 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App.vue'
+import 'element-ui/lib/theme-chalk/index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './custom.scss'
@@ -27,7 +28,6 @@ import router from './router'
 import '@/permission' // permission control
 
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import SvgIcon from '@/components/svg_icon'
