@@ -41,13 +41,13 @@
       <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
-          <el-button
+          <!-- <el-button
             size="sm"
             @click="row.toggleDetails"
             type="text"
             :style="style.methodBtn"
             class="action-button"
-          >详情</el-button>
+          >详情</el-button> -->
           <el-button
             size="sm"
             @click="download(row.item.url)"
@@ -55,7 +55,7 @@
             :style="style.methodBtn"
             class="action-button"
           >下载</el-button>
-          <el-button
+          <!-- <el-button
             size="sm"
             @click="shareData({file_id: row.item.id, file_type: 'd', is_public: row.item.is_public})"
             :variant="row.item.is_possessed?'outline-primary': 'outline-secondary'"
@@ -63,7 +63,7 @@
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
             class="action-button"
-          >分享</el-button>
+          >分享</el-button> -->
           <el-button
             size="sm"
             @click="update_key='put'; fillForm(row.item); setIsUpdateDialogOpen(true)"

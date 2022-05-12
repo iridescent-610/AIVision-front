@@ -17,13 +17,18 @@
 <template>
   <div>
     <el-button
-        class="add-button"
-        icon="el-icon-plus"
-        type="primary"
-        size="small"
-        style="font-size: 14px"
-        @click="update_key='post'; cleanForm(); setIsUpdateDialogOpen(true)"
-    >新建数据集</el-button>
+      class="add-button"
+      icon="el-icon-plus"
+      type="primary"
+      size="small"
+      style="font-size: 14px"
+      @click="
+        update_key = 'post';
+        cleanForm();
+        setIsUpdateDialogOpen(true);
+      "
+      >新增模型</el-button
+    >
     <b-table
       striped
       hover
@@ -37,11 +42,19 @@
       class="table"
     >
       <template v-slot:cell(model_type)="row">{{
-        modelToType.hasOwnProperty(row.item.model_name)?modelToType[row.item.model_name]:'squeezenet'
-         }}</template>
-      <template v-slot:cell(is_public)="row">{{row.item.is_public? "是": "否"}}</template>
-      <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
-      <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
+        modelToType.hasOwnProperty(row.item.model_name)
+          ? modelToType[row.item.model_name]
+          : "squeezenet"
+      }}</template>
+      <template v-slot:cell(is_public)="row">{{
+        row.item.is_public ? "是" : "否"
+      }}</template>
+      <template v-slot:cell(task)="row">{{
+        row.item.task.map((t) => t.name).reduce(convertArray2String)
+      }}</template>
+      <template v-slot:cell(created_time)="row">{{
+        parseTime(row.item.created_time)
+      }}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
           <!-- <b-button
@@ -55,27 +68,41 @@
             @click="vis_structure(row.item.model_name)"
             type="text"
             :style="style.methodBtn"
-          >模型结构</el-button>
+            >模型结构</el-button
+          >
           <el-button
             size="sm"
             @click="download(row.item.url)"
             type="text"
             :style="style.methodBtn"
-          >下载</el-button>
-          <el-button
+            >下载</el-button
+          >
+          <!-- <el-button
             size="sm"
-            @click="shareData({file_id: row.item.id, file_type: 'm', is_public: row.item.is_public})"
+            @click="
+              shareData({
+                file_id: row.item.id,
+                file_type: 'm',
+                is_public: row.item.is_public,
+              })
+            "
             type="text"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >分享</el-button>
+            >分享</el-button
+          > -->
           <el-button
             size="sm"
-            @click="update_key='put'; fillForm(row.item); setIsUpdateDialogOpen(true)"
+            @click="
+              update_key = 'put';
+              fillForm(row.item);
+              setIsUpdateDialogOpen(true);
+            "
             type="text"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >更新</el-button>
+            >更新</el-button
+          >
           <el-button
             size="sm"
             @click="deleteModels([row.item.id])"
@@ -83,7 +110,8 @@
             style="color: rgba(183, 28, 28, 1)"
             :disabled="!row.item.is_possessed"
             :style="style.methodBtn"
-          >删除</el-button>
+            >删除</el-button
+          >
         </div>
       </template>
       <template v-slot:row-details="row">
@@ -108,7 +136,11 @@
       @close="closeUpdateDialog"
       @cancel="closeUpdateDialog"
     >
-      <form-models :initial_file_info="file_info" :update_key="update_key" :model_id="model_id"></form-models>
+      <form-models
+        :initial_file_info="file_info"
+        :update_key="update_key"
+        :model_id="model_id"
+      ></form-models>
     </b-modal>
     <b-modal
       title="模型"
@@ -119,9 +151,9 @@
       ok-title="确定"
       @close="closeDialog"
       @ok="closeDialog"
-      :title-class="{style: {fontSize:'18px'}}"
+      :title-class="{ style: { fontSize: '18px' } }"
     >
-      <div class="text-center" :style="style.modal">{{dialog_content}}</div>
+      <div class="text-center" :style="style.modal">{{ dialog_content }}</div>
     </b-modal>
   </div>
 </template>
@@ -281,7 +313,7 @@ export default {
     setIsUpdateDialogOpen,
     shareData,
     deleteModels,
-    vis_structure(name){
+    vis_structure(name) {
       console.log(name);
 
       let routeUrl = "http://10.214.211.207:15000/?modelFile=" + name;
@@ -291,11 +323,10 @@ export default {
       // })
 
       window.open(
-        routeUrl,   // routeUrl.href, // 'https://www.baidu.com/',
-        '_blank' // <- This is what makes it open in a new window.
-      )
-
-    }
+        routeUrl, // routeUrl.href, // 'https://www.baidu.com/',
+        "_blank" // <- This is what makes it open in a new window.
+      );
+    },
   },
   mounted() {
     this.$store.dispatch("model/getMyModels");
@@ -365,7 +396,7 @@ export default {
       color: rgba(183, 28, 28, 1);
 
       &:disabled {
-        color: #C0C4CC;
+        color: #c0c4cc;
       }
     }
   }

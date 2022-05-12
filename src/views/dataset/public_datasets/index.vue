@@ -33,13 +33,13 @@
       <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
-          <el-button
+          <!-- <el-button
             size="sm"
             @click="row.toggleDetails"
             type="text"
             class="action-button"
             :style="style.methodBtn"
-          >详情</el-button>
+          >详情</el-button> -->
           <el-button
             size="sm"
             @click="download(row.item.url)"
