@@ -16,107 +16,75 @@
 
 <template>
   <div class="form-datasets">
-    <b-form>
-      <b-row>
-        <b-col md="12">
-          <b-form-group label="任务" label-cols-sm="3" label-cols-lg="2" label-align="left" style="margin-bottom: 16px;">
-            <b-form-checkbox
-              v-for="item in options.tasks"
-              :key="item.id"
-              :value="item.id"
-              v-model="file_info.task"
-              button
-              button-variant="outline-primary"
-              class="check-box"
-            >{{item.name}}</b-form-checkbox>
-          </b-form-group>
-        </b-col>
+    <!-- <b-form> -->
+    <!-- <b-row> -->
+    <!-- <b-col md="12"> -->
+    <b-form-group class="form-group1" label="任务" label-cols-sm="3" label-cols-lg="2" label-align="left">
+      <b-form-checkbox v-for="item in options.tasks" :key="item.id" :value="item.id" v-model="file_info.task" button
+        button-variant="outline-primary" class="check-box">{{ item.name }}</b-form-checkbox>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <b-col md="12">
-          <b-form-group label="名称" label-cols-sm="3" label-cols-lg="2" label-align="left">
-            <b-form-input v-model="file_info.dataset_name" type="text" placeholder="请输入数据集名称"></b-form-input>
-          </b-form-group>
-        </b-col>
+    <!-- <b-col md="12"> -->
+    <b-form-group class="form-group1" label="名称" label-cols-sm="3" label-cols-lg="2" label-align="left">
+      <b-form-input v-model="file_info.dataset_name" type="text" placeholder="请输入数据集名称"></b-form-input>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <b-col md="12">
-          <b-form-group label="公开" label-cols-sm="3" label-cols-lg="2" label-align="left">
-            <b-form-checkbox
-              v-model="file_info.is_public"
-              :value="true"
-              :unchecked-value="false"
-            >是</b-form-checkbox>
-          </b-form-group>
-        </b-col>
+    <!-- <b-col md="12"> -->
+    <b-form-group class="form-group1" label="公开" label-cols-sm="3" label-cols-lg="2" label-align="left">
+      <b-form-checkbox v-model="file_info.is_public" :value="true" :unchecked-value="false"></b-form-checkbox>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <b-col md="12">
-          <b-form-group label="标注" label-cols-sm="3" label-cols-lg="2" label-align="left">
-            <b-form-checkbox
-              v-model="file_info.is_annotated"
-              :value="true"
-              :unchecked-value="false"
-            >是</b-form-checkbox>
-          </b-form-group>
-        </b-col>
+    <!-- <b-col md="12"> -->
+    <b-form-group class="form-group1" label="标注" label-cols-sm="3" label-cols-lg="2" label-align="left">
+      <b-form-checkbox v-model="file_info.is_annotated" :value="true" :unchecked-value="false"></b-form-checkbox>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <b-col v-if="update_key=='post'" md="12">
-          <b-form-group :label="'数据集'" label-cols-sm="3" label-cols-lg="2" label-align="left">
-            <b-form-file
-              v-model="file"
-              placeholder="请选择或拖动文件"
-              drop-placeholder="请拖动至此处"
-              browse-text="浏览"
-            ></b-form-file>
-          </b-form-group>
-        </b-col>
+    <!-- <b-col v-if="update_key == 'post'" md="12"> -->
+    <b-form-group v-if="update_key == 'post'" class="form-group1" :label="'数据集'" label-cols-sm="3" label-cols-lg="2"
+      label-align="left">
+      <b-form-file v-model="file" placeholder="请选择或拖动文件" drop-placeholder="请拖动至此处" browse-text="浏览"></b-form-file>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <b-col md="12">
-          <b-form-group :label="'备注'" label-cols-sm="3" label-cols-lg="2" label-align="left">
-            <b-form-textarea v-model="file_info.info" placeholder="请键入数据集其它信息（可选）" rows="4"></b-form-textarea>
-          </b-form-group>
-        </b-col>
+    <!-- <b-col md="12"> -->
+    <b-form-group class="form-group1" :label="'备注'" label-cols-sm="3" label-cols-lg="2" label-align="left">
+      <b-form-textarea v-model="file_info.info" placeholder="请键入数据集其它信息（可选）" rows="4"></b-form-textarea>
+    </b-form-group>
+    <!-- </b-col> -->
 
-        <!-- <b-col md="12">
+    <!-- <b-col md="12">
           <b-form-group :label="'粗类别：'" label-cols-sm="2" label-cols-lg="1" label-align="right">
             <b-form-textarea v-model="file_info.info" placeholder="如cat1,cat2都属于cat，注意只有分类任务才需要填写此信息" rows="2"></b-form-textarea>
           </b-form-group>
         </b-col> -->
 
-        <!-- <b-col md="12">
+    <!-- <b-col md="12">
           <b-form-group :label="'细类别：'" label-cols-sm="2" label-cols-lg="1" label-align="right">
             <b-form-textarea v-model="file_info.info" placeholder="注意：各种类别以逗号进行分割，类别名称不要包括空格;如果是文本识别任务则输入所有的字符串" rows="2"></b-form-textarea>
           </b-form-group>
         </b-col> -->
 
-        <!-- <b-col md="12">
+    <!-- <b-col md="12">
           <b-form-group :label="'类别：'" label-cols-sm="2" label-cols-lg="1" label-align="right">
             <b-form-textarea v-model="file_info.info" placeholder="注意：各种类别以逗号进行分割，类别名称不要包括空格;如果是文本识别任务则输入所有的字符串" rows="2"></b-form-textarea>
           </b-form-group>
         </b-col> -->
 
-      </b-row>
-      <div class="text-center">
-        <b-spinner variant="primary" style="width: 3rem; height: 3rem;" v-if="is_loading"></b-spinner>
-      </div>
-      <b-button
-        v-if="!is_loading"
-        block
-        @click="updateOrUpload()"
-        variant="primary"
-        style="margin-top: 20px; background-color: rgba(25, 118, 210, 1)"
-      >{{update_key=='put'?'更新': '上传'}}</b-button>
-    </b-form>
-    <b-modal
-      title="数据集"
-      no-close-on-esc
-      no-close-on-backdrop
-      ok-only
-      :visible="is_dialog_open"
-      ok-title="确定"
-      @close="closeDialog"
-      @ok="closeDialog"
-      :title-class="{style: {fontSize:'50px'}}"
-    >
-      <div class="text-center" :style="style.modal">{{dialog_content}}</div>
+    <!-- </b-row> -->
+    <div class="text-center">
+      <b-spinner variant="primary" style="width: 3rem; height: 3rem;" v-if="is_loading"></b-spinner>
+    </div>
+    <b-button v-if="!is_loading" block @click="updateOrUpload()" variant="primary"
+      style="margin-top: 20px; background-color: rgba(25, 118, 210, 1)">{{ update_key == 'put' ? '更新' : '上传' }}
+    </b-button>
+    <!-- </b-form> -->
+    <b-modal title="数据集" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
+      @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
+      <div class="text-center" :style="style.modal">{{ dialog_content }}</div>
     </b-modal>
   </div>
 </template>
@@ -177,6 +145,12 @@ export default {
     }
   }
 
+  // .form-group1 {
+  //   display: block;
+  //   line-height: 32px;
+  //   margin-bottom: 24px;
+  // }
+
   /deep/ .custom-file-label {
     height: 32px;
     line-height: 20px;
@@ -193,6 +167,7 @@ export default {
 
   /deep/ textarea {
     font-size: 14px !important;
+
     &::-webkit-input-placeholder {
       color: rgba(69, 90, 100, 0.35);
     }
@@ -208,9 +183,11 @@ export default {
     padding-top: 5px;
   }
 }
+
 .check-box {
   margin-right: 8px;
   margin-bottom: 8px;
+
   /deep/ label {
     box-sizing: border-box;
     color: rgba(73, 93, 103, 1) !important;

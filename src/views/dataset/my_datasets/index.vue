@@ -16,29 +16,14 @@
 
 <template>
   <div>
-    <el-button
-        class="add-button"
-        icon="el-icon-plus"
-        type="primary"
-        size="small"
-        @click="update_key='post'; cleanForm(); setIsUpdateDialogOpen(true)"
-    >新建数据集</el-button>
-    <b-table
-      striped
-      hover
-      responsive
-      :items="my_datasets"
-      :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
-      outlined
-      sort-by="created_time"
-      class="table"
-    >
-      <template v-slot:cell(is_public)="row">{{row.item.is_public? "是": "否"}}</template>
-      <template v-slot:cell(is_annotated)="row">{{row.item.is_annotated? "是": "否"}}</template>
-      <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
-      <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
+    <el-button class="add-button" icon="el-icon-plus" type="primary" size="small"
+      @click="update_key = 'post'; cleanForm(); setIsUpdateDialogOpen(true)">新建数据集</el-button>
+    <b-table striped hover responsive :items="my_datasets" :fields="fields" :current-page="currentPage"
+      :per-page="perPage" outlined sort-by="created_time" class="table">
+      <template v-slot:cell(is_public)="row">{{ row.item.is_public ? "是" : "否" }}</template>
+      <template v-slot:cell(is_annotated)="row">{{ row.item.is_annotated ? "是" : "否" }}</template>
+      <template v-slot:cell(task)="row">{{ row.item.task.map(t => t.name).reduce(convertArray2String) }}</template>
+      <template v-slot:cell(created_time)="row">{{ parseTime(row.item.created_time) }}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
           <!-- <el-button
@@ -48,13 +33,8 @@
             :style="style.methodBtn"
             class="action-button"
           >详情</el-button> -->
-          <el-button
-            size="sm"
-            @click="download(row.item.url)"
-            type="text"
-            :style="style.methodBtn"
-            class="action-button"
-          >下载</el-button>
+          <el-button size="sm" @click="download(row.item.url)" type="text" :style="style.methodBtn"
+            class="action-button">下载</el-button>
           <!-- <el-button
             size="sm"
             @click="shareData({file_id: row.item.id, file_type: 'd', is_public: row.item.is_public})"
@@ -64,69 +44,30 @@
             :style="style.methodBtn"
             class="action-button"
           >分享</el-button> -->
-          <el-button
-            size="sm"
-            @click="update_key='put'; fillForm(row.item); setIsUpdateDialogOpen(true)"
-            :variant="row.item.is_possessed?'outline-danger': 'outline-secondary'"
-            type="text"
-            :disabled="!row.item.is_possessed"
-            class="action-button update"
-          >更新</el-button>
-          <el-button
-            size="sm"
-            @click="deleteDatasets([row.item.id])"
-            type="text"
-            style="color: rgba(183, 28, 28, 1)"
-            :disabled="!row.item.is_possessed"
-            :style="style.methodBtn"
-            class="action-button"
-          >删除</el-button>
+          <el-button size="sm" @click="update_key = 'put'; fillForm(row.item); setIsUpdateDialogOpen(true)"
+            :variant="row.item.is_possessed ? 'outline-danger' : 'outline-secondary'" type="text"
+            :disabled="!row.item.is_possessed" class="action-button update">更新</el-button>
+          <el-button size="sm" @click="deleteDatasets([row.item.id])" type="text" style="color: rgba(183, 28, 28, 1)"
+            :disabled="!row.item.is_possessed" :style="style.methodBtn" class="action-button">删除</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
         <b-card>
           <i v-if="!row.item.info">无详细信息</i>
-          <span v-else>{{row.item.info}}</span>
+          <span v-else>{{ row.item.info }}</span>
         </b-card>
       </template>
     </b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="my_datasets.length"
-      :per-page="perPage"
-      align="right"
-      :style="style.pagination"
-      class="pagination"
-    ></b-pagination>
-    <b-modal
-      :title="updateDialogTitle"
-      no-close-on-esc
-      scrollable
-      no-close-on-backdrop
-      hide-footer
-      :visible="is_update_dialog_open"
-      @close="closeUpdateDialog"
-      @cancel="closeUpdateDialog"
-      :title-class="{style: {fontSize:'50px'}}"
-    >
-      <form-datasets
-        :initial_file_info="file_info"
-        :update_key="update_key"
-        :dataset_id="dataset_id"
-      ></form-datasets>
+    <b-pagination v-model="currentPage" :total-rows="my_datasets.length" :per-page="perPage" align="right"
+      :style="style.pagination" class="pagination"></b-pagination>
+    <b-modal :title="updateDialogTitle" no-close-on-esc scrollable no-close-on-backdrop hide-footer
+      :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog"
+      :title-class="{ style: { fontSize: '50px' } }" centered>
+      <form-datasets :initial_file_info="file_info" :update_key="update_key" :dataset_id="dataset_id"></form-datasets>
     </b-modal>
-    <b-modal
-      title="数据集"
-      no-close-on-esc
-      no-close-on-backdrop
-      ok-only
-      :visible="is_dialog_open"
-      ok-title="确定"
-      @close="closeDialog"
-      @ok="closeDialog"
-      :title-class="{style: {fontSize:'50px'}}"
-    >
-      <div class="text-center" :style="style.modal">{{dialog_content}}</div>
+    <b-modal title="数据集" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
+      @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
+      <div class="text-center" :style="style.modal">{{ dialog_content }}</div>
     </b-modal>
   </div>
 </template>
@@ -142,9 +83,9 @@ import {
   setIsUpdateDialogOpen,
 } from "@/utils/index";
 
-import {shareData} from "@/utils/share_data"
+import { shareData } from "@/utils/share_data"
 import FormDatasets from "./form_datasets/index.vue";
-import {deleteDatasets} from "../dataset"
+import { deleteDatasets } from "../dataset"
 
 export default {
   name: "MyDatasets",
@@ -288,9 +229,11 @@ export default {
 .table {
   border: 1px solid rgba(207, 216, 220, 1);
   border-radius: 4px;
+
   /deep/ table {
     border: unset !important;
   }
+
   /deep/ thead {
     line-height: 14px;
   }
@@ -375,5 +318,9 @@ export default {
 /deep/.modal-title {
   font-size: 18px;
   font-weight: 500;
+}
+
+.test123>h5 {
+  font-size: 50px;
 }
 </style>

@@ -16,44 +16,26 @@
 
 <template>
   <div>
-    <el-button
-      class="add-button"
-      icon="el-icon-plus"
-      type="primary"
-      size="small"
-      style="font-size: 14px"
-      @click="
-        update_key = 'post';
-        cleanForm();
-        setIsUpdateDialogOpen(true);
-      "
-      >新增模型</el-button
-    >
-    <b-table
-      striped
-      hover
-      responsive
-      :items="my_models"
-      :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
-      outlined
-      sort-by="created_time"
-      class="table"
-    >
+    <el-button class="add-button" icon="el-icon-plus" type="primary" size="small" style="font-size: 14px" @click="
+  update_key = 'post';
+cleanForm();
+setIsUpdateDialogOpen(true);
+    ">新增模型</el-button>
+    <b-table striped hover responsive :items="my_models" :fields="fields" :current-page="currentPage"
+      :per-page="perPage" outlined sort-by="created_time" class="table">
       <template v-slot:cell(model_type)="row">{{
-        modelToType.hasOwnProperty(row.item.model_name)
-          ? modelToType[row.item.model_name]
-          : "squeezenet"
+          modelToType.hasOwnProperty(row.item.model_name)
+            ? modelToType[row.item.model_name]
+            : "squeezenet"
       }}</template>
       <template v-slot:cell(is_public)="row">{{
-        row.item.is_public ? "是" : "否"
+          row.item.is_public ? "是" : "否"
       }}</template>
       <template v-slot:cell(task)="row">{{
-        row.item.task.map((t) => t.name).reduce(convertArray2String)
+          row.item.task.map((t) => t.name).reduce(convertArray2String)
       }}</template>
       <template v-slot:cell(created_time)="row">{{
-        parseTime(row.item.created_time)
+          parseTime(row.item.created_time)
       }}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
@@ -63,20 +45,9 @@
             variant="outline-primary"
             :style="style.methodBtn"
           >详情</b-button> -->
-          <el-button
-            size="sm"
-            @click="vis_structure(row.item.model_name)"
-            type="text"
-            :style="style.methodBtn"
-            >模型结构</el-button
-          >
-          <el-button
-            size="sm"
-            @click="download(row.item.url)"
-            type="text"
-            :style="style.methodBtn"
-            >下载</el-button
-          >
+          <el-button size="sm" @click="vis_structure(row.item.model_name)" type="text" :style="style.methodBtn">模型结构
+          </el-button>
+          <el-button size="sm" @click="download(row.item.url)" type="text" :style="style.methodBtn">下载</el-button>
           <!-- <el-button
             size="sm"
             @click="
@@ -91,68 +62,27 @@
             :style="style.methodBtn"
             >分享</el-button
           > -->
-          <el-button
-            size="sm"
-            @click="
-              update_key = 'put';
-              fillForm(row.item);
-              setIsUpdateDialogOpen(true);
-            "
-            type="text"
-            :disabled="!row.item.is_possessed"
-            :style="style.methodBtn"
-            >更新</el-button
-          >
-          <el-button
-            size="sm"
-            @click="deleteModels([row.item.id])"
-            type="text"
-            style="color: rgba(183, 28, 28, 1)"
-            :disabled="!row.item.is_possessed"
-            :style="style.methodBtn"
-            >删除</el-button
-          >
+          <el-button size="sm" @click="
+  update_key = 'put';
+fillForm(row.item);
+setIsUpdateDialogOpen(true);
+          " type="text" :disabled="!row.item.is_possessed" :style="style.methodBtn">更新</el-button>
+          <el-button size="sm" @click="deleteModels([row.item.id])" type="text" style="color: rgba(183, 28, 28, 1)"
+            :disabled="!row.item.is_possessed" :style="style.methodBtn">删除</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
         <model-detail :row="row"></model-detail>
       </template>
     </b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="my_models.length"
-      :per-page="perPage"
-      align="right"
-      :style="style.pagination"
-      class="pagination"
-    ></b-pagination>
-    <b-modal
-      :title="updateDialogTitle"
-      no-close-on-esc
-      scrollable
-      no-close-on-backdrop
-      hide-footer
-      :visible="is_update_dialog_open"
-      @close="closeUpdateDialog"
-      @cancel="closeUpdateDialog"
-    >
-      <form-models
-        :initial_file_info="file_info"
-        :update_key="update_key"
-        :model_id="model_id"
-      ></form-models>
+    <b-pagination v-model="currentPage" :total-rows="my_models.length" :per-page="perPage" align="right"
+      :style="style.pagination" class="pagination"></b-pagination>
+    <b-modal :title="updateDialogTitle" no-close-on-esc scrollable no-close-on-backdrop hide-footer
+      :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog" centered>
+      <form-models :initial_file_info="file_info" :update_key="update_key" :model_id="model_id"></form-models>
     </b-modal>
-    <b-modal
-      title="模型"
-      no-close-on-esc
-      no-close-on-backdrop
-      ok-only
-      :visible="is_dialog_open"
-      ok-title="确定"
-      @close="closeDialog"
-      @ok="closeDialog"
-      :title-class="{ style: { fontSize: '18px' } }"
-    >
+    <b-modal title="模型" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
+      @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '18px' } }">
       <div class="text-center" :style="style.modal">{{ dialog_content }}</div>
     </b-modal>
   </div>
@@ -343,9 +273,11 @@ export default {
 .table {
   border: 1px solid rgba(207, 216, 220, 1);
   border-radius: 4px;
+
   /deep/ table {
     border: unset !important;
   }
+
   /deep/ thead {
     line-height: 14px;
   }
