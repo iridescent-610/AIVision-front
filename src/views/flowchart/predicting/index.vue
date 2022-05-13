@@ -1,36 +1,23 @@
 <template>
   <div class="app-container">
     <el-tabs tab-position="left" type="card">
-      <el-tab-pane label="单张预测">
+      <!-- <el-tab-pane label="单张预测">
 
         <div style="font-size: 18px; margin-bottom: 20px">
-          <el-button
-            v-if="isCompleted"
-            type="primary"
-            style="margin-left: 30px"
-            @click="downloadModelZip(flowchartId)"
-          >
+          <el-button v-if="isCompleted" type="primary" style="margin-left: 30px" @click="downloadModelZip(flowchartId)">
             下载模型
           </el-button>
-
-          <el-button
-            v-if="isCompleted"
-            type="success"
-            style="margin-left: 30px"
-            @click="downloadMirror"
-          >
+          <el-button v-if="isCompleted" type="success" style="margin-left: 30px" @click="downloadMirror">
             下载镜像
           </el-button>
         </div>
-
-
 
         <el-card style="margin-left: 30px; color: grey;">
           <div>
             <div style="margin-bottom: 10px">
               <span style="font-weight:bold; ">请求方式：</span>
               POST http://10.214.211.207:20167/aip
-              </div>
+            </div>
             <div>
               <span style="font-weight:bold; ">请求参数：</span>
               {"image": base64_str}
@@ -39,217 +26,109 @@
         </el-card>
 
         <div style="margin: 2px 10px 0 10px">
-          <!-- <div style="display: flex">
+          <div style="display: flex">
             <label style="width: 100px; margin-top: 6px; margin-left: 10px">
               <b>请求URL：</b>
             </label>
-            <el-input
-              placeholder="请输入部署好的服务请求url"
-              v-model="demo_url"
-            >
+            <el-input placeholder="请输入部署好的服务请求url" v-model="demo_url">
               <template slot="prepend">http://</template>
             </el-input>
-          </div> -->
+          </div>
 
-          <!-- aaaaa -->
           <div class="demo-block" linknav="true">
             <div class="demo-canvas-container">
-              <el-upload
-                name="imgUpload"
-                class="avatar-uploader"
-                action=""
-                accept="image/jpeg,image/png,image/bmp"
-                :auto-upload="false"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :on-error="handleAvatarError"
-                :before-upload="beforeAvatarUpload"
-                :on-change="onUploadChange"
-              >
-                <canvas
-                  id="canvas1"
-                  ref="canvas1"
-                  width="500"
-                  height="420"
-                  class="el-icon-plus avatar-uploader-icon"
-                />
+              <el-upload name="imgUpload" class="avatar-uploader" action="" accept="image/jpeg,image/png,image/bmp"
+                :auto-upload="false" :show-file-list="false" :on-success="handleAvatarSuccess"
+                :on-error="handleAvatarError" :before-upload="beforeAvatarUpload" :on-change="onUploadChange">
+                <canvas id="canvas1" ref="canvas1" width="500" height="420" class="el-icon-plus avatar-uploader-icon" />
               </el-upload>
               <div class="upload-notice">
                 点击上传图片，支持PNG、JPG、JPEG、BMP，图片大小不超过4M。
               </div>
             </div>
 
-            <!-- <div class="demo-result-container">
-              <canvas id="canvas2"
-                      ref="canvas2"
-                      width="500"
-                      height="420" />
-            </div> -->
-
             <div class="textarea" style="width: 500px; height: 420px">
-              <!-- <pre>{{ JSON.stringify(obj, null, 4)  }}</pre> -->
-              <json-viewer
-                :value="pred"
-                :expand-depth="4"
-                copyable
-                sort
-              ></json-viewer>
+              <json-viewer :value="pred" :expand-depth="4" copyable sort></json-viewer>
             </div>
           </div>
           <div style="text-align: center">
-            <el-button
-              style="margin-left: 10px"
-              type="success"
-              @click="submitUpload"
-              >预测</el-button
-            >
+            <el-button style="margin-left: 10px" type="success" @click="submitUpload">预测</el-button>
           </div>
-
-          <!-- aaaa -->
         </div>
-      </el-tab-pane>
-      <el-tab-pane label="批量预测">
-        <div style="font-size: 18px; margin-bottom: 20px">
-          <el-button
-            v-if="isCompleted"
-            type="success"
-            style="margin-left: 10px"
-            @click="showCreateDialog"
-          >
-            创建预测任务
-          </el-button>
-          <div v-else style="margin-left: 10px; color: #ff0000">
-            <!-- <el-alert
-              title="请不要私自乱跳页面！"
-              type="error"
-              :show-icon="true"
-              :closable="false"
-            >
-            </el-alert> -->
-            <el-alert
-              title=""
-              type="error"
-              :show-icon="true"
-              :closable="false"
-            >
-            </el-alert>
-          </div>
-          <!-- @click="downloadMirror" -->
-          <el-button
-            v-if="isCompleted"
-            type="primary"
-            style="margin-left: 30px"
-            @click="downloadModelZip(flowchartId)"
-          >
-            下载模型
-          </el-button>
+      </el-tab-pane> -->
+      <!-- <el-tab-pane label="批量预测"> -->
+      <div style="font-size: 18px; margin-bottom: 20px">
+        <el-button v-if="isCompleted" type="success" style="margin-left: 10px" @click="showCreateDialog">
+          创建预测任务
+        </el-button>
+        <div v-else style="margin-left: 10px; color: #ff0000">
+          <el-alert title="" type="error" :show-icon="true" :closable="false">
+          </el-alert>
         </div>
+        <!-- @click="downloadMirror" -->
+        <el-button v-if="isCompleted" type="primary" style="margin-left: 30px" @click="downloadModelZip(flowchartId)">
+          下载模型
+        </el-button>
+      </div>
 
-        <el-table
-          v-loading="listLoading"
-          border
-          fit
-          stripe
-          highlight-current-row
-          style="width: 100%"
-          :data="predictingTaskList"
-        >
-          <el-table-column label="ID" prop="id" align="left" width="80">
-            <template slot-scope="{ row }">
-              <span>{{ row.id }}</span>
-            </template>
-          </el-table-column>
+      <el-table v-loading="listLoading" border fit stripe highlight-current-row style="width: 100%"
+        :data="predictingTaskList">
+        <el-table-column label="ID" prop="id" align="left" width="80">
+          <template slot-scope="{ row }">
+            <span>{{ row.id }}</span>
+          </template>
+        </el-table-column>
 
-          <el-table-column label="流程图名称" prop="type" align="left">
-            <template slot-scope="{ row }">
-              <span>{{ row.flowchartName }}</span>
-            </template>
-          </el-table-column>
+        <el-table-column label="流程图名称" prop="type" align="left">
+          <template slot-scope="{ row }">
+            <span>{{ row.flowchartName }}</span>
+          </template>
+        </el-table-column>
 
-          <el-table-column label="数据集名称" align="left">
-            <template slot-scope="{ row }">
-              <span>{{ row.datasetName }}</span>
-            </template>
-          </el-table-column>
+        <el-table-column label="数据集名称" align="left">
+          <template slot-scope="{ row }">
+            <span>{{ row.datasetName }}</span>
+          </template>
+        </el-table-column>
 
-          <el-table-column label="任务状态" align="left">
-            <template slot="header">
-              任务状态&nbsp;&nbsp;
-              <el-button
-                icon="el-icon-refresh"
-                type="text"
-                circle
-                @click="getPredictingTaskList()"
-              />
-            </template>
+        <el-table-column label="任务状态" align="left">
+          <template slot="header">
+            任务状态&nbsp;&nbsp;
+            <el-button icon="el-icon-refresh" type="text" circle @click="getPredictingTaskList()" />
+          </template>
 
-            <template slot-scope="{ row }">
-              <!-- <el-tag :type="row.status | statusFilter">
+          <template slot-scope="{ row }">
+            <!-- <el-tag :type="row.status | statusFilter">
             {{ messageDict[row.status] }}
           </el-tag> -->
-              <el-tag :type="row.status | statusFilter">
-                {{ messageDict[row.status] }}
-              </el-tag>
-            </template>
-          </el-table-column>
+            <el-tag :type="row.status | statusFilter">
+              {{ messageDict[row.status] }}
+            </el-tag>
+          </template>
+        </el-table-column>
 
-          <el-table-column
-            label="操作"
-            align="left"
-            class-name="small-padding fixed-width"
-          >
-            <template slot-scope="{ row }">
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="下载数据集预测结果"
-                placement="bottom"
-              >
-                <el-button
-                  size="mini"
-                  type="success"
-                  style="margin-left: 0px"
-                  icon="el-icon-download"
-                  circle
-                  :disabled="row.status !== 'Finished'"
-                  @click="downloadFile(row.url)"
-                />
-              </el-tooltip>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
+        <el-table-column label="操作" align="left" class-name="small-padding fixed-width">
+          <template slot-scope="{ row }">
+            <el-tooltip class="item" effect="dark" content="下载数据集预测结果" placement="bottom">
+              <el-button size="mini" type="success" style="margin-left: 0px" icon="el-icon-download" circle
+                :disabled="row.status !== 'Finished'" @click="downloadFile(row.url)" />
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- </el-tab-pane> -->
     </el-tabs>
 
     <el-dialog title="创建预测任务" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="predictingTaskForm"
-        :rules="predictingTaskFormRules"
-        :model="predictingTaskForm"
-        label-position="left"
-        label-width="100px"
-        style="margin-left: 50px; margin-right: 50px"
-      >
+      <el-form ref="predictingTaskForm" :rules="predictingTaskFormRules" :model="predictingTaskForm"
+        label-position="left" label-width="100px" style="margin-left: 50px; margin-right: 50px">
         <el-form-item label="数据集" prop="datasetId">
-          <el-select
-            v-model="predictingTaskForm.datasetId"
-            placeholder="请选择"
-          >
+          <el-select v-model="predictingTaskForm.datasetId" placeholder="请选择">
             <el-option-group label="我的数据集">
-              <el-option
-                v-for="item in myDatasets"
-                :key="item.id"
-                :label="item.dataset_name"
-                :value="item.id"
-              />
+              <el-option v-for="item in myDatasets" :key="item.id" :label="item.dataset_name" :value="item.id" />
             </el-option-group>
             <el-option-group label="公开数据集">
-              <el-option
-                v-for="item in publicDatasets"
-                :key="item.id"
-                :label="item.dataset_name"
-                :value="item.id"
-              />
+              <el-option v-for="item in publicDatasets" :key="item.id" :label="item.dataset_name" :value="item.id" />
             </el-option-group>
           </el-select>
         </el-form-item>
@@ -336,9 +215,9 @@ export default {
       }
     },
   },
-  components: {
-    JsonViewer,
-  },
+  // components: {
+  //   JsonViewer,
+  // },
   mounted() {
     this.show_plus();
   },
@@ -512,7 +391,7 @@ export default {
           console.log(err);
         });
     },
-    downloadMirror(){
+    downloadMirror() {
       const loading = this.$loading({
         lock: true,
         text: "正在准备下载镜像，请勿关闭页面",
@@ -779,9 +658,11 @@ canvas {
   position: relative;
   overflow: hidden;
 }
+
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -790,11 +671,13 @@ canvas {
   line-height: 420px;
   text-align: center;
 }
+
 .avatar {
   width: 500px;
   height: 420px;
   display: block;
 }
+
 .text {
   font-size: 14px;
 }
@@ -821,6 +704,7 @@ canvas {
   margin-right: 60px;
   background: #a4a4a4;
 }
+
 .demo-result-container {
   position: relative;
   width: 500px;
@@ -833,6 +717,7 @@ canvas {
   border-width: 2px;
   border-color: #000000; */
 }
+
 .upload-notice {
   margin-top: 8px;
   color: #000;
