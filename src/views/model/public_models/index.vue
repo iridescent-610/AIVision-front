@@ -16,23 +16,13 @@
 
 <template>
   <div>
-    <b-table
-      striped
-      hover
-      responsive
-      :items="public_models"
-      :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
-      outlined
-      sort-by="created_time"
-      class="table"
-    >
+    <b-table striped hover responsive :items="public_models" :fields="fields" :current-page="currentPage"
+      :per-page="perPage" outlined sort-by="created_time" class="table">
       <template v-slot:cell(model_type)="row">{{
-        modelToType.hasOwnProperty(row.item.model_name)?modelToType[row.item.model_name]:'squeezenet'
-        }}</template>
-      <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
-      <template v-slot:cell(created_time)="row">{{parseTime(row.item.created_time)}}</template>
+          modelToType.hasOwnProperty(row.item.model_name) ? modelToType[row.item.model_name] : 'squeezenet'
+      }}</template>
+      <template v-slot:cell(task)="row">{{ row.item.task.map(t => t.name).reduce(convertArray2String) }}</template>
+      <template v-slot:cell(created_time)="row">{{ parseTime(row.item.created_time) }}</template>
       <template v-slot:cell(method)="row">
         <div style="white-space: nowrap">
           <!-- <b-button
@@ -41,38 +31,23 @@
             variant="outline-primary"
             :style="style.methodBtn"
           >详情</b-button> -->
-          <el-button
-            size="sm"
-            @click="vis_structure(row.item.model_name)"
-            type="text"
-            :style="style.methodBtn"
-          >模型结构</el-button>
-          <el-button
-            size="sm"
-            @click="download(row.item.url)"
-            type="text"
-            :style="style.methodBtn"
-          >下载</el-button>
+          <el-button size="sm" @click="vis_structure(row.item.model_name)" type="text" :style="style.methodBtn">模型结构
+          </el-button>
+          <el-button size="sm" @click="download(row.item.url)" type="text" :style="style.methodBtn">下载</el-button>
         </div>
       </template>
       <template v-slot:row-details="row">
         <model-detail :row="row"></model-detail>
       </template>
     </b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="public_models.length"
-      :per-page="perPage"
-      align="right"
-      :style="style.pagination"
-      class="pagination"
-    ></b-pagination>
+    <b-pagination v-model="currentPage" :total-rows="public_models.length" :per-page="perPage" align="right"
+      :style="style.pagination" class="pagination"></b-pagination>
   </div>
 </template>
 
 <script>
 import { download, parseTime, convertArray2String } from "@/utils/index";
-import {getPublicModels} from "../model"
+import { getPublicModels } from "../model"
 import ModelDetail from "../model_detail";
 
 import { modelToType } from "../modelType";
@@ -144,8 +119,8 @@ export default {
   methods: {
     download,
     parseTime,
-    convertArray2String,getPublicModels,
-    vis_structure(name){
+    convertArray2String, getPublicModels,
+    vis_structure(name) {
       console.log(name);
 
       let routeUrl = "http://10.214.211.207:15000/?modelFile=" + name;
@@ -170,9 +145,11 @@ export default {
 .table {
   border: 1px solid rgba(207, 216, 220, 1);
   border-radius: 4px;
+
   /deep/ table {
     border: unset !important;
   }
+
   /deep/ thead {
     line-height: 14px;
   }
