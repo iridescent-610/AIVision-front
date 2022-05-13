@@ -116,14 +116,14 @@ export const constantRoutes = [
               title: "图谱列表",
             },
           },
-         /* {
-            path: '/dashboard/visgraph',
-            name: 'Visualize Graph',
-            component: VisGraph,
-            meta: {
-              title: "图谱可视化",
-            },
-          },*/
+          /* {
+             path: '/dashboard/visgraph',
+             name: 'Visualize Graph',
+             component: VisGraph,
+             meta: {
+               title: "图谱可视化",
+             },
+           },*/
           {
             path: '/dashboard/dataset',
             name: 'Dataset',
@@ -212,6 +212,24 @@ export const constantRoutes = [
         show: false,
         meta: {
           title: "注册"
+        },
+      },
+      {
+        path: '/industry/:industry',
+        name: 'Industry',
+        component: Industry,
+        show: false,
+        meta: {
+          title: "行业应用",
+        },
+      },
+      {
+        path: '/industry_demo/:type',
+        name: 'IndustryDemo',
+        component: IndustryDemo,
+        show: false,
+        meta: {
+          title: "行业演示",
         },
       },
     ]

@@ -9,8 +9,11 @@
             控制台
           </div>
         </div>
-        <div v-if="!$store.state.auth.username" class="user-info" @click="$router.push('/signIn')">
+        <!-- <div v-if="!$store.state.auth.username" class="user-info" @click="$router.push('/signIn')">
           登录/注册
+        </div> -->
+        <div v-if="!$store.state.auth.username" class="user-info" @click="$router.push('/signIn')">
+          登录
         </div>
         <el-dropdown class="user-info" v-else placement="bottom" @command="handleCommand">
           <div>{{ $store.state.auth.username }} <i class="el-icon-caret-bottom"></i></div>
@@ -21,7 +24,7 @@
       </div>
     </div>
     <el-container class="layout-container">
-      <router-view/>
+      <router-view />
     </el-container>
   </div>
 </template>
@@ -29,7 +32,8 @@
 export default {
   methods: {
     jumpDoc() {
-      window.location.replace(`${process.env.VUE_APP_DOC_URL}/#/?userName=${this.$store.state.auth.username}`)
+      window.open("http://10.214.211.207:10087/")
+      // window.location.replace(`${process.env.VUE_APP_DOC_URL}/#/?userName=${this.$store.state.auth.username}`)
     },
     handleCommand(command) {
       if (command === 'logout') {

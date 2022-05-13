@@ -17,16 +17,9 @@
           </p>
         </div>
         <div>
-          <el-button
-            type="primary"
-            class="intro-button"
-            @click="handleClickJump('task')"
-            >立即使用</el-button
-          >
-          <span @click="jumpDoc" target="_blank">
-            <el-button type="info" class="intro-button" id="intro-button2"
-              >查看文档</el-button
-            >
+          <el-button type="primary" class="intro-button" @click="handleClickJump('task')">立即使用</el-button>
+          <span @click="jumpDoc">
+            <el-button type="info" class="intro-button" id="intro-button2">查看文档</el-button>
           </span>
         </div>
       </div>
@@ -38,12 +31,8 @@
           </div>
           <div class="section-content">
             <div class="modeltype lite">
-              <a
-                v-for="item in keyToIndustry['general'].examples"
-                :key="item.id"
-                @click="createExample(item.key, 'general')"
-                class="modeltype-item"
-              >
+              <a v-for="item in keyToIndustry['general'].examples" :key="item.id"
+                @click="createExample(item.key, 'general')" class="modeltype-item">
                 <div class="modeltype-icon">
                   <img :src="require(item.img + '')" :alt="item.name" />
                 </div>
@@ -53,7 +42,7 @@
                 <div class="modeltype-desc">{{ item.desc }}</div>
                 <div class="modeltype-type">
                   <span v-for="element in item.elements" :key="element">{{
-                    element
+                      element
                   }}</span>
                 </div>
               </a>
@@ -69,12 +58,7 @@
           </div>
           <div class="section-content">
             <div class="modeltype lite">
-              <a
-                v-for="item in realApplication"
-                :key="item.id"
-                class="modeltype-item"
-                id="modeltype-item2"
-              >
+              <a v-for="item in realApplication" :key="item.id" class="modeltype-item" id="modeltype-item2">
                 <div class="modeltype-icon" id="modeltype-icon2">
                   <img :src="require(item.img + '')" :alt="item.name" />
                 </div>
@@ -83,25 +67,17 @@
                 </div>
                 <div class="modeltype-type2">
                   <span v-for="element in item.elements" :key="element">{{
-                    element
+                      element
                   }}</span>
                 </div>
                 <div class="modeltype-desc" id="modeltype-desc2">
                   {{ item.desc }}
                 </div>
                 <div class="modeltype-show">
-                  <button
-                    class="modeltype-button1"
-                    size="mini"
-                    @click="createExample(item.key, item.industry)"
-                  >
+                  <button class="modeltype-button1" size="mini" @click="createExample(item.key, item.industry)">
                     创建
                   </button>
-                  <button
-                    class="modeltype-button2"
-                    size="mini"
-                    @click="demoExample(item.id)"
-                  >
+                  <button class="modeltype-button2" size="mini" @click="demoExample(item.id)">
                     演示
                   </button>
                 </div>
@@ -139,7 +115,8 @@ export default {
 
   methods: {
     jumpDoc() {
-      window.location.replace(process.env.VUE_APP_DOC_URL)
+      window.open("http://10.214.211.207:10087/")
+      // window.location.replace(process.env.VUE_APP_DOC_URL)
     },
     handleClickIndustry(industry) {
       var routeUrl = this.$router.resolve({
@@ -199,6 +176,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 80px;
 }
+
 .banner.lite .banner-title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -208,6 +186,7 @@ export default {
   align-items: center;
   margin-bottom: 45px;
 }
+
 .banner.lite .banner-title-text {
   margin: 0;
   font-size: 42px;
@@ -218,6 +197,7 @@ export default {
   flex: 1;
   color: #c6c2d3;
 }
+
 .banner.lite .banner-main {
   overflow: hidden;
   display: -webkit-box;
@@ -227,12 +207,14 @@ export default {
   -webkit-box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
 }
+
 .banner.lite .banner-main-nav {
   background: #f8f9fb no-repeat bottom/100%;
   background-position: 0 3px;
   width: 300px;
   padding: 42px 40px 40px;
 }
+
 .banner.lite .banner-main-nav_title {
   font-size: 20px;
   letter-spacing: 4px;
@@ -240,13 +222,15 @@ export default {
   margin-bottom: 30px;
   font-weight: 500;
 }
-.banner.lite .banner-main-nav > ul > li {
+
+.banner.lite .banner-main-nav>ul>li {
   cursor: pointer;
   margin-bottom: 28px;
   position: relative;
 }
-.banner.lite .banner-main-nav > ul > li,
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item {
+
+.banner.lite .banner-main-nav>ul>li,
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -254,25 +238,30 @@ export default {
   -ms-flex-align: center;
   align-items: center;
 }
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item {
+
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item {
   font-size: 16px;
   line-height: 22px;
   vertical-align: middle;
 }
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item:hover {
+
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item:hover {
   color: #036fe2;
 }
-.banner.lite .banner-main-nav > ul > li .icon {
+
+.banner.lite .banner-main-nav>ul>li .icon {
   font-size: 16px;
   margin-left: 8px;
 }
-.banner.lite .banner-main-nav > ul > li .img-icon-wrap {
+
+.banner.lite .banner-main-nav>ul>li .img-icon-wrap {
   margin-left: 8px;
   overflow: hidden;
   height: 22px;
   width: 22px;
 }
-.banner.lite .banner-main-nav > ul > li .img-icon {
+
+.banner.lite .banner-main-nav>ul>li .img-icon {
   position: relative;
   left: -80px;
   height: 22px;
@@ -280,7 +269,8 @@ export default {
   -webkit-filter: drop-shadow(#000 80px 0);
   filter: drop-shadow(#000 80px 0);
 }
-.banner.lite .banner-main-nav > ul > li:before {
+
+.banner.lite .banner-main-nav>ul>li:before {
   content: "";
   display: block;
   height: 6px;
@@ -289,7 +279,8 @@ export default {
   border-radius: 50%;
   margin-right: 10px;
 }
-.banner.lite .banner-main-nav > ul > li:after {
+
+.banner.lite .banner-main-nav>ul>li:after {
   content: "";
   display: block;
   width: 0;
@@ -299,15 +290,18 @@ export default {
   left: 2px;
   top: 16px;
 }
-.banner.lite .banner-main-nav > ul > li:last-child:after {
+
+.banner.lite .banner-main-nav>ul>li:last-child:after {
   display: none;
 }
+
 .banner.lite .banner-main-swiper {
   width: 900px;
   height: 350px;
   overflow: hidden;
   position: relative;
 }
+
 .banner.lite .slide {
   width: 900px;
   height: 350px;
@@ -316,6 +310,7 @@ export default {
   background-repeat: no-repeat;
   background-position: 50%;
 }
+
 .banner.lite .lite-swiper-pagination {
   position: absolute;
   bottom: 86px;
@@ -333,42 +328,44 @@ export default {
   margin: 0 auto 21px;
   text-align: center;
 }
+
 .intro-title {
   padding-top: 120px;
   color: white;
   font-size: 51px;
 }
+
 .intro-line1 {
   margin: 11px auto 3px;
   width: 719px;
   height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    white,
-    rgba(255, 255, 255, 0)
-  );
+  background-image: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      white,
+      rgba(255, 255, 255, 0));
 }
+
 .intro-line2 {
   margin: 2px auto 48px;
   width: 719px;
   height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    white,
-    rgba(255, 255, 255, 0)
-  );
+  background-image: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      white,
+      rgba(255, 255, 255, 0));
 }
+
 .intro-subtitle {
   color: white;
   font-size: 20px;
 }
+
 .intro-describe {
   padding-bottom: 44px;
   color: white;
   font-size: 20px;
 }
+
 .intro-button {
   text-align: center;
   margin-bottom: 115px;
@@ -378,6 +375,7 @@ export default {
   font-weight: 500;
   background-color: #1976d2;
 }
+
 #intro-button2 {
   margin-left: 32px;
   background-color: transparent;
@@ -394,6 +392,7 @@ export default {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
 }
+
 .modeltype-item {
   display: block;
   border-radius: 15px;
@@ -406,6 +405,7 @@ export default {
   background: white;
   position: relative;
 }
+
 .modeltype-item:nth-child(even) {
   margin-left: 21px;
 }
@@ -415,6 +415,7 @@ export default {
   height: 290px;
   background-size: 100%;
 }
+
 .modeltype-title {
   display: block;
   font-size: 20px;
@@ -422,6 +423,7 @@ export default {
   margin-top: 20px;
   margin-left: 32px;
 }
+
 .modeltype-desc {
   font-size: 14px;
   color: #666;
@@ -430,6 +432,7 @@ export default {
   margin-left: 32px;
   margin-right: 32px;
 }
+
 .modeltype-type {
   font-size: 12px;
   height: 25px;
@@ -439,7 +442,8 @@ export default {
   bottom: 20px;
   left: 32px;
 }
-.modeltype-type > span {
+
+.modeltype-type>span {
   display: inline-block;
   line-height: 17px;
   padding: 4px 12px;
@@ -471,51 +475,62 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 *,
 body,
 html {
   padding: 0;
   margin: 0;
 }
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 a {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
+
 img {
   width: 100%;
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 .section-title_container {
   padding-bottom: 56px;
 }
+
 .section {
   margin: 0 auto;
   width: 961px;
 }
+
 .section-wrap {
   width: 1400px;
   margin: 0 auto 20px;
   padding-top: 56px;
   padding-bottom: 25px;
 }
+
 .section-white {
   background-color: #f2f3f4;
 }
+
 .section-title {
   width: 100%;
   height: 56px;
   font-size: 40px;
   text-align: center;
 }
+
 .alink {
   display: inline-block;
   text-align: center;
@@ -529,6 +544,7 @@ ul {
 .alink-grounp.alink-grounp-center {
   text-align: center;
 }
+
 .alink-grounp.alink-grounp-left {
   text-align: left;
 }
@@ -537,24 +553,30 @@ ul {
   width: 307px;
   height: 560px;
 }
+
 #modeltype-icon2 {
   width: 303px;
 }
+
 #modeltype-title2 {
   line-height: 28px;
   margin-left: 20px;
 }
+
 #modeltype-item2 {
   position: relative;
 }
+
 #modeltype-item2:not(:first-child) {
   margin-left: 20px;
 }
+
 #modeltype-desc2 {
   margin-top: 11px;
   margin-left: 20px;
   margin-right: 20px;
 }
+
 .modeltype-type2 {
   font-size: 12px;
   height: 25px;
@@ -562,7 +584,8 @@ ul {
   overflow: hidden;
   color: #9ba6ab;
 }
-.modeltype-type2 > span {
+
+.modeltype-type2>span {
   display: inline-block;
   line-height: 17px;
   padding: 4px 12px;
@@ -575,7 +598,8 @@ ul {
   bottom: 24px;
   left: 20px;
 }
-.modeltype-show > button {
+
+.modeltype-show>button {
   width: 52px;
   height: 32px;
   border-radius: 3px;
@@ -583,18 +607,21 @@ ul {
   font-size: 14px;
   font-weight: 500;
 }
+
 .modeltype-button1 {
   background-color: #1976d2;
   color: white;
   border: none;
 }
+
 .modeltype-button2 {
   margin-left: 12px;
   background-color: white;
   border: 1px solid #1976d2;
   color: #1976d2;
 }
-.modeltype-show > button:hover {
+
+.modeltype-show>button:hover {
   background-color: #edf3ff;
   color: #409efe;
   border: none;

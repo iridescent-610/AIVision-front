@@ -1,100 +1,82 @@
 <template>
-  <div style="margin-top:-24px; margin-bottom:-25px; !important; position: relative; padding-bottom: 50px">
+  <div class="industry_demo">
     <div class="module-header"
-         v-bind:style="{ background: 'url(&quot;' + require(typeToDesc[industry_type].back+'') + '&quot;) center center / cover no-repeat rgb(0, 0, 0)' }">
+      v-bind:style="{ background: 'url(&quot;' + require(typeToDesc[industry_type].back + '') + '&quot;) center center / cover no-repeat rgb(0, 0, 0)' }">
       <div class="module-header-container">
         <div class="module-header-content">
-          <div class="module-header-title"> {{ typeToDesc[industry_type].name }}</div>
-          <div class="module-header-info"> {{ typeToDesc[industry_type].desc }}</div>
+          <div v-bind:style="{ color: typeToDesc[industry_type].back_color }" class="module-header-title"> {{
+              typeToDesc[industry_type].name
+          }}</div>
+          <div v-bind:style="{ color: typeToDesc[industry_type].back_color }" class="module-header-info"> {{
+              typeToDesc[industry_type].desc
+          }}</div>
         </div>
-
-        <el-button style="margin-left: 100px" type="success"
-                   @click="createExample(typeToDesc[industry_type].key, typeToDesc[industry_type].industry)">立即创建
-        </el-button>
-
-        <div class="module-header-empty"></div>
+        <!-- <el-button style="margin-left: 100px" type="success"
+          @click="createExample(typeToDesc[industry_type].key, typeToDesc[industry_type].industry)">立即创建
+        </el-button> -->
+        <!-- <div class="module-header-empty"></div> -->
       </div>
     </div>
-    <div style="margin: 30px 60px 40px 60px">
+
+    <div>
       <div v-if="typeToDesc[industry_type].demo_type === 'IMAGE'" class="demo-block" linknav="true">
         <div class="demo-canvas-container">
-          <el-upload
-              name="imgUpload"
-              class="avatar-uploader"
-              action=""
-              accept="image/jpeg,image/png,image/bmp"
-              :auto-upload="false"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :on-error="handleAvatarError"
-              :before-upload="beforeAvatarUpload"
-              :on-change="onUploadChange"
-          >
-            <canvas
-                id="canvas1"
-                ref="canvas1"
-                width="500"
-                height="420"
-                class="el-icon-plus avatar-uploader-icon"
-            />
+          <el-upload name="imgUpload" class="avatar-uploader" action="" accept="image/jpeg,image/png,image/bmp"
+            :auto-upload="false" :show-file-list="false" :on-success="handleAvatarSuccess" :on-error="handleAvatarError"
+            :before-upload="beforeAvatarUpload" :on-change="onUploadChange">
+            <canvas id="canvas1" width="618" height="384" class="el-icon-plus avatar-uploader-icon" />
+            <img v-show="isShow" src="./assets/icon_20_AIVison.png" class="demo-img">
+            <div v-show="isShow" class="upload-notice1">
+              点击或拖拽图片到此区域，上传图片
+            </div>
+            <div v-show="isShow" class="upload-notice2">
+              支持PNG、JPG、JPEG、BMP，图片大小不超过4M
+            </div>
           </el-upload>
-          <div class="upload-notice">
-            点击上传图片，支持PNG、JPG、JPEG、BMP，图片大小不超过4M。
-          </div>
         </div>
-
+        <img src="./assets/arrow.png" class="arrow">
         <div class="demo-result-container">
-          <canvas id="canvas2"
-                  ref="canvas2"
-                  width="500"
-                  height="420"/>
+          <canvas id="canvas2" ref="canvas2" width="618" height="384" />
         </div>
       </div>
 
       <div v-else-if="typeToDesc[industry_type].demo_type === 'VIDEO'" class="demo-block-video" linknav="true">
         <div class="demo-video-container">
           <div class="">
-            <el-upload class="avatar-uploader-video"
-                       action="http://10.214.211.205:20202/demo"
-                       v-bind:data="{key:'test'}"
-                       v-bind:on-progress="uploadVideoProcess"
-                       v-bind:on-success="handleVideoSuccess"
-                       v-bind:before-upload="beforeUploadVideo"
-                       v-bind:show-file-list="false">
-              <video v-if="videoForm.showVideoPath !='' && !videoFlag"
-                     v-bind:src="videoForm.showVideoPath"
-                     class="video-avatar"
-                     controls="controls">
+            <el-upload class="avatar-uploader-video" action="http://10.214.211.205:20202/demo"
+              v-bind:data="{ key: 'test' }" v-bind:on-progress="uploadVideoProcess"
+              v-bind:on-success="handleVideoSuccess" v-bind:before-upload="beforeUploadVideo"
+              v-bind:show-file-list="false">
+              <video v-if="videoForm.showVideoPath != '' && !videoFlag" v-bind:src="videoForm.showVideoPath"
+                class="video-avatar" controls="controls">
                 您的浏览器不支持视频播放
               </video>
-              <i v-else-if="videoForm.showVideoPath =='' && !videoFlag"
-                 class="el-icon-plus avatar-uploader-icon-video"></i>
-              <el-progress v-if="videoFlag == true"
-                           type="circle"
-                           v-bind:percentage="videoUploadPercent"
-                           style="margin-top: 211px; margin-left: 421px;"></el-progress>
+              <canvas v-else-if="videoForm.showVideoPath == '' && !videoFlag" width="595" height="334"
+                class="el-icon-plus avatar-uploader-icon-video" />
+              <!-- <i v-else-if="videoForm.showVideoPath == '' && !videoFlag"
+                class="el-icon-plus avatar-uploader-icon-video"></i> -->
+              <!-- <el-progress v-if="videoFlag == true" type="circle" v-bind:percentage="videoUploadPercent"
+                style="margin-top: 211px; margin-left: 421px;"></el-progress> -->
               <!-- 270-59  480-59 -->
             </el-upload>
           </div>
 
-          <div class="upload-notice">
-            点击上传视频，支持MP4，视频大小不超过10M。
+          <img v-show="isShow" src="./assets/icon_21_AIVison.png" class="demo-img-video">
+          <div v-show="isShow" class="upload-video-notice1">
+            点击或拖拽视频到此区域，上传视频
+          </div>
+          <div v-show="isShow" class="upload-video-notice2">
+            支持MP4，视频大小不超过10M
           </div>
         </div>
-
       </div>
 
-      <div style="text-align: center">
-        <el-button
-            style="margin-left: 10px"
-            type="success"
-            @click="submitUpload"
-        > {{ typeToDesc[industry_type].note }}
-        </el-button
-        >
+      <div style="text-align: center; vertical-align: middle;">
+        <el-button type="primary" class="note-button" @click="submitUpload">
+          <img src="./assets/icon.png" style="display:inline-block; height:20px; width:20px;">
+          {{ typeToDesc[industry_type].note }}
+        </el-button>
       </div>
-
-      <!-- aaaa -->
     </div>
     <div class="footer">
       <p>AI+X 普适化平台</p>
@@ -107,7 +89,7 @@
 import {
   detectDemo,
 } from "./api";
-import {typeToDesc} from './industries'
+import { typeToDesc } from './industries'
 
 import img_src from "./assets/plus.png";
 
@@ -134,7 +116,8 @@ export default {
         showVideoPath: ''
       },
       //
-      show_flag: true
+      show_flag: true,
+      isShow: true
     };
   },
   methods: {
@@ -142,7 +125,7 @@ export default {
       /// object_detection factory
       let routeUrl = this.$router.resolve({
         name: 'Flowcharting',
-        query: {task: task, industry: industry},
+        query: { task: task, industry: industry },
       })
       window.open(routeUrl.href, '_blank')
     },
@@ -161,11 +144,11 @@ export default {
         let w = 0.2 * img.width;
         let h = 0.2 * img.height; //这里的坑 获取图像高度要在加载完图像之后！
         ctx.drawImage(
-            img,
-            canvas.width / 2 - w / 2,
-            canvas.height / 2 - h / 2,
-            w,
-            h
+          img,
+          canvas.width / 2 - w / 2,
+          canvas.height / 2 - h / 2,
+          w,
+          h
         );
       };
     },
@@ -190,11 +173,11 @@ export default {
         }
         // var ww = img.width*canvas.height/img.height
         ctx.drawImage(
-            img,
-            canvas.width / 2 - ww / 2,
-            canvas.height / 2 - hh / 2,
-            ww,
-            hh
+          img,
+          canvas.width / 2 - ww / 2,
+          canvas.height / 2 - hh / 2,
+          ww,
+          hh
         );
       };
       img.src = this.imageUrl;
@@ -203,6 +186,7 @@ export default {
       this.$message.error("上传失败!");
     },
     handleAvatarSuccess(res, file) {
+
       console.log(res.data.aa);
       // this.imageUrl = URL.createObjectURL(file.raw)
       // const canvas = document.getElementById('canvas1')
@@ -238,9 +222,9 @@ export default {
     },
     beforeAvatarUpload(file) {
       const isImage =
-          file.type === "image/jpeg" ||
-          file.type === "image/png" ||
-          file.type === "image/bmp";
+        file.type === "image/jpeg" ||
+        file.type === "image/png" ||
+        file.type === "image/bmp";
       const isLt4M = file.size / 1024 / 1024 < 4;
 
       if (!isImage) {
@@ -252,6 +236,7 @@ export default {
       return isImage && isLt4M;
     },
     onUploadChange(file, fileList) {
+
       // const isIMAGE = (file.raw.type === 'image/jpeg' || file.raw.type === 'image/png');
       // const isLt1M = file.size / 1024 / 1024 < 1;
 
@@ -294,11 +279,11 @@ export default {
         }
         // var ww = img.width*canvas.height/img.height
         ctx.drawImage(
-            img,
-            canvas.width / 2 - ww / 2,
-            canvas.height / 2 - hh / 2,
-            ww,
-            hh
+          img,
+          canvas.width / 2 - ww / 2,
+          canvas.height / 2 - hh / 2,
+          ww,
+          hh
         );
       };
       img.src = this.imageUrl;
@@ -306,6 +291,8 @@ export default {
       const canvas2 = document.getElementById("canvas2");
       const context2 = canvas2.getContext("2d");
       context2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+      this.isShow = false;
     },
     submitUpload() {
       var data = {
@@ -348,11 +335,11 @@ export default {
           }
           // var ww = img.width*canvas.height/img.height
           ctx.drawImage(
-              img,
-              canvas.width / 2 - ww / 2,
-              canvas.height / 2 - hh / 2,
-              ww,
-              hh
+            img,
+            canvas.width / 2 - ww / 2,
+            canvas.height / 2 - hh / 2,
+            ww,
+            hh
           )
         }
         img.src = pred
@@ -389,8 +376,7 @@ export default {
         });
         this.show_flag = false
       }
-
-
+      this.isShow = false;
     },
     //上传成功回调
     handleVideoSuccess(res, file) {
@@ -417,15 +403,6 @@ export default {
 };
 </script>
 
-
-<style lang="less" scoped>
-.app-container {
-  margin: -24px 50px -25px 50px;
-  // !important;
-}
-</style>
-
-
 <style scoped>
 canvas {
   display: block;
@@ -433,11 +410,11 @@ canvas {
 }
 
 .avatar-uploader-video {
-  width: 960px;
-  height: 540px;
+  width: 595px;
+  height: 334px;
 }
 
-.avatar-uploader .el-upload {
+/* .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
@@ -447,35 +424,56 @@ canvas {
 
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;
-}
+} */
 
-.avatar-uploader-icon {
+/* .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 500px;
-  height: 420px;
-  line-height: 420px;
+  width: 618px;
+  height: 384px;
+  line-height: 384px;
   text-align: center;
+} */
+
+.demo-img {
+  display: block;
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 205px;
+}
+
+.demo-img-video {
+  display: block;
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 170px;
 }
 
 .avatar-uploader-icon-video {
   font-size: 28px;
   color: #8c939d;
-  width: 960px;
-  height: 540px;
-  line-height: 540px;
+  width: 595px;
+  height: 334px;
+  line-height: 334px;
   text-align: center;
 }
 
+/* 
 .avatar {
   width: 500px;
   height: 420px;
   display: block;
-}
+} */
 
 .video-avatar {
-  width: 960px;
-  height: 540px;
+  width: 595px;
+  height: 334px;
   display: block;
 }
 
@@ -488,61 +486,119 @@ canvas {
 }
 
 .demo-block {
-  width: 1120px;
-  margin: 30px auto;
-  padding-top: 20px;
-
+  width: 1376px;
+  margin: 32px auto 24px;
+  /* padding-top: 20px; */
   display: flex;
   /* text-align: center; */
+  /* margin-bottom: 60px; */
+  position: relative;
+}
 
-  margin-bottom: 60px;
+.arrow {
+  margin-top: 187px;
+  width: 140px;
+  height: 10px;
 }
 
 .demo-block-video {
-  width: 1120px;
-  margin: 30px auto;
-  padding-top: 20px;
-
+  width: 595px;
+  margin: 32px auto 24px;
+  /* padding-top: 20px; */
   display: flex;
   /* text-align: center; */
-
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 }
 
 .demo-video-container {
-  /* position: relative; */
-  width: 960px;
-  height: 540px;
-  /* margin-right: 60px; */
-  background: #a4a4a4;
+  position: relative;
+  width: 595px;
+  height: 334px;
+  background: rgba(238, 242, 243, 1);
+  border: 1px dash rgba(73, 93, 103, 0.35);
+  border-radius: 4px;
 }
 
 .demo-canvas-container {
   position: relative;
-  width: 500px;
-  height: 420px;
-  margin-right: 60px;
-  background: #a4a4a4;
+  width: 618px;
+  height: 384px;
+  /* margin-right: 140px; */
+  background: rgba(238, 242, 243, 1);
+  border: 1px dash rgba(73, 93, 103, 0.35);
+  border-radius: 4px;
 }
 
 .demo-result-container {
   position: relative;
-  width: 500px;
-  height: 420px;
-  background: #f7f6f6;
-  margin-left: 60px;
-
-  outline: 2px solid #000000;
+  width: 618px;
+  height: 384px;
+  background: white;
+  /* margin-left: 60px; */
+  border: 1px solid rgba(73, 93, 103, 0.35);
+  border-radius: 4px;
   /* border-style: solid;
   border-width: 2px;
   border-color: #000000; */
 }
 
-.upload-notice {
-  margin-top: 8px;
-  color: #000;
-  font-size: 16px;
+.upload-notice1 {
+  position: absolute;
+  bottom: 161px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  line-height: 20px;
+  color: rgba(73, 93, 103, 1);
+  font-size: 14px;
   text-align: center;
+}
+
+.upload-notice2 {
+  position: absolute;
+  bottom: 136px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  line-height: 17px;
+  color: rgba(73, 93, 103, 0.65);
+  font-size: 12px;
+  text-align: center;
+}
+
+.upload-video-notice1 {
+  position: absolute;
+  bottom: 125px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  line-height: 21px;
+  color: rgba(73, 93, 103, 1);
+  font-size: 14px;
+  text-align: center;
+}
+
+.upload-video-notice2 {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  line-height: 18px;
+  color: rgba(73, 93, 103, 0.65);
+  font-size: 12px;
+  text-align: center;
+}
+
+.note-button {
+  width: 76px;
+  height: 32px;
+  background: rgba(25, 118, 210, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  text-align: center;
+}
+
+.button-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
 }
 
 .textarea {
@@ -563,7 +619,7 @@ canvas {
   overflow-y: auto;
   border-color: rgba(82, 168, 236, 0.8);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),
-  0 0 8px rgba(82, 168, 236, 0.6);
+    0 0 8px rgba(82, 168, 236, 0.6);
 }
 </style>
 
@@ -632,7 +688,7 @@ canvas {
   transition: all 0.2s ease-in-out;
 }
 
-.modeltype.lite .modeltype-title > i {
+.modeltype.lite .modeltype-title>i {
   font-size: 12px;
   padding-left: 10px;
 }
@@ -658,7 +714,7 @@ canvas {
   color: #000;
 }
 
-.modeltype.lite .modeltype-type > span {
+.modeltype.lite .modeltype-type>span {
   display: inline-block;
   height: 24px;
   padding: 0 12px;
@@ -691,8 +747,8 @@ html {
   width: 100%;
   /* min-width: 1200px; */
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial,
-  sans-serif;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -756,8 +812,7 @@ ul {
   letter-spacing: normal;
 }
 
-.common-container {
-}
+.common-container {}
 
 .common-container .section {
   width: 1180px;
@@ -766,37 +821,45 @@ ul {
 
 
 <style scoped>
+.industry_demo {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 .module-header {
-  height: 350px;
+  height: 193px;
   color: #fff;
   background: #000;
 }
 
 .module-header-container {
   position: relative;
-  margin: 0 auto;
-  width: 1180px;
+  margin-left: 32px;
   height: 100%;
-  color: #fff;
-  overflow: hidden;
+  /* color: rgba(59, 112, 42, 1); */
+  /* overflow: hidden; */
 }
 
 .module-header-title {
-  font-size: 48px;
+  padding-top: 40px;
+  font-size: 36px;
+  line-height: 50px;
 }
 
 .module-header-info {
-  width: 630px;
-  margin-top: 30px;
-  font-size: 16px;
-  line-height: 27px;
+  width: 766px;
+  margin-top: 8px;
+  font-size: 14px;
+  height: 50px;
 }
 
-.module-header-content,
+/* .module-header-content,
 .module-header-empty {
   display: inline-block;
   vertical-align: middle;
-}
+} */
 
 .module-header-empty {
   height: 100%;
@@ -814,9 +877,5 @@ ul {
   padding: 4px 0 7px 0;
   border-top: 1px solid rgba(69, 90, 100, 0.1);
   margin-top: auto;
-
-  p {
-    margin: 0;
-  }
 }
 </style>
