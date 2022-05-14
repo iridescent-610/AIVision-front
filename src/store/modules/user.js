@@ -16,7 +16,7 @@
 
 import request from '@/utils/request'
 import { setIsDialogOpen, setDialogContent } from '@/store/utils'
-import {resetRouter} from '@/router'
+import { resetRouter } from '@/router'
 
 // initial state
 const state = {
@@ -85,12 +85,12 @@ const actions = {
         }).then((response) => {
             console.log("signin success", response.data)
             // commit('updateAuth', response.data.access, { root: true })
-            commit('updateAuth', {'token': response.data.access, 'username': user_info.username}, { root: true })
+            commit('updateAuth', { 'token': response.data.access, 'username': user_info.username }, { root: true })
         }).catch((errors) => {
             console.log("signin error", errors)
             commit('setErrors', errors)
             commit('setIsDialogOpen', true)
-            commit('setDialogContent', '登录失败')
+            commit('setDialogContent', '请检查用户名和密码')
         })
     },
     syncUser({ dispatch, commit, state }, token) {
@@ -126,9 +126,9 @@ const actions = {
             })
         })
     },
-    logout({dispatch, commit}) {
+    logout({ dispatch, commit }) {
         commit('removeAuth', null, { root: true })
-        commit('permission/setRoutes', [], {root: true})
+        commit('permission/setRoutes', [], { root: true })
         resetRouter()
     }
 }

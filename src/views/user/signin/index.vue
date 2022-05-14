@@ -31,6 +31,10 @@
         <b-button class="login-button" block @click="signIn(user_info)" variant="primary" :style="style.submitBtn">登录
         </b-button>
       </b-form>
+      <b-modal title="登录失败" no-close-on-backdrop no-close-on-esc ok-only :visible="is_dialog_open" ok-title="确定"
+        @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
+        <div class="text-center">{{ dialog_content }}</div>
+      </b-modal>
     </div>
     <div class="footer">
       <p>AI+X 普适化平台</p>

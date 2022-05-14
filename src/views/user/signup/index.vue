@@ -41,10 +41,10 @@
         <b-button class="login-button" block @click="signUp(user_info)" variant="primary" :style="style.submitBtn">注册
         </b-button>
       </b-form>
-      <!-- <b-modal title="注册" no-close-on-backdrop no-close-on-esc ok-only :visible="is_dialog_open" ok-title="确定"
+      <b-modal title="注册失败" no-close-on-backdrop no-close-on-esc ok-only :visible="is_dialog_open" ok-title="确定"
         @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
         <div class="text-center">{{ dialog_content }}</div>
-      </b-modal> -->
+      </b-modal>
     </div>
     <div class="footer">
       <p>AI+X 普适化平台</p>
