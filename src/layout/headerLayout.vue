@@ -9,11 +9,8 @@
             控制台
           </div>
         </div>
-        <!-- <div v-if="!$store.state.auth.username" class="user-info" @click="$router.push('/signIn')">
-          登录/注册
-        </div> -->
         <div v-if="!$store.state.auth.username" class="user-info" @click="$router.push('/signIn')">
-          登录
+          登录/注册
         </div>
         <el-dropdown class="user-info" v-else placement="bottom" @command="handleCommand">
           <div>{{ $store.state.auth.username }} <i class="el-icon-caret-bottom"></i></div>

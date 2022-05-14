@@ -15,27 +15,28 @@
 -->
 
 <template>
- <div class="sign-in">
-   <div class="container">
-     <div class="login-title">登录</div>
-     <div class="tab-pane">账号密码登录</div>
-     <b-form>
-       <span class="label">账号</span>
-       <b-form-group>
-         <b-form-input placeholder="请输入账号" class="input" v-model="user_info.username" type="text"></b-form-input>
-       </b-form-group>
-       <span class="label">密码</span>
-       <b-form-group>
-         <b-form-input placeholder="请输入密码" class="input" v-model="user_info.password" type="password"></b-form-input>
-       </b-form-group>
-       <b-button class="login-button" block @click="signIn(user_info)" variant="primary" :style="style.submitBtn">登录</b-button>
-     </b-form>
-   </div>
-   <div class="footer">
-     <p>AI+X 普适化平台</p>
-     <p>Copyright © 2022 浙江大学计算机创新技术研究院</p>
-   </div>
- </div>
+  <div class="sign-in">
+    <div class="container">
+      <div class="login-title">登录</div>
+      <div class="tab-pane" @click="$router.push('/signUp')">首次使用？点我注册</div>
+      <b-form>
+        <span class="label">用户名</span>
+        <b-form-group>
+          <b-form-input placeholder="请输入用户名" class="input" v-model="user_info.username" type="text"></b-form-input>
+        </b-form-group>
+        <span class="label">密码</span>
+        <b-form-group>
+          <b-form-input placeholder="请输入密码" class="input" v-model="user_info.password" type="password"></b-form-input>
+        </b-form-group>
+        <b-button class="login-button" block @click="signIn(user_info)" variant="primary" :style="style.submitBtn">登录
+        </b-button>
+      </b-form>
+    </div>
+    <div class="footer">
+      <p>AI+X 普适化平台</p>
+      <p>Copyright © 2022 浙江大学计算机创新技术研究院</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -103,6 +104,10 @@ export default {
       border-bottom: 2px solid rgba(25, 118, 210, 1);
       margin-bottom: 24px;
       font-weight: 500;
+    }
+
+    .tab-pane:hover {
+      cursor: pointer;
     }
 
     .label {
