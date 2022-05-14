@@ -63,7 +63,7 @@ const store = new Vuex.Store({
     //   console.log(token)
     //   router.push({ name: 'Welcome' })
     // },
-    updateAuth (state, data) {
+    updateAuth(state, data) {
       let token = data.token
       let username = data.username
 
@@ -71,21 +71,21 @@ const store = new Vuex.Store({
       setLocalToken(token)
       state.auth.token = token;
       console.log(token)
-      if(username === 'aix03') router.push({ name: 'My Models' });   // 人工智能专家
-      else if (username === 'aix02') router.push({ name: 'My Flowcharts' });   // 系统开发者
+      if (username === 'aix03') router.push({ name: 'Model' });   // 人工智能专家
+      else if (username === 'aix02') router.push({ name: 'Flowchart' });   // 系统开发者
       else router.push({ name: 'Welcome' });   // 普通用户
     },
-    removeAuth (state) {
+    removeAuth(state) {
       removeLocalToken()
       state.auth = { username: '', is_staff: false, token: '' };
       router.push({ name: 'Sign In' })
       // router.push({ name: 'Welcome' })
     },
     setIsDialogOpen, setDialogContent,
-    setUsername (state, username) {
+    setUsername(state, username) {
       state.auth.username = username
     },
-    setIsStaff (state, is_staff) {
+    setIsStaff(state, is_staff) {
       state.auth.is_staff = is_staff
     }
   },

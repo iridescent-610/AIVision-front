@@ -2,23 +2,13 @@
   <div class="menu-layout">
     <el-aside class="layout-aside">
       <div class="menu-title">AIVision 控制台</div>
-      <el-menu
-        class="el-menu-vertical"
-        background-color="#F9FAFA"
-        text-color="#000"
-        router
-        :default-active="activeMenu"
-        active-text-color="#fff"
-      >
-        <el-menu-item
-          v-for="item in menuList"
-          :key="item.title"
-          :index="item.path"
-        >
+      <el-menu class="el-menu-vertical" background-color="#F9FAFA" text-color="#000" router :default-active="activeMenu"
+        active-text-color="#fff">
+        <el-menu-item v-for="item in menuList" :key="item.title" :index="item.path">
           <svg-icon class="menu-icon" :svg-name="item.icon" />
           <span>{{ item.title }}</span>
         </el-menu-item>
-        <div class="collapse" @click="collapse = !collapse">xxx</div>
+        <!-- <div class="collapse" @click="collapse = !collapse">xxx</div> -->
       </el-menu>
     </el-aside>
     <el-main class="main">
@@ -44,11 +34,11 @@ export default {
           path: "/dashboard/modelZoo",
           icon: "menu_icon_1",
         },
-       /* {
-          title: "图谱可视化",
-          path: "/dashboard/visgraph",
-          icon: "menu_icon_2",
-        },*/
+        /* {
+           title: "图谱可视化",
+           path: "/dashboard/visgraph",
+           icon: "menu_icon_2",
+         },*/
         {
           title: "我的数据集",
           path: "/dashboard/dataset",
