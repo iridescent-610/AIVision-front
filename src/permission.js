@@ -2,7 +2,7 @@ import router from './router'
 import store from './store'
 import getPageTitle from '@/utils/page_title'
 
-const whiteList = ['Sign In', 'Sign Up', 'Sync', 'Welcome', 'Doc']
+const whiteList = ['Sign In', 'Sign Up', 'Welcome', 'Industry', 'IndustryDemo']
 const oriList = ['Sign In', 'Sign Up', 'Sync']
 
 router.beforeEach((to, from, next) => {
@@ -10,13 +10,13 @@ router.beforeEach((to, from, next) => {
     document.title = getPageTitle(to.meta.title)
     if (!store.getters.is_loggedin) {
         // 未登录
-        next()
-        // if (whiteList.indexOf(to.name) !== -1) {
-        //     next()
-        // }
-        // else {
-        //     next({ name: 'Sign In' })
-        // }
+        // next()
+        if (whiteList.indexOf(to.name) !== -1) {
+            next()
+        }
+        else {
+            next({ name: 'Sign In' })
+        }
     }
     else if (store.getters.is_loggedin) {
         if (!store.state.auth.username) {
