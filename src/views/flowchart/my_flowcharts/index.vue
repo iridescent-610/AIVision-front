@@ -94,9 +94,9 @@
 
     </el-tabs>
 
-    <el-dialog title="新的流程图名" :visible.sync="dialogVisible" class="add-modal" width="30%">
+    <el-dialog title="新的流程图名" :visible.sync="dialogVisible" class="add-modal">
 
-      <el-form ref="form" :model="newFlowchartForm" label-width="80px">
+      <el-form ref="form" :model="newFlowchartForm">
         <el-form-item label="流程图名">
           <el-input v-model="newFlowchartForm.name" size="small" placeholder="请输入名称，2-20个字符"></el-input>
         </el-form-item>
@@ -429,6 +429,90 @@ export default {
 .add-modal {
   /deep/ .el-form-item {
     margin-bottom: 0;
+  }
+
+  /deep/ .el-dialog {
+    width: 556px;
+  }
+
+  /deep/ .el-dialog__header {
+    padding: 24px;
+  }
+
+  /deep/ .el-dialog__headerbtn {
+    display: none;
+  }
+
+  /deep/ .el-dialog__title {
+    font-size: 20px;
+    color: black;
+  }
+
+  /deep/ .el-dialog__body {
+    padding: 0 24px;
+  }
+
+  /deep/ .el-form-item .el-form-item__content {
+    display: inline-block;
+    line-height: 32px;
+    margin-bottom: 24px;
+    // color: black;
+  }
+
+  /deep/ .el-form-item__label {
+    color: rgba(38, 50, 56, 1);
+    padding: 0;
+    line-height: 32px;
+    margin: 0;
+    width: 58px;
+    text-align: left;
+  }
+
+  /deep/ .el-form-item__content {
+    color: rgba(73, 93, 103, 1);
+    margin-left: 24px;
+    width: 426px;
+  }
+
+  /deep/ .el-dialog__footer {
+    height: 72px;
+    padding: 0 24px 24px;
+    position: relative;
+  }
+
+  /deep/ .el-button {
+    text-align: center;
+    width: 52px;
+    height: 32px;
+    padding: 6px 12px;
+
+    .span {
+      width: 28px;
+      height: 20px;
+    }
+  }
+
+  /deep/ .el-button--default {
+    position: absolute;
+    bottom: 24px;
+    right: 84px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(207, 216, 220, 1);
+
+    .span {
+      color: rgba(69, 90, 100, 1);
+    }
+  }
+
+  /deep/ .el-button--primary {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(25, 118, 210, 1);
+
+    .span {
+      color: white;
+    }
   }
 }
 </style>
