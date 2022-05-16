@@ -62,8 +62,9 @@
       :style="style.pagination" class="pagination"></b-pagination>
     <b-modal :title="updateDialogTitle" no-close-on-esc scrollable no-close-on-backdrop hide-footer
       :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog"
-      :title-class="{ style: { fontSize: '50px' } }" centered>
+      :title-class="{ style: { fontSize: '50px' } }" centered style="position: relative;">
       <form-datasets :initial_file_info="file_info" :update_key="update_key" :dataset_id="dataset_id"></form-datasets>
+      <el-button @click="is_update_dialog_open = false" size="small" class="return-button">取消</el-button>
     </b-modal>
     <b-modal title="数据集" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
       @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
@@ -320,7 +321,35 @@ export default {
   font-weight: 500;
 }
 
-.test123>h5 {
-  font-size: 50px;
+/deep/ .modal-content {
+  width: 556px;
+  box-shadow: 0px 0px 24px rgba(21, 35, 43, 0.2), 0px 4px 32px rgba(21, 35, 43, 0.3);
+  border-radius: 8px;
+  border: none;
+
+  .modal-header {
+    padding: 24px;
+    border: none;
+
+    .modal-title {
+      color: rgba(0, 0, 0, 1);
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+
+  .modal-body {
+    padding: 8px 24px 56px;
+  }
+}
+
+/deep/ .return-button {
+  width: 52px;
+  height: 32px;
+  font-size: 14px;
+  padding: 0;
+  color: rgba(69, 90, 100, 1);
+  position: absolute;
+  right: 84px;
 }
 </style>
