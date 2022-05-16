@@ -15,16 +15,16 @@
 -->
 
 <template>
- <div>
-   <el-tabs class="el-tab" v-model="activeName" @tab-click="handleTabClick">
-     <el-tab-pane label="我的数据集" name="first">
-       <my-datasets/>
-     </el-tab-pane>
-     <el-tab-pane label="公开数据集" name="second">
-       <public-datasets/>
-     </el-tab-pane>
-   </el-tabs>
- </div>
+  <div>
+    <el-tabs class="el-tab" v-model="activeName" @tab-click="handleTabClick">
+      <el-tab-pane label="我的数据集" name="first">
+        <my-datasets />
+      </el-tab-pane>
+      <el-tab-pane label="公开数据集" name="second">
+        <public-datasets />
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    handleTabClick() {}
+    handleTabClick() { }
   }
 };
 </script>
@@ -57,5 +57,9 @@ export default {
       color: rgba(25, 118, 210, 1);
     }
   }
+}
+
+/deep/ .el-tabs__header {
+  margin-bottom: 24px;
 }
 </style>

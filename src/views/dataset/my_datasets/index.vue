@@ -222,7 +222,6 @@ export default {
 
 .add-button {
   font-size: 14px;
-  margin-top: 9px;
   margin-bottom: 24px;
   border: unset;
 }

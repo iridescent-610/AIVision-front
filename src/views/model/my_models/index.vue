@@ -268,7 +268,6 @@ export default {
 <style lang="less" scoped>
 .add-button {
   margin-bottom: 24px;
-  margin-top: 9px;
   border: unset;
 }
 

@@ -339,7 +339,7 @@ export const realApplication = [
     name: "香烟零售计数",
     img: "./assets/retail_detect.png",
     back: "./assets/retail_back.jpg",
-    back_color: "rgba(59, 112, 42, 1)",
+    back_color: "rgba(255,255,255,1)",
     desc: "基于目标检测技术，对新零售场景图像中的烟草进行检测和品类分类，可应用于视频中的各品类烟草计数，实现烟草销售量自动统计分析",
     key: "object_detection",
     elements: ['目标检测'],

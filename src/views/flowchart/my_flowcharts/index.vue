@@ -20,6 +20,8 @@
         </div>
       </el-tab-pane>
 
+
+
       <!-- 列表页面 -->
       <el-tab-pane name="0" label="表格一览" :closable="false">
         <!-- <div style="margin-bottom:20px; margin-top:27px">
@@ -29,8 +31,9 @@
           <span style="margin-left: 20px; font-size: 14px;">下载一次镜像，可用于本平台所有模型的本地部署</span>
         </div> -->
 
-        <el-table style="width: auto" fit stripe highlight-current-row class="table" :data="allFlowChartData">
-
+        <el-table v-loading="listLoading" style="width: auto" fit stripe highlight-current-row class="table"
+          :data="allFlowChartData.slice((currentPage - 1) * perPage, currentPage * perPage)" :current-page="currentPage"
+          :per-page="perPage">
           <el-table-column label="ID" prop="id" align="left" width="80">
           </el-table-column>
 
@@ -51,47 +54,51 @@
 
             <template slot-scope="{row}">
               <!-- <el-tag :type="row.status | statusFilter">
-            {{ messageDict[row.status] }}
-          </el-tag> -->
-              <!--              <el-tag :type="row.is_completed | statusFilter">-->
-              <!--                {{messageDict[row.is_completed]}}-->
-              <!--              </el-tag>-->
-              <el-tag :type="row.status | statusFilter">
-                {{ messageDict[row.status + ""] }}
+                {{ messageDict[row.status] }}
               </el-tag>
+              <el-tag :type="row.is_completed | statusFilter">
+                {{ messageDict[row.is_completed] }}
+              </el-tag>  -->
+              <span v-if="row.status === 0" style="color: #e6a23c">{{ messageDict[row.status] }}</span>
+              <span v-if="row.status === 1" style="color: #67c23a">{{ messageDict[row.status] }}</span>
+              <span v-if="row.status === 2" style="color: #f56c6c">{{ messageDict[row.status] }}</span>
+              <span v-if="row.status === 3" style="color: #909399">{{ messageDict[row.status] }}</span>
             </template>
           </el-table-column>
 
           <el-table-column label="操作" align="left" class-name="small-padding fixed-width">
             <template slot-scope="{row}">
 
-              <el-tooltip class="item" effect="dark" content="打开流程图" placement="bottom">
-                <el-button size="medium" type="warning" style="margin-left:0px" icon="el-icon-view" circle
-                  @click="handleOpenExisting(row.id)" />
-              </el-tooltip>
+              <el-button size="sm" type="text" class="action-button" @click="handleOpenExisting(row.id)">查看
+              </el-button>
+              <el-button size="sm" type="text" class="action-button" :disabled="!row.is_completed"
+                @click="downloadModelZip(row.id)">下载
+              </el-button>
+              <el-button size="sm" type="text" style="color: rgba(183, 28, 28, 1)" class="action-button"
+                slot="reference" @click="handleDeleteFlowchart(row.id)">
+                删除</el-button>
 
-              <el-tooltip class="item" effect="dark" content="下载流程模型" placement="bottom">
-                <el-button size="medium" type="success" style="margin-left:15px" icon="el-icon-download" circle
-                  :disabled="!row.is_completed" @click="downloadModelZip(row.id)" />
-              </el-tooltip>
-
-              <el-tooltip class="item" effect="dark" content="删除流程图" placement="bottom">
-
-                <el-popconfirm confirm-button-text='好的' cancel-button-text='不用了' icon="el-icon-info" icon-color="red"
-                  title="确定删除吗？" @onConfirm="handleDeleteFlowchart(row.id)">
-                  <el-button slot="reference" size="medium" type="danger" style="margin-left:15px" icon="el-icon-delete"
-                    circle />
-                </el-popconfirm>
-
-              </el-tooltip>
-
+              <!-- <el-tooltip class="item" effect="dark" content="打开流程图" placement="bottom">
+                  <el-button size="medium" type="warning" style="margin-left:0px" icon="el-icon-view" circle
+                    @click="handleOpenExisting(row.id)" />
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="下载流程模型" placement="bottom">
+                  <el-button size="medium" type="success" style="margin-left:15px" icon="el-icon-download" circle
+                    :disabled="!row.is_completed" @click="downloadModelZip(row.id)" />
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="删除流程图" placement="bottom">
+                  <el-popconfirm confirm-button-text='好的' cancel-button-text='不用了' icon="el-icon-info" icon-color="red"
+                    title="确定删除吗？" @onConfirm="handleDeleteFlowchart(row.id)">
+                    <el-button slot="reference" size="medium" type="danger" style="margin-left:15px"
+                      icon="el-icon-delete" circle />
+                  </el-popconfirm>
+                </el-tooltip> -->
             </template>
           </el-table-column>
-
         </el-table>
-
+        <b-pagination v-model="currentPage" :total-rows="allFlowChartData.length" :per-page="perPage" align="right"
+          :style="style.pagination" class="pagination"></b-pagination>
       </el-tab-pane>
-
     </el-tabs>
 
     <el-dialog title="新的流程图名" :visible.sync="dialogVisible" class="add-modal">
@@ -153,7 +160,15 @@ export default {
   },
   data() {
     return {
+      perPage: 8,
+      currentPage: 1,
+      style: {
+        pagination: {
+          marginTop: "20px",
+        },
+      },
       flowchartTemplates: flowchartTemplates,
+      listLoading: false,
       industries: industries,
       keyToIndustry: keyToIndustry,
       newFlowchartForm: {
@@ -224,7 +239,11 @@ export default {
       })
     },
     getMyFlowcharts() {
-      this.$store.dispatch('flowchart/getMyFlowcharts')
+      this.listLoading = true;
+      this.$store.dispatch('flowchart/getMyFlowcharts');
+      setTimeout(() => {
+        this.listLoading = false;
+      }, 1.0 * 400);
     },
     handleOpenExisting(id) {
       var index = this.allFlowChartData.findIndex((x) => {
@@ -311,7 +330,7 @@ export default {
 
 
   /deep/ .el-tabs__header {
-    margin: 0 0;
+    margin: 0 0 24px;
   }
 
   /deep/ #tab--1 .el-icon-close {
@@ -355,12 +374,10 @@ export default {
 
 .add-button {
   font-size: 14px;
-  margin-top: 24px;
   border: unset;
 }
 
 .table {
-  margin-top: 15px;
   border: 1px solid rgba(207, 216, 220, 1);
   border-radius: 4px;
 
@@ -376,30 +393,34 @@ export default {
     border: unset !important;
   }
 
-  /deep/ thead {
-    line-height: 14px;
-  }
-
   /deep/ th {
+    vertical-align: middle;
     background-color: rgba(248, 249, 249, 1) !important;
     color: rgba(38, 50, 56, 1);
     font-size: 14px;
     font-weight: 400;
-    border: unset;
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-bottom: 1px solid rgba(238, 242, 243, 1);
 
     .cell {
       line-height: 20px;
+      padding: 0;
     }
   }
 
-  /deep/ tbody td {
-    height: 40px;
-    line-height: 40px;
-    padding: 0;
+  /deep/ td {
+    vertical-align: middle;
+    background-color: white !important;
     color: rgba(73, 93, 103, 1);
     font-size: 14px;
+    font-weight: 400;
+    padding: 1px 12px;
+    border-bottom: 1px solid rgba(238, 242, 243, 1);
+
+    .cell {
+      line-height: 20px;
+      padding: 0;
+    }
   }
 
   /deep/ .card {
@@ -513,6 +534,24 @@ export default {
     .span {
       color: white;
     }
+  }
+}
+
+.pagination {
+  /deep/ .page-link {
+    border: unset !important;
+    font-size: 14px;
+    color: rgba(69, 90, 100, 0.65);
+
+    &:focus {
+      outline: unset;
+      box-shadow: unset;
+    }
+  }
+
+  /deep/ .page-item.active .page-link {
+    background-color: #fff;
+    color: #007bff;
   }
 }
 </style>

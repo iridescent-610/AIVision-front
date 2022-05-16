@@ -17,10 +17,10 @@
 <template>
   <el-tabs class="el-tab" v-model="activeName" @tab-click="handleTabClick">
     <el-tab-pane label="我的模型" name="first">
-      <my-models/>
+      <my-models />
     </el-tab-pane>
     <el-tab-pane label="公开模型" name="second">
-      <public-models/>
+      <public-models />
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-    handleTabClick() {}
+    handleTabClick() { }
   }
 };
 </script>
@@ -55,5 +55,9 @@ export default {
       color: rgba(25, 118, 210, 1);
     }
   }
+}
+
+/deep/ .el-tabs__header {
+  margin-bottom: 24px;
 }
 </style>
