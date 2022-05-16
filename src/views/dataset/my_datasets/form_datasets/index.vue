@@ -16,7 +16,7 @@
 
 <template>
   <div class="form-datasets">
-    <b-form-group class="tasks-label">
+    <b-form-group style="margin-bottom: 104px;">
       <span>任务</span>
       <div class="options-tasks">
         <b-form-checkbox v-for="item in options.tasks" :key="item.id" :value="item.id" v-model="file_info.task" button
@@ -44,7 +44,7 @@
       <b-form-file v-model="file" placeholder="请选择或拖动文件" drop-placeholder="请拖动至此处" browse-text="浏览"></b-form-file>
     </b-form-group>
 
-    <b-form-group class="remarks">
+    <b-form-group style="margin-bottom: 108px;">
       <span>备注</span>
       <b-form-textarea v-model="file_info.info" placeholder="请键入数据集其它信息（可选）" rows="4"></b-form-textarea>
     </b-form-group>
@@ -125,10 +125,6 @@ export default {
 <style scoped lang="less">
 .form-datasets {
   position: relative;
-
-  /deep/ .tasks-label {
-    margin-bottom: 104px;
-  }
 
   /deep/ .form-group {
     .bv-no-focus-ring {
@@ -218,10 +214,6 @@ export default {
         display: inline-block;
       }
     }
-  }
-
-  /deep/ .remarks {
-    margin-bottom: 108px;
   }
 
   /deep/ .custom-file-label {

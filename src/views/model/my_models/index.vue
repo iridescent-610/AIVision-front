@@ -78,8 +78,10 @@ setIsUpdateDialogOpen(true);
     <b-pagination v-model="currentPage" :total-rows="my_models.length" :per-page="perPage" align="right"
       :style="style.pagination" class="pagination"></b-pagination>
     <b-modal :title="updateDialogTitle" no-close-on-esc scrollable no-close-on-backdrop hide-footer
-      :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog" centered>
+      :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog" centered
+      style="position: relative;">
       <form-models :initial_file_info="file_info" :update_key="update_key" :model_id="model_id"></form-models>
+      <el-button @click="is_update_dialog_open = false" size="small" class="return-button">取消</el-button>
     </b-modal>
     <b-modal title="模型" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
       @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '18px' } }">
@@ -362,5 +364,37 @@ export default {
 /deep/.modal-title {
   font-size: 18px;
   font-weight: 500;
+}
+
+/deep/ .modal-content {
+  width: 556px;
+  box-shadow: 0px 0px 24px rgba(21, 35, 43, 0.2), 0px 4px 32px rgba(21, 35, 43, 0.3);
+  border-radius: 8px;
+  border: none;
+
+  .modal-header {
+    padding: 24px;
+    border: none;
+
+    .modal-title {
+      color: rgba(0, 0, 0, 1);
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+
+  .modal-body {
+    padding: 8px 24px 56px;
+  }
+}
+
+/deep/ .return-button {
+  width: 52px;
+  height: 32px;
+  font-size: 14px;
+  padding: 0;
+  color: rgba(69, 90, 100, 1);
+  position: absolute;
+  right: 84px;
 }
 </style>
