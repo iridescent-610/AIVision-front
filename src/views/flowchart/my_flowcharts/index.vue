@@ -454,6 +454,7 @@ export default {
 
   /deep/ .el-dialog {
     width: 556px;
+    border-radius: 8px;
   }
 
   /deep/ .el-dialog__header {
