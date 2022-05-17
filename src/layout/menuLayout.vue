@@ -4,10 +4,24 @@
       <div class="menu-title">AIVision 控制台</div>
       <el-menu class="el-menu-vertical" background-color="#F9FAFA" text-color="#000" router :default-active="activeMenu"
         active-text-color="#fff">
-        <el-menu-item v-for="item in menuList" :key="item.title" :index="item.path">
-          <svg-icon class="menu-icon" :svg-name="item.icon" />
-          <span>{{ item.title }}</span>
-        </el-menu-item>
+        <div v-if="$store.state.auth.username === 'aix02'">
+          <el-menu-item v-for="item in menuList2" :key="item.title" :index="item.path">
+            <svg-icon class="menu-icon" :svg-name="item.icon" />
+            <span>{{ item.title }}</span>
+          </el-menu-item>
+        </div>
+        <div v-else-if="$store.state.auth.username === 'aix03'">
+          <el-menu-item v-for="item in menuList3" :key="item.title" :index="item.path">
+            <svg-icon class="menu-icon" :svg-name="item.icon" />
+            <span>{{ item.title }}</span>
+          </el-menu-item>
+        </div>
+        <div v-else>
+          <el-menu-item v-for="item in menuList1" :key="item.title" :index="item.path">
+            <svg-icon class="menu-icon" :svg-name="item.icon" />
+            <span>{{ item.title }}</span>
+          </el-menu-item>
+        </div>
         <!-- <div class="collapse" @click="collapse = !collapse">xxx</div> -->
       </el-menu>
     </el-aside>
@@ -28,7 +42,31 @@ export default {
     return {
       activeMenu: "",
       collapse: false,
-      menuList: [
+      menuList1: [
+        {
+          title: "图谱列表",
+          path: "/dashboard/modelZoo",
+          icon: "menu_icon_1",
+        },
+      ],
+      menuList2: [
+        {
+          title: "图谱列表",
+          path: "/dashboard/modelZoo",
+          icon: "menu_icon_1",
+        },
+        {
+          title: "我的数据集",
+          path: "/dashboard/dataset",
+          icon: "menu_icon_3",
+        },
+        {
+          title: "业务机理建模",
+          path: "/dashboard/flowchart",
+          icon: "menu_icon_5",
+        },
+      ],
+      menuList3: [
         {
           title: "图谱列表",
           path: "/dashboard/modelZoo",
@@ -54,11 +92,11 @@ export default {
           path: "/dashboard/flowchart",
           icon: "menu_icon_5",
         },
-        {
-          title: "我的容器",
-          path: "/dashboard/container",
-          icon: "menu_icon_6",
-        },
+        // {
+        //   title: "我的容器",
+        //   path: "/dashboard/container",
+        //   icon: "menu_icon_6",
+        // },
       ],
     };
   },
