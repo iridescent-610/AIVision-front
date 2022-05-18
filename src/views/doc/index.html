@@ -37,21 +37,21 @@
     <div id="app"></div>
 </div>
 <script>
+    const userName = window.localStorage.getItem('userName')
+    const userDom = document.documentElement.querySelector('.username')
+    const loginDom = document.documentElement.querySelector('.login')
+    if (userName) {
+        userDom.innerText = userName
+        userDom.style.display = 'block'
+        loginDom.style.display = 'none'
+    }
+</script>
+<script>
     window.$docsify = {
         name: '',
         repo: '',
         loadNavbar: true,
         topMargin: 58
-    }
-</script>
-<script>
-    const username = window.localStorage.getItem('username')
-    const userDom = document.documentElement.querySelector('.username')
-    const loginDom = document.documentElement.querySelector('.login')
-    if (username) {
-        userDom.innerText = username
-        userDom.style.display = 'block'
-        loginDom.style.display = 'none'
     }
 </script>
 <!-- Docsify v4 -->
