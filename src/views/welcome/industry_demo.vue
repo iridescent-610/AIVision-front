@@ -27,7 +27,7 @@
             <canvas id="canvas1" width="618" height="384" class="el-icon-plus avatar-uploader-icon" />
             <img v-show="isShow" src="./assets/icon_20_AIVison.png" class="demo-img">
             <div v-show="isShow" class="upload-notice1">
-              点击或拖拽图片到此区域，上传图片
+              点击此区域，上传图片
             </div>
             <div v-show="isShow" class="upload-notice2">
               支持PNG、JPG、JPEG、BMP，图片大小不超过4M
@@ -63,7 +63,7 @@
 
           <img v-show="isShow" src="./assets/icon_21_AIVison.png" class="demo-img-video">
           <div v-show="isShow" class="upload-video-notice1">
-            点击或拖拽视频到此区域，上传视频
+            点击此区域，上传视频
           </div>
           <div v-show="isShow" class="upload-video-notice2">
             支持MP4，视频大小不超过10M
@@ -464,7 +464,7 @@ canvas {
   text-align: center;
 }
 
-/* 
+/*
 .avatar {
   width: 500px;
   height: 420px;

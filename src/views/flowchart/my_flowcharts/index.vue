@@ -53,16 +53,17 @@
             </template>
 
             <template slot-scope="{row}">
-              <!-- <el-tag :type="row.status | statusFilter">
-                {{ messageDict[row.status] }}
-              </el-tag>
-              <el-tag :type="row.is_completed | statusFilter">
-                {{ messageDict[row.is_completed] }}
-              </el-tag>  -->
-              <span v-if="row.status === 0" style="color: #e6a23c">{{ messageDict[row.status] }}</span>
-              <span v-if="row.status === 1" style="color: #67c23a">{{ messageDict[row.status] }}</span>
-              <span v-if="row.status === 2" style="color: #f56c6c">{{ messageDict[row.status] }}</span>
-              <span v-if="row.status === 3" style="color: #909399">{{ messageDict[row.status] }}</span>
+              <div style="display: flex; align-items: center;">
+                <span v-if="row.status === 0" style="color: #e6a23c; margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon"/></span>
+                <span v-if="row.status === 1" style="color: rgba(67, 160, 71, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="success_icon"/></span>
+                <span v-if="row.status === 2" style="color: rgba(183, 28, 28, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="failed_icon"/></span>
+                <span v-if="row.status === 3" style="color: rgba(73, 93, 103, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon"/></span>
+
+                <span v-if="row.status === 0" style="color: #495D67">{{ messageDict[row.status] }}</span>
+                <span v-if="row.status === 1" style="color: #495D67">{{ messageDict[row.status] }}</span>
+                <span v-if="row.status === 2" style="color: #495D67">{{ messageDict[row.status] }}</span>
+                <span v-if="row.status === 3" style="color: #495D67">{{ messageDict[row.status] }}</span>
+              </div>
             </template>
           </el-table-column>
 
@@ -398,7 +399,7 @@ export default {
     background-color: rgba(248, 249, 249, 1) !important;
     color: rgba(38, 50, 56, 1);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     padding: 8px 12px;
     border-bottom: 1px solid rgba(238, 242, 243, 1);
 

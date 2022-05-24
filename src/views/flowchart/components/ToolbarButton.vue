@@ -1,8 +1,10 @@
 <template>
 
   <command :name="command">
-    <icon :type="iconType" :title="text" />
-    <span v-if="label">{{ label }}</span>
+    <div style="display: flex; align-items: center;">
+      <icon :type="iconType" :title="text" />
+      <span v-if="label">{{ label }}</span>
+    </div>
   </command>
 
 </template>

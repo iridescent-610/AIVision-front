@@ -18,7 +18,6 @@
   <div class="sign-in">
     <div class="container">
       <div class="login-title">登录</div>
-      <div class="tab-pane" @click="$router.push('/signUp')">首次使用？点我注册</div>
       <b-form>
         <span class="label">用户名</span>
         <b-form-group>
@@ -30,6 +29,7 @@
         </b-form-group>
         <b-button class="login-button" block @click="signIn(user_info)" variant="primary" :style="style.submitBtn">登录
         </b-button>
+        <div class="first-login">首次使用？点我 <span @click="$router.push('/signUp')">注册</span></div>
       </b-form>
       <b-modal title="登录失败" no-close-on-backdrop no-close-on-esc ok-only :visible="is_dialog_open" ok-title="确定"
         @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
@@ -167,6 +167,18 @@ export default {
 
   p {
     margin: 0;
+  }
+}
+
+.first-login {
+  color: rgba(0, 0, 0, 0.92);
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 16px;
+
+  span {
+    color: rgba(25, 118, 210, 1);
+    cursor: pointer;
   }
 }
 </style>

@@ -165,7 +165,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .banner.lite {
   background-image: linear-gradient(transparent, white 100%),
     url("./assets/head.jpg");
@@ -398,12 +398,15 @@ export default {
   border-radius: 15px;
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
-  border: 2px solid transparent;
   width: 470px;
   height: 471px;
   margin-bottom: 32px;
   background: white;
   position: relative;
+
+  &:hover {
+    box-shadow: 0px 8px 32px rgba(38, 50, 56, 0.2);
+  }
 }
 
 .modeltype-item:nth-child(even) {
@@ -411,7 +414,7 @@ export default {
 }
 
 .modeltype-icon {
-  width: 466px;
+  width: 100%;
   height: 290px;
   background-size: 100%;
 }
@@ -422,11 +425,12 @@ export default {
   line-height: 30px;
   margin-top: 20px;
   margin-left: 32px;
+  font-weight: 500;
 }
 
 .modeltype-desc {
   font-size: 14px;
-  color: #666;
+  color: #455A64;
   line-height: 22px;
   margin-top: 6px;
   margin-left: 32px;
@@ -447,8 +451,9 @@ export default {
   display: inline-block;
   line-height: 17px;
   padding: 4px 12px;
-  margin-right: 20px;
+  margin-right: 8px;
   background: #eceeef;
+  border-radius: 1px;
 }
 
 :root {
@@ -514,7 +519,7 @@ ul {
 }
 
 .section-wrap {
-  width: 1400px;
+  width: 100%;
   margin: 0 auto 20px;
   padding-top: 56px;
   padding-bottom: 25px;
@@ -583,6 +588,7 @@ ul {
   margin: 8px 20px 11px;
   overflow: hidden;
   color: #9ba6ab;
+  border-radius: 1px;
 }
 
 .modeltype-type2>span {
@@ -622,9 +628,9 @@ ul {
 }
 
 .modeltype-show>button:hover {
-  background-color: #edf3ff;
-  color: #409efe;
-  border: none;
+  background-color: rgba(0, 92, 184, 1);
+  color: #fff;
+  border: 1px solid rgba(0, 92, 184, 1);
 }
 </style>
 

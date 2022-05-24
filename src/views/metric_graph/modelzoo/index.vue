@@ -43,11 +43,11 @@
           <b-list-group>
             <div v-for="attr in get_attr(item.tags)" :key="item+attr">
 
-              <b v-if="attr!='readme'">{{attr}}
-                : {{get_value(item.tags, attr)}}</b>
+              <span v-if="attr!='readme'">{{attr}}
+                : {{get_value(item.tags, attr)}}</span>
             </div>
             <div>
-              <b>URL: </b>
+              <span>URL: </span>
               <a target="_blank" :href="item.tags.url">homepage</a>
             </div>
             &lt;!&ndash; text-align:center &ndash;&gt;
@@ -288,6 +288,8 @@ export default {
       line-height: 32px;
       padding: 0 12px;
       margin-top: 8px;
+      border-radius: 2px;
+      font-weight: normal;
 
       &:hover {
         background-color: rgba(25, 118, 210, 1);

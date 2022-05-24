@@ -185,6 +185,8 @@ a{text-decoration:none}
     display: flex;
     color: #333;
     font-weight: normal;
+    align-items: center;
+    padding-top: 22px;
     //     border: 1px solid #ccc;
     // display: inline-block;
     // padding: 6px 12px;
@@ -198,17 +200,15 @@ a{text-decoration:none}
       display: block;
       width: 27px;
       height: 27px;
-      margin: 0 6px;
-      padding-top: 10px;
       text-align: center;
       border: 1px solid #fff;
       cursor: pointer;
+      margin-right: 6px;
     }
 
     span {
       display: block;
       font-size: 12px;
-      padding-top: 10px;
       margin-left: -6px;
       padding-right: 6px;
       line-height: 20px;
@@ -224,13 +224,13 @@ a{text-decoration:none}
   .command {
     display: flex;
     color: #333;
+    padding-top: 15px;
 
     i {
       display: block;
       width: 27px;
       height: 27px;
       margin: 0 6px;
-      padding-top: 10px;
       text-align: center;
       border: 1px solid #fff;
       cursor: pointer;
@@ -239,7 +239,6 @@ a{text-decoration:none}
     span {
       display: block;
       font-size: 12px;
-      padding-top: 10px;
       margin-left: -6px;
       padding-right: 6px;
       line-height: 20px;

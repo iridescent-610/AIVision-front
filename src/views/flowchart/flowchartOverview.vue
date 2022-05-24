@@ -5,36 +5,40 @@
       <vue-flowchart-editor ref="flowChart">
         <!-- Hidden Main Chart -->
         <div style="display: none;">
-          <flow :data="flowChartData" />
+          <flow :data="flowChartData"/>
         </div>
 
         <!-- Displayed Minimap -->
         <div class="flowchart-card-minimap" @click="$emit('click-minimap')">
-          <minimap :height="210" :width="278" />
+          <minimap :height="210" :width="278"/>
         </div>
       </vue-flowchart-editor>
-
-      <!-- 20220101 start -->
       <div class="flowchart-state">
-        <span style="font-size:14px; margin-left: 24px; color: #495D67;">训练状态：</span>
-        <!-- <el-divider direction="vertical"></el-divider> -->
-        <span style="font-size:14px;">
-          <span v-if="chartStatus === 0" style="color: #e6a23c">{{ messageDict[chartStatus] }}</span>
-          <span v-if="chartStatus === 1" style="color: #67c23a">{{ messageDict[chartStatus] }}</span>
-          <span v-if="chartStatus === 2" style="color: #f56c6c">{{ messageDict[chartStatus] }}</span>
-          <span v-if="chartStatus === 3" style="color: #909399">{{ messageDict[chartStatus] }}</span>
-        </span>
+          <span v-if="chartStatus === 0" style="color: #e6a23c; margin-bottom: 1px; margin-right: 5px;"><svg-icon style="width: 20px;height: 20px;"
+                                                                                              svg-name="loading_icon"/></span>
+        <span v-if="chartStatus === 1" style="color: rgba(67, 160, 71, 1); margin-bottom: 1px; margin-right: 5px;"><svg-icon style="width: 20px;height: 20px;"
+                                                                                            svg-name="success_icon"/></span>
+        <span v-if="chartStatus === 2" style="color: rgba(183, 28, 28, 1); margin-bottom: 1px; margin-right: 5px;"><svg-icon style="width: 20px;height: 20px;"
+                                                                                            svg-name="failed_icon"/></span>
+        <span v-if="chartStatus === 3" style="color: rgba(73, 93, 103, 1); margin-bottom: 1px; margin-right: 5px;"><svg-icon style="width: 20px;height: 20px;"
+                                                                                            svg-name="loading_icon"/></span>
 
-        <el-button class="button" id="button-check" plain @click="$emit('click-minimap')">查看</el-button>
-        <el-button class="button" plain :disabled="chartStatus !== 1" @click="handlePredicting">演示
-        </el-button>
+        <span v-if="chartStatus === 0" style="color: #e6a23c">{{ messageDict[chartStatus] }}</span>
+        <span v-if="chartStatus === 1" style="color: rgba(67, 160, 71, 1)">{{ messageDict[chartStatus] }}</span>
+        <span v-if="chartStatus === 2" style="color: rgba(183, 28, 28, 1)">{{ messageDict[chartStatus] }}</span>
+        <span v-if="chartStatus === 3" style="color: rgba(73, 93, 103, 1)">{{ messageDict[chartStatus] }}</span>
+
+        <div style="margin-left: auto;">
+          <el-button class="button" id="button-check" plain @click="$emit('click-minimap')">查看</el-button>
+          <el-button class="button" plain :disabled="chartStatus !== 1" @click="handlePredicting">演示</el-button>
+        </div>
       </div>
       <!-- 20220102 end -->
 
     </el-card>
 
     <div class="flowchart-name">
-      <icon type="flowchart" />
+      <icon type="flowchart"/>
       <span class="flowchart-span">[{{ keyToIndustry[flowChartIndustry].name }}] {{ flowChartName }}</span>
     </div>
   </div>
@@ -42,9 +46,9 @@
 </template>
 
 <script>
-import VueFlowchartEditor, { Flow, Minimap } from 'vue-flowchart-editor'
+import VueFlowchartEditor, {Flow, Minimap} from 'vue-flowchart-editor'
 import Icon from './components/Icon'
-import { keyToIndustry } from '../welcome/industries'
+import {keyToIndustry} from '../welcome/industries'
 
 export default {
   name: 'FlowchartOverview',
@@ -95,13 +99,14 @@ export default {
     }
   },
 
-  mounted() { },
+  mounted() {
+  },
 
   methods: {
     handlePredicting() {
       let routeUrl = this.$router.resolve({
         name: 'Predicting',
-        params: { id: this.chartId },
+        params: {id: this.chartId},
       })
       // console.log(this.chartId)
       window.open(routeUrl.href, '_blank')
@@ -120,10 +125,23 @@ export default {
     cursor: default !important;
   }
 
+  .flowchart-name {
+    margin-top: 8px;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+
+    .flowchart-span {
+      margin-left: 8px;
+      font-weight: 500;
+    }
+  }
+
   .flowchart-card {
     width: 278px;
     height: 258px;
     background-color: #EEF2F3;
+    border-color: #CFD8DC;
 
     .flowchart-card-minimap {
       position: relative;
@@ -132,23 +150,15 @@ export default {
     }
 
     .flowchart-state {
-      line-height: 48px;
-    }
-  }
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      height: 48px;
 
-  .flowchart-name {
-    margin-top: 8px;
-    font-size: 14px;
-    height: 20px;
-
-    font-family: Apple System, 'SF Pro SC', 'SF Pro Display', 'Helvetica Neue',
-      Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei',
-      'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC',
-      'Source Han Sans CN', sans-serif;
-    -webkit-font-smoothing: antialiased;
-
-    .flowchart-span {
-      margin-left: 8px;
+      span {
+        margin-right: 4px;
+      }
     }
   }
 
@@ -158,12 +168,11 @@ export default {
     height: 32px;
     position: relative;
     float: right;
-    margin-right: 8px;
-    margin-top: 8px;
+    margin-left: 8px;
     border: 1px solid rgba(73, 93, 103, 1);
   }
 
-  .button>span {
+  .button > span {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -171,7 +180,7 @@ export default {
   }
 
   #button-check {
-    margin-right: 16px;
+    margin-left: 8px;
     color: rgba(25, 118, 210, 1);
     border: 1px solid rgba(25, 118, 210, 1);
   }

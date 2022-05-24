@@ -71,7 +71,7 @@
       style="background-color: rgba(25, 118, 210, 1)">{{ update_key == 'put' ? '更新' : '上传' }}
     </b-button>
     <b-modal title="数据集" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
-      @close="closeDialog" @ok="closeDialog" :title-class="{ style: { fontSize: '50px' } }">
+      @close="closeDialog();$emit('close')" @ok="closeDialog;$emit('close')" :title-class="{ style: { fontSize: '50px' } }">
       <div class="text-center" :style="style.modal">{{ dialog_content }}</div>
     </b-modal>
   </div>

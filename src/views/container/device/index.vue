@@ -281,7 +281,7 @@ export default {
     background-color: rgba(248, 249, 249, 1) !important;
     color: rgba(38, 50, 56, 1);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     border: unset;
   }
 

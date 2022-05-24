@@ -63,7 +63,7 @@
     <b-modal :title="updateDialogTitle" no-close-on-esc scrollable no-close-on-backdrop hide-footer
       :visible="is_update_dialog_open" @close="closeUpdateDialog" @cancel="closeUpdateDialog"
       :title-class="{ style: { fontSize: '50px' } }" centered style="position: relative;">
-      <form-datasets :initial_file_info="file_info" :update_key="update_key" :dataset_id="dataset_id"></form-datasets>
+      <form-datasets @close="closeUpdateDialog" :initial_file_info="file_info" :update_key="update_key" :dataset_id="dataset_id"></form-datasets>
       <el-button @click="is_update_dialog_open = false" size="small" class="return-button">取消</el-button>
     </b-modal>
     <b-modal title="数据集" no-close-on-esc no-close-on-backdrop ok-only :visible="is_dialog_open" ok-title="确定"
@@ -242,7 +242,7 @@ export default {
     background-color: rgba(248, 249, 249, 1) !important;
     color: rgba(38, 50, 56, 1);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     border: unset;
     text-align: left !important;
   }

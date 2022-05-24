@@ -381,7 +381,7 @@
         <!-- <el-form-item v-if="formModel.key === 'TEXT_RECOGNITION'" label="成段">
           <el-switch v-model="formModel.params.need_merge" active-color="#13ce66" inactive-color="#ff4949" />
         </el-form-item> -->
-        
+
         <!-- <el-form-item
           v-if="formModel.params.id && formModel.params.meta.category_flag"
           label="所属粗类别"
@@ -1303,6 +1303,7 @@ export default {
             }
           }
         }
+        this.$message.success('保存成功')
       }, 0);
     },
   },

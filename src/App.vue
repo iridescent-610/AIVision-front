@@ -172,4 +172,11 @@ th > div {
    border: unset;
  }
 }
+
+button {
+  font-weight: normal !important;
+  span {
+    font-weight: normal !important;
+  }
+}
 </style>

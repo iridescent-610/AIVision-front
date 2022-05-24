@@ -40,7 +40,6 @@
 export default {
   data() {
     return {
-      activeMenu: "",
       collapse: false,
       menuList1: [
         {
@@ -100,13 +99,17 @@ export default {
       ],
     };
   },
-  created() {
-    const { path } = this.$route;
-    const findMenu = this.menuList.find((menu) => path.includes(menu.path));
-    if (findMenu) {
-      this.activeMenu = findMenu.path;
+  computed: {
+    activeMenu() {
+      const { path } = this.$route;
+      const findMenu = [...this.menuList1, ...this.menuList2, ...this.menuList3].find((menu) => path.includes(menu.path));
+      console.log(findMenu);
+      if (findMenu) {
+        return findMenu.path
+      }
+      return ''
     }
-  },
+  }
 };
 </script>
 <style lang="less" scoped>
