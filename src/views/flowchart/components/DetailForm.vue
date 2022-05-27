@@ -1,36 +1,17 @@
 <template>
   <div>
     <!-- 选模型的对话框 -->
-    <el-dialog
-      title="可选模型列表"
-      :visible.sync="modelDialogVisible"
-      width="80%"
-    >
-      <div
-        v-if="formModel.params.meta.filter_flag"
-        style="margin-bottom: 10px; margin-left: 10px"
-      >
+    <el-dialog title="可选模型列表" :visible.sync="modelDialogVisible" width="80%">
+      <div v-if="formModel.params.meta.filter_flag" style="margin-bottom: 10px; margin-left: 10px">
         筛选
-        <el-radio-group
-          v-model="filter_value"
-          style="margin-left: 15px; margin-top: 8px"
-        >
-          <el-radio
-            v-for="op in formModel.params.meta.filter_values"
-            :label="op"
-            :key="op"
-          >
-            {{ op }}</el-radio
-          >
+        <el-radio-group v-model="filter_value" style="margin-left: 15px; margin-top: 8px">
+          <el-radio v-for="op in formModel.params.meta.filter_values" :label="op" :key="op">
+            {{ op }}</el-radio>
         </el-radio-group>
       </div>
       <div class="select-list">
-        <div
-          v-for="item in filter(modelOptions)"
-          :key="item.id"
-          @click="handleConfirmModel(item.model_name)"
-          class="select-list-item"
-        >
+        <div v-for="item in filter(modelOptions)" :key="item.id" @click="handleConfirmModel(item.model_name)"
+          class="select-list-item">
           <el-card shadow="hover" style="width: 450px">
             <div slot="header" class="clearfix">
               <span style="text-align: center">
@@ -64,18 +45,10 @@
     </el-dialog>
 
     <!-- 选预训练的对话框 -->
-    <el-dialog
-      title="可选预训练模型列表"
-      :visible.sync="pretrainDialogVisible"
-      width="80%"
-    >
+    <el-dialog title="可选预训练模型列表" :visible.sync="pretrainDialogVisible" width="80%">
       <div v-if="pretrainOptions.length > 0" class="select-list">
-        <div
-          v-for="(item, index) in pretrainOptions"
-          :key="item.id"
-          @click="handleConfirmPretrain(index)"
-          class="select-list-item"
-        >
+        <div v-for="(item, index) in pretrainOptions" :key="item.id" @click="handleConfirmPretrain(index)"
+          class="select-list-item">
           <el-card shadow="hover" style="width: 450px">
             <div slot="header" class="clearfix">
               <span style="text-align: center">
@@ -97,24 +70,14 @@
                 {{ item.categories }}
               </el-form-item>
               <el-form-item label="配置">
-                <el-tag
-                  v-for="(value, name) in item.config"
-                  type="info"
-                  size="mini"
-                  :key="name"
-                  style="margin-left: 5px"
-                >
+                <el-tag v-for="(value, name) in item.config" type="info" size="mini" :key="name"
+                  style="margin-left: 5px">
                   {{ name + ": " + value }}
                 </el-tag>
               </el-form-item>
               <el-form-item label="指标">
-                <el-tag
-                  v-for="(value, name) in item.metric"
-                  type="info"
-                  size="mini"
-                  :key="name"
-                  style="margin-left: 5px"
-                >
+                <el-tag v-for="(value, name) in item.metric" type="info" size="mini" :key="name"
+                  style="margin-left: 5px">
                   {{ name + ": " + value }}
                 </el-tag>
               </el-form-item>
@@ -136,32 +99,18 @@
         当前行业场景下，该网络结构没有可以使用的预训练模型
       </div>
 
-      <el-alert
-        title="在选择重新训练模型时，预训练模型只用作初始化参数，输出类别仍然可以自定义；在作为已训练完成的模型直接使用时，输出类别将固定不可更改"
-        type="info"
-        :closable="false"
-        show-icon
-      >
+      <el-alert title="在选择重新训练模型时，预训练模型只用作初始化参数，输出类别仍然可以自定义；在作为已训练完成的模型直接使用时，输出类别将固定不可更改" type="info" :closable="false"
+        show-icon>
       </el-alert>
 
       <div style="text-align: right; margin-top: 10px">
-        <el-button
-          v-if="formModel.params.retrain"
-          type="primary"
-          size="medium"
-          plain
-          @click.prevent="handleNotUsePretrain"
-          >不使用</el-button
-        >
+        <el-button v-if="formModel.params.retrain" type="primary" size="medium" plain
+          @click.prevent="handleNotUsePretrain">不使用</el-button>
       </div>
     </el-dialog>
 
     <!-- 选数据集的对话框 -->
-    <el-dialog
-      title="可选数据集列表"
-      :visible.sync="datasetDialogVisible"
-      width="80%"
-    >
+    <el-dialog title="可选数据集列表" :visible.sync="datasetDialogVisible" width="80%">
 
       <!-- 20220105 start -->
       <div style="margin-bottom: 20px; margin-top: -10px">
@@ -175,12 +124,7 @@
 
       <div class="select-head-text">我的数据集</div>
       <div class="select-list">
-        <div
-          v-for="item in myDatasets"
-          :key="item.id"
-          @click="handleConfirmDataset(item)"
-          class="select-list-item"
-        >
+        <div v-for="item in myDatasets" :key="item.id" @click="handleConfirmDataset(item)" class="select-list-item">
           <el-card shadow="hover" style="width: 450px">
             <div slot="header" class="clearfix">
               <span style="text-align: center">
@@ -191,12 +135,7 @@
             <el-form>
               <el-form-item label="预览"> 无 </el-form-item>
               <el-form-item label="标签">
-                <el-tag
-                  v-for="task in item.task"
-                  :key="task.id"
-                  type="info"
-                  size="mini"
-                >
+                <el-tag v-for="task in item.task" :key="task.id" type="info" size="mini">
                   {{ task.id }}
                 </el-tag>
               </el-form-item>
@@ -216,12 +155,7 @@
 
       <div class="select-head-text">公开数据集</div>
       <div class="select-list">
-        <div
-          v-for="item in publicDatasets"
-          :key="item.id"
-          @click="handleConfirmDataset(item)"
-          class="select-list-item"
-        >
+        <div v-for="item in publicDatasets" :key="item.id" @click="handleConfirmDataset(item)" class="select-list-item">
           <el-card shadow="hover" style="width: 450px">
             <div slot="header" class="clearfix">
               <span style="text-align: center">
@@ -232,13 +166,7 @@
             <el-form>
               <el-form-item label="预览"> 无 </el-form-item>
               <el-form-item label="标签">
-                <el-tag
-                  v-for="task in item.task"
-                  :key="task.id"
-                  type="info"
-                  size="mini"
-                  style="margin-right: 5px"
-                >
+                <el-tag v-for="task in item.task" :key="task.id" type="info" size="mini" style="margin-right: 5px">
                   {{ task.id }}
                 </el-tag>
               </el-form-item>
@@ -258,48 +186,19 @@
     </el-dialog>
 
     <!-- 模型节点各种参数的配置 -->
-    <el-dialog
-      v-if="formModel.kind === 'Algorithm'"
-      title="模型节点配置"
-      :visible.sync="configDialogVisible"
-      width="80%"
-    >
-      <el-form
-        ref="form"
-        :model="formModel"
-        label-width="150px"
-        class="detail-form"
-        style="margin: 0 120px 0 0"
-      >
+    <el-dialog v-if="formModel.kind === 'Algorithm'" title="模型节点配置" :visible.sync="configDialogVisible" width="80%">
+      <el-form ref="form" :model="formModel" label-width="150px" class="detail-form" style="margin: 0 120px 0 0">
         <el-form-item label="模型">
-          <el-input
-            placeholder="请选择模型"
-            v-model="formModel.params.model_name"
-            size="small"
-            class="input-with-select"
-            style="width: 400px"
-            @focus="handleSelectModel()"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-more"
-              @click="handleSelectModel()"
-            ></el-button>
+          <el-input placeholder="请选择模型" v-model="formModel.params.model_name" size="small" class="input-with-select"
+            style="width: 400px" @focus="handleSelectModel()">
+            <el-button slot="append" icon="el-icon-more" @click="handleSelectModel()"></el-button>
           </el-input>
         </el-form-item>
 
         <el-form-item v-if="formModel.params.id" label="分支">
-          <el-radio-group
-            v-model="formModel.params.retrain"
-            size="mini"
-            @change="handleChangeRetrain"
-          >
-            <el-radio :label="true" :disabled="!modelTrainable"
-              >重新训练</el-radio
-            >
-            <el-radio :label="false" :disabled="pretrainOptions.length === 0"
-              >使用已有的模型</el-radio
-            >
+          <el-radio-group v-model="formModel.params.retrain" size="mini" @change="handleChangeRetrain">
+            <el-radio :label="true" :disabled="!modelTrainable">重新训练</el-radio>
+            <el-radio :label="false" :disabled="pretrainOptions.length === 0">使用已有的模型</el-radio>
           </el-radio-group>
         </el-form-item>
 
@@ -307,74 +206,36 @@
           <!-- 参数的修改 -->
           <div v-if="formModel.params.args.length > 0">
             <div v-for="arg in formModel.params.args" :key="arg.name">
-              <template
-                v-if="
-                  formModel.params.retrain ||
-                  (!formModel.params.retrain && !arg.for_train_only)
-                "
-              >
-                <span
-                  style="width: 120px; text-align: left; display: inline-block"
-                >
+              <template v-if="
+                formModel.params.retrain ||
+                (!formModel.params.retrain && !arg.for_train_only)
+              ">
+                <span style="width: 120px; text-align: left; display: inline-block">
                   <el-tag size="small" type="info">{{ arg.name }}</el-tag>
                 </span>
-                <el-input
-                  v-if="!arg.choices"
-                  v-model="arg.value"
-                  size="mini"
-                  placeholder=""
-                  style="width: 180px"
-                >
+                <el-input v-if="!arg.choices" v-model="arg.value" size="mini" placeholder="" style="width: 180px">
                 </el-input>
-                <el-select
-                  v-else
-                  v-model="arg.value"
-                  placeholder="请选择"
-                  size="mini"
-                  style="width: 180px"
-                >
-                  <el-option
-                    v-for="choice in arg.choices"
-                    :key="choice"
-                    :label="choice"
-                    :value="choice"
-                  >
+                <el-select v-else v-model="arg.value" placeholder="请选择" size="mini" style="width: 180px">
+                  <el-option v-for="choice in arg.choices" :key="choice" :label="choice" :value="choice">
                   </el-option>
                 </el-select>
-                <el-tooltip
-                  class="item"
-                  effect="dark"
-                  :content="arg.description"
-                  placement="bottom"
-                  style="margin-left: 20px"
-                >
+                <el-tooltip class="item" effect="dark" :content="arg.description" placement="bottom"
+                  style="margin-left: 20px">
                   <i class="el-icon-warning-outline" />
                 </el-tooltip>
               </template>
             </div>
             <div style="margin-left: 30px">
-              <el-button type="info" size="mini" plain @click="restoreDefault"
-                >还原默认参数</el-button
-              >
+              <el-button type="info" size="mini" plain @click="restoreDefault">还原默认参数</el-button>
             </div>
           </div>
           <div v-else>该模型无需设置参数</div>
         </el-form-item>
 
         <el-form-item v-if="formModel.params.id" label="预训练">
-          <el-input
-            placeholder="请选择已有的权重参数"
-            v-model="formModel.params.pretrain_name"
-            size="mini"
-            class="input-with-select"
-            style="width: 300px"
-            @focus="handleSelectPretrain()"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-more"
-              @click="handleSelectPretrain()"
-            ></el-button>
+          <el-input placeholder="请选择已有的权重参数" v-model="formModel.params.pretrain_name" size="mini"
+            class="input-with-select" style="width: 300px" @focus="handleSelectPretrain()">
+            <el-button slot="append" icon="el-icon-more" @click="handleSelectPretrain()"></el-button>
           </el-input>
         </el-form-item>
 
@@ -395,135 +256,61 @@
           </el-input>
         </el-form-item> -->
 
-        <el-form-item
-          v-if="formModel.params.id && formModel.params.meta.category_flag"
-          label="细类别"
-        >
-          <el-input
-            v-model="formModel.params.categories"
-            type="textarea"
-            :disabled="
-              !formModel.params.retrain && formModel.params.source === 0
-            "
-            placeholder='输入所有类别并以逗号分隔（不要有无关空格），如"cat,dog,horse"，如果同属于一个粗类别，则在所属粗类别中指出'
-            size="mini"
-            :rows="5"
-          />
+        <el-form-item v-if="formModel.params.id && formModel.params.meta.category_flag" label="细类别">
+          <el-input v-model="formModel.params.categories" type="textarea" :disabled="
+            !formModel.params.retrain && formModel.params.source === 0
+          " placeholder='输入所有类别并以逗号分隔（不要有无关空格），如"cat,dog,horse"，如果同属于一个粗类别，则在所属粗类别中指出' size="mini" :rows="5" />
         </el-form-item>
 
-        <el-form-item
-          v-if="formModel.params.id && formModel.params.retrain"
-          label="条件"
-        >
+        <el-form-item v-if="formModel.params.id && formModel.params.retrain" label="条件">
           <!-- v-if="metricOptions.length>0" -->
-          <el-input
-            v-model="formModel.params.requirement.value"
-            placeholder="条件值"
-            class="input-with-select"
-            size="mini"
-            style="width: 180px"
-          >
-            <el-select
-              slot="prepend"
-              v-model="formModel.params.requirement.name"
-              placeholder="条件"
-              style="width: 90px"
-              @change="handleMetricOptionChange"
-            >
-              <el-option
-                v-for="item in metricOptions"
-                :key="item.name"
-                :label="item.name"
-                :value="item.name"
-              />
+          <el-input v-model="formModel.params.requirement.value" placeholder="条件值" class="input-with-select" size="mini"
+            style="width: 180px">
+            <el-select slot="prepend" v-model="formModel.params.requirement.name" placeholder="条件" style="width: 90px"
+              @change="handleMetricOptionChange">
+              <el-option v-for="item in metricOptions" :key="item.name" :label="item.name" :value="item.name" />
             </el-select>
           </el-input>
 
-          <el-tooltip
-            v-if="formModel.params.requirement.type === 'good'"
-            class="item"
-            effect="dark"
-            :content="formModel.params.requirement.description"
-            placement="bottom"
-          >
+          <el-tooltip v-if="formModel.params.requirement.type === 'good'" class="item" effect="dark"
+            :content="formModel.params.requirement.description" placement="bottom">
             <i class="el-icon-top" style="color: green; font-size: 1.3em" />
           </el-tooltip>
-          <el-tooltip
-            v-else-if="formModel.params.requirement.type === 'bad'"
-            class="item"
-            effect="dark"
-            :content="formModel.params.requirement.description"
-            placement="bottom"
-          >
+          <el-tooltip v-else-if="formModel.params.requirement.type === 'bad'" class="item" effect="dark"
+            :content="formModel.params.requirement.description" placement="bottom">
             <i class="el-icon-bottom" style="color: red; font-size: 1.3em" />
           </el-tooltip>
         </el-form-item>
 
         <!-- **************** 最后的备注 **************** -->
         <el-form-item label="备注">
-          <el-input
-            v-model="formModel.note"
-            type="textarea"
-            placeholder="备注内容"
-            maxlength="30"
-            show-word-limit
-            size="mini"
-          />
+          <el-input v-model="formModel.note" type="textarea" placeholder="备注内容" maxlength="30" show-word-limit
+            size="mini" />
         </el-form-item>
 
-        <el-form-item
-          v-if="
-            formModel.params.id &&
-            formModel.params.retrain &&
-            formModel.params.meta.atlas_support &&
-            formModel.params.source === 0
-          "
-          label="导出"
-        >
-          <el-switch
-            v-model="formModel.params.auto_export"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          />
-          <span style="margin-left: 10px"
-            >自动导出可以下载的模型，仅支持基于本流程图训练的模型</span
-          >
+        <el-form-item v-if="
+          formModel.params.id &&
+          formModel.params.retrain &&
+          formModel.params.meta.atlas_support &&
+          formModel.params.source === 0
+        " label="导出">
+          <el-switch v-model="formModel.params.auto_export" active-color="#13ce66" inactive-color="#ff4949" />
+          <span style="margin-left: 10px">自动导出可以下载的模型，仅支持基于本流程图训练的模型</span>
         </el-form-item>
 
-        <el-form-item
-          v-if="formModel.params.id && formModel.params.retrain"
-          label="公开"
-        >
-          <el-switch
-            v-model="formModel.params.is_public"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          />
-          <span style="margin-left: 10px"
-            >公开后别人可以使用你训练好的模型</span
-          >
+        <el-form-item v-if="formModel.params.id && formModel.params.retrain" label="公开">
+          <el-switch v-model="formModel.params.is_public" active-color="#13ce66" inactive-color="#ff4949" />
+          <span style="margin-left: 10px">公开后别人可以使用你训练好的模型</span>
         </el-form-item>
 
         <el-form-item style="margin-top: 10px">
-          <el-button
-            v-if="!readOnly"
-            type="primary"
-            size="medium"
-            plain
-            @click.prevent="handleSubmit"
-            >保存</el-button
-          >
+          <el-button v-if="!readOnly" type="primary" size="medium" plain @click.prevent="handleSubmit">保存</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
 
     <!-- 其他一些类型的节点的配置 -->
-    <el-form
-      ref="form"
-      :model="formModel"
-      label-width="80px"
-      class="detail-form"
-    >
+    <el-form ref="form" :model="formModel" label-width="80px" class="detail-form">
       <!-- 如果是节点类型 -->
       <div v-if="type === 'node'" class="my-collapse">
         <el-collapse value="model">
@@ -546,29 +333,14 @@
             </el-form-item> -->
 
             <el-form-item v-if="formModel.kind === 'Algorithm'" label="配置">
-              <el-button
-                type="primary"
-                size="small"
-                @click="configDialogVisible = true"
-                >打开模型配置页面</el-button
-              >
+              <el-button type="primary" size="small" @click="configDialogVisible = true">打开模型配置页面</el-button>
             </el-form-item>
 
             <!-- *********************** 节点类型的Dataset *********************** -->
             <el-form-item v-if="formModel.kind === 'Dataset'" label="选择">
-              <el-input
-                placeholder="请选择已有的数据集"
-                v-model="datasetLabel"
-                size="mini"
-                class="input-with-select"
-                style="width: 220px"
-                @focus="handleSelectDataset()"
-              >
-                <el-button
-                  slot="append"
-                  icon="el-icon-more"
-                  @click="handleSelectDataset()"
-                ></el-button>
+              <el-input placeholder="请选择已有的数据集" v-model="datasetLabel" size="mini" class="input-with-select"
+                style="width: 220px" @focus="handleSelectDataset()">
+                <el-button slot="append" icon="el-icon-more" @click="handleSelectDataset()"></el-button>
               </el-input>
             </el-form-item>
 
@@ -581,60 +353,28 @@
             </el-form-item>
 
             <el-form-item v-if="formModel.kind === 'Dataset'" label="用途">
-              <el-switch
-                v-model="formModel.params.only_train"
-                active-text="仅辅助训练"
-                inactive-text="流程数据"
-              >
+              <el-switch v-model="formModel.params.only_train" active-text="仅辅助训练" inactive-text="流程数据">
               </el-switch>
             </el-form-item>
             <!-- *********************** 节点类型的Decision *********************** -->
             <el-form-item v-if="formModel.kind === 'Decision'" label="条件">
               <!-- v-if="metricOptions.length>0" -->
-              <el-input
-                v-model="formModel.params.requirement.value"
-                placeholder="条件值"
-                class="input-with-select"
-                size="mini"
-                style="width: 180px"
-              >
-                <el-select
-                  slot="prepend"
-                  v-model="formModel.params.requirement.name"
-                  placeholder="条件"
-                  style="width: 90px"
-                  @change="handleMetricOptionChange"
-                >
-                  <el-option
-                    v-for="item in metricOptions"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name"
-                  />
+              <el-input v-model="formModel.params.requirement.value" placeholder="条件值" class="input-with-select"
+                size="mini" style="width: 180px">
+                <el-select slot="prepend" v-model="formModel.params.requirement.name" placeholder="条件"
+                  style="width: 90px" @change="handleMetricOptionChange">
+                  <el-option v-for="item in metricOptions" :key="item.name" :label="item.name" :value="item.name" />
                 </el-select>
               </el-input>
               <!-- <span v-else style="color: red">上一模型无度量指标或者未连接模型节点，请删除该节点</span> -->
 
-              <el-tooltip
-                v-if="formModel.params.requirement.type === 'good'"
-                class="item"
-                effect="dark"
-                :content="formModel.params.requirement.description"
-                placement="bottom"
-              >
+              <el-tooltip v-if="formModel.params.requirement.type === 'good'" class="item" effect="dark"
+                :content="formModel.params.requirement.description" placement="bottom">
                 <i class="el-icon-top" style="color: green; font-size: 1.3em" />
               </el-tooltip>
-              <el-tooltip
-                v-else-if="formModel.params.requirement.type === 'bad'"
-                class="item"
-                effect="dark"
-                :content="formModel.params.requirement.description"
-                placement="bottom"
-              >
-                <i
-                  class="el-icon-bottom"
-                  style="color: red; font-size: 1.3em"
-                />
+              <el-tooltip v-else-if="formModel.params.requirement.type === 'bad'" class="item" effect="dark"
+                :content="formModel.params.requirement.description" placement="bottom">
+                <i class="el-icon-bottom" style="color: red; font-size: 1.3em" />
               </el-tooltip>
             </el-form-item>
             <!-- *********************** 节点类型的Endpoint *********************** -->
@@ -652,35 +392,14 @@
             </template>
             <!--  外观属性  -->
             <el-form-item label="颜色">
-              <el-input
-                v-model="formModel.color"
-                size="mini"
-                :disabled="true"
-              />
+              <el-input v-model="formModel.color" size="mini" :disabled="true" />
             </el-form-item>
             <el-form-item label="形状">
-              <el-select
-                v-model="formModel.shape"
-                placeholder="请选择节点的形状"
-                size="mini"
-                :disabled="true"
-              >
+              <el-select v-model="formModel.shape" placeholder="请选择节点的形状" size="mini" :disabled="true">
                 <el-option key="flow-rect" label="rect" value="flow-rect" />
-                <el-option
-                  key="flow-circle"
-                  label="circle"
-                  value="flow-circle"
-                />
-                <el-option
-                  key="flow-rhombus"
-                  label="rhombus"
-                  value="flow-rhombus"
-                />
-                <el-option
-                  key="flow-capsule"
-                  label="capsule"
-                  value="flow-capsule"
-                />
+                <el-option key="flow-circle" label="circle" value="flow-circle" />
+                <el-option key="flow-rhombus" label="rhombus" value="flow-rhombus" />
+                <el-option key="flow-capsule" label="capsule" value="flow-capsule" />
               </el-select>
             </el-form-item>
             <el-form-item label="尺寸">
@@ -720,26 +439,10 @@
               <b>外观属性</b>
             </template>
             <el-form-item label="形状">
-              <el-select
-                v-model="formModel.shape"
-                placeholder="请选择边的形状"
-                size="mini"
-              >
-                <el-option
-                  key="flow-smooth"
-                  label="Smooth"
-                  value="flow-smooth"
-                />
-                <el-option
-                  key="flow-polyline"
-                  label="Polyline"
-                  value="flow-polyline"
-                />
-                <el-option
-                  key="flow-polyline-round"
-                  label="Polyline Round"
-                  value="flow-polyline-round"
-                />
+              <el-select v-model="formModel.shape" placeholder="请选择边的形状" size="mini">
+                <el-option key="flow-smooth" label="Smooth" value="flow-smooth" />
+                <el-option key="flow-polyline" label="Polyline" value="flow-polyline" />
+                <el-option key="flow-polyline-round" label="Polyline Round" value="flow-polyline-round" />
                 <!-- <el-option key="custom-polyline" label="Custom Polyline" value="custom-polyline" /> -->
               </el-select>
             </el-form-item>
@@ -756,13 +459,8 @@
       </div>
 
       <el-form-item style="margin-top: 10px">
-        <el-button
-          v-if="!readOnly && formModel.kind !== 'Algorithm'"
-          type="primary"
-          size="medium"
-          plain
-          @click.prevent="handleSubmit"
-          >保存属性
+        <el-button v-if="!readOnly && formModel.kind !== 'Algorithm'" type="primary" size="medium" plain
+          @click.prevent="handleSubmit">保存属性
         </el-button>
       </el-form-item>
     </el-form>
@@ -998,52 +696,52 @@ export default {
   },
 
   methods: {
-    newGotoUpload(){
+    newGotoUpload() {
       let routeUrl = this.$router.resolve({
-        name: 'My Datasets',
+        name: 'Dataset',
         // query: { task: task, industry: industry },
       })
       window.open(routeUrl.href, '_blank')
     },
-    newFreshDataset(){
-        getPublicDatasets()
-          .then((res) => {
-            this.publicDatasets = res.data;
+    newFreshDataset() {
+      getPublicDatasets()
+        .then((res) => {
+          this.publicDatasets = res.data;
 
-            getMyDatasets()
-              .then((res) => {
-                this.myDatasets = res.data;
+          getMyDatasets()
+            .then((res) => {
+              this.myDatasets = res.data;
 
-                // 去除公开数据集中自己上传的
-                let a = _.remove(this.publicDatasets, function (dataset) {
-                  let index = res.data.findIndex((item) => {
-                    return item.id === dataset.id;
-                  });
-                  // console.log(index)
-                  return index >= 0;
+              // 去除公开数据集中自己上传的
+              let a = _.remove(this.publicDatasets, function (dataset) {
+                let index = res.data.findIndex((item) => {
+                  return item.id === dataset.id;
                 });
-                // console.log(a)
-                var index = this.publicDatasets.findIndex((item) => {
+                // console.log(index)
+                return index >= 0;
+              });
+              // console.log(a)
+              var index = this.publicDatasets.findIndex((item) => {
+                return item.id === this.formModel.params.id;
+              });
+              if (index >= 0) {
+                this.datasetLabel = this.publicDatasets[index].dataset_name;
+              } else {
+                index = this.myDatasets.findIndex((item) => {
                   return item.id === this.formModel.params.id;
                 });
                 if (index >= 0) {
-                  this.datasetLabel = this.publicDatasets[index].dataset_name;
-                } else {
-                  index = this.myDatasets.findIndex((item) => {
-                    return item.id === this.formModel.params.id;
-                  });
-                  if (index >= 0) {
-                    this.datasetLabel = this.myDatasets[index].dataset_name;
-                  }
+                  this.datasetLabel = this.myDatasets[index].dataset_name;
                 }
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     ////
     filter(modelOptions) {
@@ -1200,9 +898,8 @@ export default {
           if (canvasContext.measureText(label).width + spacing <= maxWidth) {
             return {
               ...model,
-              size: `${
-                canvasContext.measureText(label).width + spacing
-              }*${sourceHeight}`,
+              size: `${canvasContext.measureText(label).width + spacing
+                }*${sourceHeight}`,
             };
           }
 
@@ -1337,6 +1034,7 @@ export default {
       .el-form-item__label {
         line-height: 25px;
       }
+
       .el-form-item__content {
         line-height: 25px;
         margin-left: 40px;
@@ -1347,6 +1045,7 @@ export default {
 
 .detail-form {
   font-size: 14px;
+
   // margin: 0 120px 0 0;
   /deep/ .el-collapse-item__wrap {
     background-color: #fafafa;
@@ -1358,9 +1057,11 @@ export default {
     .el-input {
       margin: 2px 0 2px 0;
     }
+
     .el-radio {
       margin: 0 5px 0 5px;
     }
+
     .el-select {
       // margin: 3px 0 3px 0;
     }
@@ -1380,6 +1081,7 @@ export default {
 .el-select .el-input {
   width: 130px;
 }
+
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
