@@ -170,6 +170,11 @@ export default {
     float: right;
     margin-left: 8px;
     border: 1px solid rgba(73, 93, 103, 1);
+
+    &.is-disabled.is-plain {
+      border-color: #CFD8DC;
+      color: #CFD8DC;
+    }
   }
 
   .button > span {

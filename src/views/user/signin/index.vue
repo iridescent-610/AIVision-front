@@ -171,7 +171,7 @@ export default {
 }
 
 .first-login {
-  color: rgba(0, 0, 0, 0.92);
+  color: #495D67;
   font-size: 14px;
   font-weight: 400;
   margin-top: 16px;

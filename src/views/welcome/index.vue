@@ -520,7 +520,7 @@ ul {
 
 .section-wrap {
   width: 100%;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   padding-top: 56px;
   padding-bottom: 25px;
 }
@@ -557,10 +557,6 @@ ul {
 #modeltype-item2 {
   width: 307px;
   height: 560px;
-}
-
-#modeltype-icon2 {
-  width: 303px;
 }
 
 #modeltype-title2 {
