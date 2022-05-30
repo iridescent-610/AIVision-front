@@ -17,26 +17,26 @@
 <template>
   <div class="form-datasets">
     <b-form-group style="margin-bottom: 104px;">
-      <span>任务</span>
+      <span class="label-font">任务</span>
       <div class="options-tasks">
         <b-form-checkbox v-for="item in options.tasks" :key="item.id" :value="item.id" v-model="file_info.task" button
           button-variant="outline-primary" class="check-box">{{ item.name }}</b-form-checkbox>
       </div>
     </b-form-group>
     <b-form-group>
-      <span>名称</span>
+      <span class="label-font">名称</span>
       <b-form-input v-model="file_info.model_name" type="text" placeholder="请输入模型名称"></b-form-input>
     </b-form-group>
     <b-form-group>
-      <span>公开</span>
-      <b-form-checkbox v-model="file_info.is_public" :value="true" :unchecked-value="false"></b-form-checkbox>
+      <span class="label-font">公开</span>
+      <b-form-checkbox v-model="file_info.is_public" :value="true" :unchecked-value="false" class="custom-control"></b-form-checkbox>
     </b-form-group>
     <b-form-group>
-      <span>数据集</span>
+      <span class="label-font">数据集</span>
       <b-form-input v-model="file_info.dataset_name" type="text" placeholder="请输入数据集名称"></b-form-input>
     </b-form-group>
     <b-form-group v-if="update_key == 'post'">
-      <span>模型</span>
+      <span class="label-font">模型</span>
       <b-form-file v-model="file" placeholder="请选择或拖动文件" drop-placeholder="请拖动至此处" browse-text="浏览"></b-form-file>
     </b-form-group>
     <!-- <b-button-group style="float: right; margin-bottom: 1rem">
@@ -89,7 +89,7 @@
           </b-form-group>
         </b-col> -->
     <b-form-group style="margin-bottom: 108px;">
-      <span>备注</span>
+      <span class="label-font">备注</span>
       <b-form-textarea v-model="file_info.info" placeholder="请键入模型其它信息（可选）" rows="4"></b-form-textarea>
     </b-form-group>
     <div class="text-center">
@@ -186,6 +186,10 @@ export default {
 .form-datasets {
   position: relative;
 
+  .label-font {
+    font-weight: bold;
+  }
+
   /deep/ .form-group {
     .bv-no-focus-ring {
       padding: 0;
@@ -243,6 +247,7 @@ export default {
         label::before {
           height: 20px;
           width: 20px;
+          background-color: #1976D2;
         }
 
         label::after {
@@ -334,10 +339,12 @@ export default {
     &:hover {
       color: #fff !important;
       border-color: #007bff;
+      background-color: #1976D2;
     }
 
     &.active {
       color: #fff !important;
+      background-color: #1976D2 !important;
     }
   }
 }

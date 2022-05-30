@@ -29,6 +29,7 @@
                 :on-after-item-selected="handleAfterItemSelected"
                 :on-before-change="handleBeforeChange"
                 :on-context-menu="handleContextMenu"
+                :on-mouse-up="handleMouseUp"
                 :graph="graphConfig" />
           <div class="tooltip">
             <template v-for="item in tooltipData">
@@ -56,7 +57,7 @@
         </el-collapse> -->
 
         <div class="vfe-chart-panel">
-          <div class="vfe-chart-panel-detail">
+          <div class="vfe-chart-panel-detail" v-show="showEditorDetailPanel">
             <editor-detail-panel :read-only="readOnly"
                                  :industry="industry" />
           </div>
@@ -171,6 +172,7 @@ export default {
       tooltipShow: true,
       tooltipData: [],
       colorDict: colorDict,
+      showEditorDetailPanel: false,
     }
   },
 
@@ -281,6 +283,7 @@ export default {
     },
 
     handleAfterItemSelected(e) {
+      this.showEditorDetailPanel = !!e.item;
       // console.log(e)
       const { executeCommand, update } = this.$refs.flowChart.propsAPI
       const { item } = e
@@ -293,6 +296,10 @@ export default {
           update(item, model)
         })
       }
+    },
+
+    handleMouseUp(e) {
+      this.showEditorDetailPanel = !!e.item;
     },
 
     loadChartData(data) {
@@ -444,7 +451,7 @@ export default {
 
       .vfe-chart-panel-minimap {
         position: relative;
-        top: 20px;
+        top: 0px;
         bottom: 20px;
         width: 320px;
         height: 200px;
