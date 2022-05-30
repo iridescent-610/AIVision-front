@@ -290,6 +290,7 @@ export default {
     font-weight: 500;
     border: unset;
     text-align: left !important;
+    font-weight: bold;
   }
 
   /deep/ tr {

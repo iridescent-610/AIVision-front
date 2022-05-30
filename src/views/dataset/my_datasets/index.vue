@@ -19,7 +19,7 @@
     <el-button class="add-button" icon="el-icon-plus" type="primary" size="small"
       @click="update_key = 'post'; cleanForm(); setIsUpdateDialogOpen(true)">新建数据集</el-button>
     <b-table striped hover responsive :items="my_datasets" :fields="fields" :current-page="currentPage"
-      :per-page="perPage" outlined sort-by="created_time" class="table">
+      :per-page="perPage" outlined sort-by="created_time" class="table" sort-icon-left style="margin-bottom: 0;">
       <template v-slot:cell(is_public)="row">{{ row.item.is_public ? "是" : "否" }}</template>
       <template v-slot:cell(is_annotated)="row">{{ row.item.is_annotated ? "是" : "否" }}</template>
       <template v-slot:cell(task)="row">{{ row.item.task.map(t => t.name).reduce(convertArray2String) }}</template>
@@ -85,12 +85,12 @@ import {
 } from "@/utils/index";
 
 import { shareData } from "@/utils/share_data"
-import FormDatasets from "./form_datasets/index.vue";
+// import FormDatasets from "./form_datasets/index.vue";
 import { deleteDatasets } from "../dataset"
 
 export default {
   name: "MyDatasets",
-  components: { FormDatasets },
+  // components: { FormDatasets },
   data() {
     return {
       perPage: 8,
@@ -132,7 +132,7 @@ export default {
       isEditing: false,
       style: {
         pagination: {
-          marginTop: "20px",
+          marginTop: "8px",
         },
         submitBtn: {
           marginBottom: "20px",
@@ -245,6 +245,7 @@ export default {
     font-weight: 500;
     border: unset;
     text-align: left !important;
+    font-weight: bold;
   }
 
   /deep/ tr {

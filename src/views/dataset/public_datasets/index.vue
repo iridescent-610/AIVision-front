@@ -20,6 +20,7 @@
       striped
       hover
       responsive
+      sort-icon-left
       :items="public_datasets"
       :fields="fields"
       :current-page="currentPage"
@@ -27,6 +28,7 @@
       outlined
       sort-by="created_time"
       class="table"
+      style="margin-bottom: 0;"
     >
       <template v-slot:cell(is_annotated)="row">{{row.item.is_annotated? "是": "否"}}</template>
       <template v-slot:cell(task)="row">{{row.item.task.map(t=>t.name).reduce(convertArray2String)}}</template>
@@ -114,7 +116,7 @@ export default {
       ],
       style: {
         pagination: {
-          marginTop: "20px",
+          marginTop: "8px",
         },
         submitBtn: {
           marginBottom: "20px",
@@ -157,6 +159,7 @@ export default {
     font-weight: 500;
     border: unset;
     text-align: left !important;
+    font-weight: bold;
   }
 
   /deep/ tr {
