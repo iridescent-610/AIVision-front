@@ -9,6 +9,7 @@ function resolve(dir) {
 
 module.exports = {
     productionSourceMap: false,
+    publicPath: '/aivision',
     configureWebpack: config => {
         config.plugins.push(
             new CompressionWebpackPlugin({
