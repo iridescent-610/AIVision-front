@@ -248,7 +248,8 @@ export default {
     vis_structure(name) {
       console.log(name);
 
-      let routeUrl = "http://10.214.211.207:15000/?modelFile=" + name;
+      // localhost:15000
+      let routeUrl = "http://183.129.217.214:20182/netron/?modelFile=" + name;
       // let routeUrl = this.$router.resolve({
       //   name: 'Multiple Task',
       //   params: { flowchart_id: this.chartId, node_id: model.id },

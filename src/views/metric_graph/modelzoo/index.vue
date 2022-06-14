@@ -16,35 +16,29 @@
 
 <template>
   <div>
-    <el-input
-        v-model="model_search"
-        class="input-container"
-        placeholder="搜索"
-    >
-      <template slot="prepend"><svg-icon class="menu-icon" svg-name="search_icon" /></template>
+    <el-input v-model="model_search" class="input-container" placeholder="搜索">
+      <template slot="prepend">
+        <svg-icon class="menu-icon" svg-name="search_icon" />
+      </template>
       <el-button class="search-button" slot="append" type="primary" @click="get_model">搜索</el-button>
     </el-input>
     <el-row :gutter="20" class="card-list">
-      <el-col :span="8" v-for="(item, index) in get_model(model_search)"  :key="item.tags.name">
+      <el-col :span="8" v-for="(item, index) in get_model(model_search)" :key="item.tags.name">
         <div class="card-container">
-          <div class="title">{{item.tags.name}}</div>
-          <div class="desc">{{item.tags.readme}}</div>
+          <div class="title">{{ item.tags.name }}</div>
+          <div class="desc">{{ item.tags.readme }}</div>
           <div class="tag-list">
-            <div class="tag" v-for="(attr, index) in get_attr(item.tags)" :key="index+attr">{{attr}}: {{get_value(item.tags, attr)}}</div>
+            <div class="tag" v-for="(attr, index) in get_attr(item.tags)" :key="index + attr">{{ attr }}:
+              {{ get_value(item.tags, attr) }}</div>
           </div>
-          <b-button class="detail-button" :id="'b_'+index" variant="outline-secondary">详情</b-button>
+          <b-button class="detail-button" :id="'b_' + index" variant="outline-secondary">详情</b-button>
         </div>
-        <b-popover
-            :target="'b_'+index"
-            title="Model Properties"
-            triggers="focus"
-            :placement="judge_position(index)"
-        >
+        <b-popover :target="'b_' + index" title="Model Properties" triggers="focus" :placement="judge_position(index)">
           <b-list-group>
-            <div v-for="attr in get_attr(item.tags)" :key="item+attr">
+            <div v-for="attr in get_attr(item.tags)" :key="item + attr">
 
-              <span v-if="attr!='readme'">{{attr}}
-                : {{get_value(item.tags, attr)}}</span>
+              <span v-if="attr != 'readme'">{{ attr }}
+                : {{ get_value(item.tags, attr) }}</span>
             </div>
             <div>
               <span>URL: </span>
@@ -59,7 +53,7 @@
       </el-col>
     </el-row>
     <div class="card-list">
-<!--      <div
+      <!--      <div
         v-for="(item, index) in get_model(model_search)"
         :key="index"
         :value="item.tags.id"
@@ -131,13 +125,13 @@ export default {
     this.$store.dispatch("metric_graph/getGraphs", [this.metric_names[0]]);
   },
   watch: {
-    metric_names: function(newVal, oldVal) {
+    metric_names: function (newVal, oldVal) {
       let params = [];
       params.push(newVal[0]);
       this.$store.dispatch("metric_graph/getGraphs", params);
     }
   },
-  data: function() {
+  data: function () {
     return {
       model_search: ""
     };
@@ -173,10 +167,11 @@ export default {
       }
       return "righttop";
     },
-    vis_structure(name){
+    vis_structure(name) {
       console.log(name);
 
-      let routeUrl = "http://10.214.211.207:15000/?modelFile=" + name;
+      // localhost:15000
+      let routeUrl = "http://183.129.217.214:20182/netron/?modelFile=" + name;
       // let routeUrl = this.$router.resolve({
       //   name: 'Multiple Task',
       //   params: { flowchart_id: this.chartId, node_id: model.id },
@@ -206,6 +201,7 @@ export default {
     width: 100%;
     height: 32px;
   }
+
   .menu-icon {
     height: 20px;
     width: 20px;

@@ -33,7 +33,7 @@ module.exports = {
             });
     },
     devServer: {
-        port: 10086,
+        port: 5045,
         proxy: {
             '/dev-api/aix': { // 配置的变量
                 // target: 'http://localhost:8081/aix', // 需要请求的第三方接口

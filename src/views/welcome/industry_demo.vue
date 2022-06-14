@@ -43,7 +43,7 @@
       <div v-else-if="typeToDesc[industry_type].demo_type === 'VIDEO'" class="demo-block-video" linknav="true">
         <div class="demo-video-container">
           <div class="">
-            <el-upload class="avatar-uploader-video" action="http://10.214.211.205:20202/demo"
+            <el-upload class="avatar-uploader-video" action="http://183.129.217.214:20182/20202/demo"
               v-bind:data="{ key: 'test' }" v-bind:on-progress="uploadVideoProcess"
               v-bind:on-success="handleVideoSuccess" v-bind:before-upload="beforeUploadVideo"
               v-bind:show-file-list="false">
@@ -300,13 +300,13 @@ export default {
       };
 
       if (this.industry_type === 'security_check') {
-        this.demo_url = "10.214.211.205:20167/demo"
+        this.demo_url = "183.129.217.214:20182/20167/demo"
       } else if (this.industry_type === 'retail_detect') {
-        this.demo_url = "10.214.211.205:20200/demo"
+        this.demo_url = "183.129.217.214:20182/20200/demo"
       } else if (this.industry_type === 'card_recognition') {
-        this.demo_url = "10.214.211.205:20201/demo"
+        this.demo_url = "183.129.217.214:20182/20201/demo"
       } else if (this.industry_type === 'driver_action_recognition') {
-        this.demo_url = "10.214.211.205:20202/demo"
+        this.demo_url = "183.129.217.214:20182/20202/demo"
       }
 
       if (!this.demo_url) {

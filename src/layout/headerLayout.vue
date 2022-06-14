@@ -29,7 +29,7 @@
 export default {
   methods: {
     jumpDoc() {
-      window.open("http://10.214.211.207:10087/")
+      window.open("http://183.129.217.214:20182/10087")
       // window.location.replace(`${process.env.VUE_APP_DOC_URL}/#/?userName=${this.$store.state.auth.username}`)
     },
     handleCommand(command) {

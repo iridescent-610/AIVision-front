@@ -25,11 +25,11 @@ const getters = {
 
 // actions
 const actions = {
-  getMyFlowcharts ({ commit, state }) {
+  getMyFlowcharts({ commit, state }) {
 
     // commit('setMyFlowcharts', allChartData)
     // request.get(`/api/task/flowchart`, {
-    request.get(`http://10.214.211.208:8002/flowchart/queryFlowchart`, {
+    request.get(`http://183.129.217.214:20182/8002/flowchart/queryFlowchart`, {
     })
       .then((response) => {
         const flowcharts = response.data.data;
@@ -46,11 +46,11 @@ const actions = {
 
 // mutations
 const mutations = {
-  setMyFlowcharts (state, flowcharts) {
+  setMyFlowcharts(state, flowcharts) {
     state.my_flowcharts = _.cloneDeep(flowcharts)
   },
 
-  updateErrorList (state, payload) {
+  updateErrorList(state, payload) {
     const { nodeList, edgeList } = payload
     state.errorNodeList = _.cloneDeep(nodeList)
     state.errorEdgeList = _.cloneDeep(edgeList)

@@ -1,63 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>AIP使用文档</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="Description"/>
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-    />
-    <link
-            rel="stylesheet"
-            href="//unpkg.com/docsify@4.12.2/lib/themes/vue.css"
-    />
-</head>
-<body>
-<div class="container">
-    <div class="header">
-        <img class="logo" src="https://aix.zjuici.com/static/media/logo.f79a771e.jpg" alt=""
-             onclick="window.location.replace('http://localhost:10086')">
-        <div class="right-container">
-            <div class="tab-list">
-                <div class="tab-pane active">使用文档</div>
-                <div class="tab-pane" onclick="window.location.replace('http://localhost:10086/#/dashboard/modelZoo')">
-                    控制台
-                </div>
-            </div>
-            <div class="user-info login" onclick="window.location.replace('http://localhost:10086/#/signin')">
-                登录/注册
-            </div>
-            <div class="user-info username">
 
+<head>
+    <meta charset="UTF-8" />
+    <title>AIP使用文档</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" /> -->
+    <!-- <link href="https://unpkg.com/browse/docsify@4.12.2/themes/vue.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.12.2/themes/vue.css"
+        integrity="sha512-Fx3pofPGJnIfyLEg2QbFfLQ3C1PeVA/Je45YIReWzDj/vY6v/Szp3aDeIl8jc8rMb4AIxVIG917/LKeCZiffRQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="https://aix.zjuici.com/static/media/logo.f79a771e.jpg" alt=""
+                onclick="window.location.replace('http://183.129.217.214:20182/')">
+            <div class="right-container">
+                <div class="tab-list">
+                    <div class="tab-pane active">使用文档</div>
+                    <div class="tab-pane"
+                        onclick="window.location.replace('http://183.129.217.214:20182/#/dashboard/modelZoo')">
+                        控制台
+                    </div>
+                </div>
+                <div class="user-info login" onclick="window.location.replace('http://183.129.217.214:20182/#/signin')">
+                    登录/注册
+                </div>
+                <div class="user-info username">
+
+                </div>
             </div>
         </div>
     </div>
     <div id="app"></div>
-</div>
-<script>
-    const userName = window.localStorage.getItem('userName')
-    const userDom = document.documentElement.querySelector('.username')
-    const loginDom = document.documentElement.querySelector('.login')
-    if (userName) {
-        userDom.innerText = userName
-        userDom.style.display = 'block'
-        loginDom.style.display = 'none'
-    }
-</script>
-<script>
-    window.$docsify = {
-        name: '',
-        repo: '',
-        loadNavbar: true,
-        topMargin: 58
-    }
-</script>
-<!-- Docsify v4 -->
-<script src="//unpkg.com/docsify@4.12.2/lib/docsify.min.js"></script>
-<!-- <script src="//cdn.jsdelivr.net/npm/docsify@4"></script> -->
+    <script>
+        const userName = window.localStorage.getItem('userName')
+        const userDom = document.documentElement.querySelector('.username')
+        const loginDom = document.documentElement.querySelector('.login')
+        if (userName) {
+            userDom.innerText = userName
+            userDom.style.display = 'block'
+            loginDom.style.display = 'none'
+        }
+    </script>
+    <script>
+        window.$docsify = {
+            name: '',
+            repo: '',
+            loadNavbar: true,
+            topMargin: 58
+        }
+    </script>
+    <!-- Docsify v4 -->
+    <!-- <script src="https://unpkg.com/browse/docsify@4.12.2/lib/docsify.min.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.12.2/docsify.min.js"
+        integrity="sha512-RwYli4ks+A0xDFQF+RGro+dSSRteJ2lR1tYWhexc11b9x/EQ1NXhQAY+ojU4TsV1utS+Gy3wEHLYTuAEvRWGEg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
+
 </html>
 <style>
     * {
@@ -66,8 +71,8 @@
 
     .container {
         font-family: PingFangSC-Regular, PingFang SC;
-        height: 100vh;
-        padding-top: 58px;
+        /* height: 100vh;
+        padding-top: 58px; */
     }
 
     .container .content {

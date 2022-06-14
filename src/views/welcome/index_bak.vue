@@ -1,7 +1,6 @@
 <template>
   <div style="margin-top:-24px; margin-bottom:-25px; !important;">
-    <div id="static"
-         class="common-container">
+    <div id="static" class="common-container">
       <div class="banner lite">
         <section class="section">
 
@@ -9,12 +8,12 @@
             <h1 class="banner-title-text">AIVision开发平台</h1>
             <div class="alink-grounp alink-grounp-center">
               <el-button type="primary"
-                         style="margin-left: 0px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;"
-                         @click="handleClickJump('task')">立即体验</el-button>
-              <a href="http://10.214.211.207:10087"
-                 target="_blank">
+                style="margin-left: 0px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;"
+                @click="handleClickJump('task')">立即体验</el-button>
+              <a href="http://183.129.217.214:20182/10087" target="_blank">
                 <el-button type="info"
-                           style="margin-left: 20px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;">使用文档</el-button>
+                  style="margin-left: 20px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;">
+                  使用文档</el-button>
               </a>
             </div>
           </div>
@@ -26,31 +25,20 @@
               </div>
               <ul>
                 <li>
-                  <a target="__black"
-                     href="#"
-                     @click="handleClickJump('dataset')"
-                     class="banner-main-nav_item">【数据】上传业务数据
+                  <a target="__black" href="#" @click="handleClickJump('dataset')"
+                    class="banner-main-nav_item">【数据】上传业务数据
                     <i class="icon el-icon-picture-outline"></i></a>
                 </li>
                 <li>
-                  <a target="__black"
-                     href="#"
-                     @click="handleClickJump('task')"
-                     class="banner-main-nav_item">【任务】快速定制任务
+                  <a target="__black" href="#" @click="handleClickJump('task')" class="banner-main-nav_item">【任务】快速定制任务
                     <i class="icon el-icon-magic-stick"></i></a>
                 </li>
                 <li>
-                  <a target="__black"
-                     href="#"
-                     @click="handleClickJump('task')"
-                     class="banner-main-nav_item">【训练】自动串行训练
+                  <a target="__black" href="#" @click="handleClickJump('task')" class="banner-main-nav_item">【训练】自动串行训练
                     <i class="icon el-icon-files"></i></a>
                 </li>
                 <li>
-                  <a target="__black"
-                     href="#"
-                     @click="handleClickJump('task')"
-                     class="banner-main-nav_item">【部署】本地一键部署
+                  <a target="__black" href="#" @click="handleClickJump('task')" class="banner-main-nav_item">【部署】本地一键部署
                     <i class="icon el-icon-coin"></i></a>
                 </li>
               </ul>
@@ -59,28 +47,16 @@
               <div class="swiper-container">
                 <el-carousel height="350px">
                   <el-carousel-item>
-                    <img src="./assets/dataset.jpg"
-                         style="height:100%;width:100%;"
-                         alt="上传数据集"
-                         title="上传数据集" />
+                    <img src="./assets/dataset.jpg" style="height:100%;width:100%;" alt="上传数据集" title="上传数据集" />
                   </el-carousel-item>
                   <el-carousel-item>
-                    <img src="./assets/task.jpg"
-                         style="height:100%;width:100%;"
-                         alt="创建任务"
-                         title="创建任务" />
+                    <img src="./assets/task.jpg" style="height:100%;width:100%;" alt="创建任务" title="创建任务" />
                   </el-carousel-item>
                   <el-carousel-item>
-                    <img src="./assets/train.jpg"
-                         style="height:100%;width:100%;"
-                         alt="训练"
-                         title="训练" />
+                    <img src="./assets/train.jpg" style="height:100%;width:100%;" alt="训练" title="训练" />
                   </el-carousel-item>
                   <el-carousel-item>
-                    <img src="./assets/deploy.jpg"
-                         style="height:100%;width:100%;"
-                         alt="本地部署"
-                         title="本地部署" />
+                    <img src="./assets/deploy.jpg" style="height:100%;width:100%;" alt="本地部署" title="本地部署" />
                   </el-carousel-item>
                 </el-carousel>
               </div>
@@ -89,31 +65,24 @@
         </section>
       </div>
 
-      <div style="padding-top: 0;"
-           class="section-wrap section-white modal_section">
-        <section id=""
-                 class="section">
+      <div style="padding-top: 0;" class="section-wrap section-white modal_section">
+        <section id="" class="section">
           <div class="section-title_container">
             <div class="section-title">通用解决方案</div>
           </div>
           <div class="section-content">
             <div class="modeltype lite">
 
-              <a v-for="item in keyToIndustry['general'].examples"
-                 :key="item.id"
-                 @click="createExample(item.key, 'general')"
-                 class="modeltype-item">
+              <a v-for="item in keyToIndustry['general'].examples" :key="item.id"
+                @click="createExample(item.key, 'general')" class="modeltype-item">
                 <div class="modeltype-icon">
-                  <img :src="require(item.img + '')"
-                       :alt="item.name">
+                  <img :src="require(item.img + '')" :alt="item.name">
                 </div>
                 <div class="modeltype-title">{{ item.name }}
-                  <i class="el-icon-arrow-right"
-                     style="font-size: 18px"></i>
+                  <i class="el-icon-arrow-right" style="font-size: 18px"></i>
                 </div>
                 <div class="modeltype-type">
-                  <span v-for="element in item.elements"
-                        :key="element">{{ element }}</span>
+                  <span v-for="element in item.elements" :key="element">{{ element }}</span>
                 </div>
                 <div class="modeltype-desc">{{ item.desc }}</div>
               </a>
@@ -138,10 +107,8 @@
             </a> -->
 
             <!-- 一般行业列表 -->
-            <a v-for="item in industries"
-               :key="item.id"
-               @click="handleClickIndustry(item.key)"
-               class="ai-layout-b-item">
+            <a v-for="item in industries" :key="item.id" @click="handleClickIndustry(item.key)"
+              class="ai-layout-b-item">
               <div class="ai-layout-b-item-img"><img :src="require(item.img + '')">
                 <div class="ai-layout-b-item-title"> {{ item.name }} </div>
               </div>
@@ -164,8 +131,7 @@
       <div class="footer_cover">
 
         <el-row>
-          <el-col :span="6"
-                  :offset="6">
+          <el-col :span="6" :offset="6">
             <div class="ai_items_class connect">
               <div class="ai_title">联系地址</div>
               <div>
@@ -183,9 +149,9 @@
         </el-row>
 
       </div>
-      <div class="footer_copyright"
-           style="text-align: center; ">
-        <p style="color: rgb(255,255,255);">©2017-2019 Laboratory of Visual Intelligence and Pattern Analysis All Rights Reserved</p>
+      <div class="footer_copyright" style="text-align: center; ">
+        <p style="color: rgb(255,255,255);">©2017-2019 Laboratory of Visual Intelligence and Pattern Analysis All Rights
+          Reserved</p>
       </div>
     </div>
   </div>
@@ -259,6 +225,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 80px;
 }
+
 .banner.lite .banner-title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -268,6 +235,7 @@ export default {
   align-items: center;
   margin-bottom: 45px;
 }
+
 .banner.lite .banner-title-text {
   margin: 0;
   font-size: 42px;
@@ -278,6 +246,7 @@ export default {
   flex: 1;
   color: #c6c2d3;
 }
+
 .banner.lite .banner-main {
   overflow: hidden;
   display: -webkit-box;
@@ -287,12 +256,14 @@ export default {
   -webkit-box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
 }
+
 .banner.lite .banner-main-nav {
   background: #f8f9fb no-repeat bottom/100%;
   background-position: 0 3px;
   width: 300px;
   padding: 42px 40px 40px;
 }
+
 .banner.lite .banner-main-nav_title {
   font-size: 20px;
   letter-spacing: 4px;
@@ -300,13 +271,15 @@ export default {
   margin-bottom: 30px;
   font-weight: 500;
 }
-.banner.lite .banner-main-nav > ul > li {
+
+.banner.lite .banner-main-nav>ul>li {
   cursor: pointer;
   margin-bottom: 28px;
   position: relative;
 }
-.banner.lite .banner-main-nav > ul > li,
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item {
+
+.banner.lite .banner-main-nav>ul>li,
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -314,25 +287,30 @@ export default {
   -ms-flex-align: center;
   align-items: center;
 }
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item {
+
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item {
   font-size: 16px;
   line-height: 22px;
   vertical-align: middle;
 }
-.banner.lite .banner-main-nav > ul > li .banner-main-nav_item:hover {
+
+.banner.lite .banner-main-nav>ul>li .banner-main-nav_item:hover {
   color: #036fe2;
 }
-.banner.lite .banner-main-nav > ul > li .icon {
+
+.banner.lite .banner-main-nav>ul>li .icon {
   font-size: 16px;
   margin-left: 8px;
 }
-.banner.lite .banner-main-nav > ul > li .img-icon-wrap {
+
+.banner.lite .banner-main-nav>ul>li .img-icon-wrap {
   margin-left: 8px;
   overflow: hidden;
   height: 22px;
   width: 22px;
 }
-.banner.lite .banner-main-nav > ul > li .img-icon {
+
+.banner.lite .banner-main-nav>ul>li .img-icon {
   position: relative;
   left: -80px;
   height: 22px;
@@ -340,7 +318,8 @@ export default {
   -webkit-filter: drop-shadow(#000 80px 0);
   filter: drop-shadow(#000 80px 0);
 }
-.banner.lite .banner-main-nav > ul > li:before {
+
+.banner.lite .banner-main-nav>ul>li:before {
   content: '';
   display: block;
   height: 6px;
@@ -349,7 +328,8 @@ export default {
   border-radius: 50%;
   margin-right: 10px;
 }
-.banner.lite .banner-main-nav > ul > li:after {
+
+.banner.lite .banner-main-nav>ul>li:after {
   content: '';
   display: block;
   width: 0;
@@ -359,15 +339,18 @@ export default {
   left: 2px;
   top: 16px;
 }
-.banner.lite .banner-main-nav > ul > li:last-child:after {
+
+.banner.lite .banner-main-nav>ul>li:last-child:after {
   display: none;
 }
+
 .banner.lite .banner-main-swiper {
   width: 900px;
   height: 350px;
   overflow: hidden;
   position: relative;
 }
+
 .banner.lite .slide {
   width: 900px;
   height: 350px;
@@ -385,6 +368,7 @@ export default {
   height: 19px;
   z-index: 10;
 }
+
 .modeltype.lite {
   font-size: 16px;
   display: -webkit-box;
@@ -396,6 +380,7 @@ export default {
   -ms-flex-pack: justify;
   /* justify-content: space-between; */
 }
+
 .modeltype.lite .modeltype-item {
   display: block;
   -webkit-box-flex: 1;
@@ -407,6 +392,7 @@ export default {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+
 .modeltype.lite .modeltype-item:hover {
   border: 1px solid #036fe2;
   -webkit-box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
@@ -416,6 +402,7 @@ export default {
 .modeltype.lite .modeltype-item:hover .modeltype-title {
   color: #503ef3;
 }
+
 /* .modeltype.lite .modeltype-item:last-child {
   -webkit-box-flex: 0;
   -ms-flex-positive: 0;
@@ -426,6 +413,7 @@ export default {
   width: 320px;
   margin-bottom: 24px;
 }
+
 .modeltype.lite .modeltype-title {
   display: block;
   font-size: 20px;
@@ -436,13 +424,16 @@ export default {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.modeltype.lite .modeltype-title > i {
+
+.modeltype.lite .modeltype-title>i {
   font-size: 12px;
   padding-left: 10px;
 }
+
 .modeltype.lite .modeltype-title:hover {
   color: #503ef3;
 }
+
 .modeltype.lite .modeltype-desc {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -450,6 +441,7 @@ export default {
   color: #666;
   line-height: 24px;
 }
+
 .modeltype.lite .modeltype-type {
   font-size: 14px;
   line-height: 24px;
@@ -458,7 +450,8 @@ export default {
   overflow: hidden;
   color: #000;
 }
-.modeltype.lite .modeltype-type > span {
+
+.modeltype.lite .modeltype-type>span {
   display: inline-block;
   height: 24px;
   padding: 0 12px;
@@ -470,6 +463,7 @@ export default {
 :root {
   --swiper-theme-color: #007aff;
 }
+
 .swiper-container {
   margin-left: auto;
   margin-right: auto;
@@ -479,6 +473,7 @@ export default {
   padding: 0;
   z-index: 1;
 }
+
 .swiper-container /deep/ .el-carousel__button {
   background-color: #0c24ad;
 }
@@ -488,11 +483,13 @@ export default {
   background-color: rgba(3, 3, 122, 0.8);
   /* padding-right: 220px; */
 }
+
 .footer .footer_cover {
   width: 100%;
   height: 300px;
   margin: 0 auto;
 }
+
 .footer .ai_items_img {
   padding-top: 158px;
   color: #ffffff;
@@ -506,6 +503,7 @@ export default {
   /* background-size: 200px 200px; */
   background-repeat: no-repeat;
 }
+
 .footer .ai_items_class {
   width: 259px;
   text-align: center;
@@ -514,25 +512,31 @@ export default {
   display: block;
   margin: 0 auto;
 }
+
 .footer .ai_items_class .title {
   font-size: 18px;
   margin: 20px 0 20px;
 }
+
 .footer .ai_items_class .desc {
   font-size: 14px;
   line-height: 20px;
   opacity: 0.66;
   max-width: 302px;
 }
+
 .footer .ai_items_class.logo {
   width: 405px;
 }
+
 .footer .ai_items_class.resource {
   width: 158px;
 }
+
 .footer .ai_items_class.market {
   width: 170px;
 }
+
 .footer .ai_items {
   font-size: 14px;
   color: #fff;
@@ -540,18 +544,22 @@ export default {
   line-height: 36px;
   cursor: pointer;
 }
+
 .footer .ai_items.qq {
   cursor: default;
   white-space: nowrap;
 }
+
 .footer .ai_items.qq:hover {
   color: #fff;
 }
+
 .footer .ai_items:hover {
   opacity: 1;
   color: #036fe2;
   /* #3B5998 */
 }
+
 .footer .ai_title {
   margin: 48px 0 27px;
   text-align: center;
@@ -560,6 +568,7 @@ export default {
   opacity: 1;
   cursor: default;
 }
+
 .footer .footer_copyright {
   line-height: 50px;
   font-size: 14px;
@@ -577,46 +586,57 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 *,
 body,
 html {
   padding: 0;
   margin: 0;
 }
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 a {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
+
 img {
   width: 100%;
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 .modal_section .section-title_container {
   padding-bottom: 30px;
 }
+
 .section {
   margin: 0 auto;
   font-size: 0;
 }
+
 .section-wrap {
   padding-top: 60px;
   padding-bottom: 60px;
 }
+
 .section-white {
   background: rgba(0, 0, 0, 0);
 }
+
 .section-title_container {
   padding-bottom: 60px;
 }
+
 .section-title {
   width: 100%;
   font-size: 32px;
@@ -624,11 +644,13 @@ ul {
   font-weight: 400;
   letter-spacing: normal;
 }
-.common-container {
-}
+
+.common-container {}
+
 .common-container .section {
   width: 1180px;
 }
+
 .alink {
   display: inline-block;
   text-align: center;
@@ -642,6 +664,7 @@ ul {
 .alink-grounp.alink-grounp-center {
   text-align: center;
 }
+
 .alink-grounp.alink-grounp-left {
   text-align: left;
 }
@@ -672,6 +695,7 @@ ul {
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+
 .ai-layout-b-item {
   display: block;
   position: relative;
@@ -688,12 +712,14 @@ ul {
   box-sizing: border-box;
   text-align: center;
 }
+
 .ai-layout-b-item-title {
   margin-top: -40px;
   color: white;
   font-size: 24px;
   line-height: 26px;
 }
+
 .ai-layout-b-item-img {
   width: 276px;
   height: 276px;
@@ -709,6 +735,7 @@ ul {
   box-sizing: border-box;
   overflow: hidden;
 }
+
 .ai-home-section-title {
   font-size: 34px;
   line-height: 44px;
@@ -719,28 +746,30 @@ ul {
 .ai-home-section-industry {
   /* padding-top: 50px; */
 }
+
 .ai-home-section-industry .ai-layout-b {
   margin-top: 56px;
 }
+
 .ai-home-section-industry .ai-layout-b-item {
   width: 280px;
   height: 280px;
   margin-top: 20px;
 }
+
 .ai-home-section-industry .ai-layout-b-item:not(:last-child):hover {
   border: 2px solid #1a73e8;
   -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
 }
+
 .ai-home-section-industry .ai-layout-b-item:last-child {
   pointer-events: none;
   cursor: default;
 }
 
-.ai-home-section-industry
-  .ai-layout-b-item:not(:last-child):hover
-  .ai-layout-b-item-title {
+.ai-home-section-industry .ai-layout-b-item:not(:last-child):hover .ai-layout-b-item-title {
   font-weight: 700;
   /* color: #1a73e8; */
 }
