@@ -115,7 +115,7 @@ export default {
 
   methods: {
     jumpDoc() {
-      window.open("http://183.129.217.214:20182/10087")
+      window.open("/aivision/10087")
       // window.location.replace(process.env.VUE_APP_DOC_URL)
     },
     handleClickIndustry(industry) {

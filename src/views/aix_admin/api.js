@@ -2,7 +2,7 @@
 import request from "@/utils/request";
 
 export function uploadFlowchart(data) {
-  return request.post(`http://183.129.217.214:20182/8002/models/checkModel`, data);
+  return request.post(`/8002/models/checkModel`, data);
 }
 
 // export function getDatasetsList() {
@@ -18,7 +18,7 @@ export function getMyDatasets() {
 }
 
 export function getAvailableModels(params) {
-  return request.get(`http://183.129.217.214:20182/8002/getInfo/getInfoByTaskType`, {
+  return request.get(`/8002/getInfo/getInfoByTaskType`, {
     params
   });
 }
@@ -32,27 +32,27 @@ export function getAvailablePretrain(params) {
 
 export function getFlowchartDetails(params) {
   // return request.get(`/api/task/flowchart_details`, { params });
-  return request.get(`http://183.129.217.214:20182/8002/flowchart/queryById`, { params });
+  return request.get(`/8002/flowchart/queryById`, { params });
 
 }
 
 export function getFlowchartProcess(flowchartId) {
   return request.get(
-    `http://183.129.217.214:20182/8080/multiple_task/` + flowchartId + `/list`
+    `/8080/multiple_task/` + flowchartId + `/list`
   );
 }
 
 
 export function fetchPredictingTasks(params) {
   return request.post(
-    `http://183.129.217.214:20182/8002/predict/queryPredictTaskByFlowchartId`,
+    `/8002/predict/queryPredictTaskByFlowchartId`,
     params
   );
 }
 
 export function createPredictingTask(data) {
   return request.post(
-    `http://183.129.217.214:20182/8002/predict/createAixTaskForPredict`,
+    `/8002/predict/createAixTaskForPredict`,
     data
   );
 }
@@ -65,15 +65,15 @@ export function createPredictingTask(data) {
 // }
 export function downloadModel(params) {
 
-  return request.get(`http://183.129.217.214:20182/8002/download/wrapper`, { params });
+  return request.get(`/8002/download/wrapper`, { params });
 }
 
 export function downloadMirror(params) {
-  return request.get(`http://183.129.217.214:20182/8002/predict/createAixTaskForPredict`, { params });
+  return request.get(`/8002/predict/createAixTaskForPredict`, { params });
 }
 
 export function deleteFlowchart(data) {
-  return request.post(`http://183.129.217.214:20182/8002/flowchart/delete`, data);
+  return request.post(`/8002/flowchart/delete`, data);
 }
 
 

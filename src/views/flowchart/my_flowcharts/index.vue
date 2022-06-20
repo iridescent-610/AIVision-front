@@ -54,10 +54,18 @@
 
             <template slot-scope="{row}">
               <div style="display: flex; align-items: center;">
-                <span v-if="row.status === 0" style="color: #e6a23c; margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon"/></span>
-                <span v-if="row.status === 1" style="color: rgba(67, 160, 71, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="success_icon"/></span>
-                <span v-if="row.status === 2" style="color: rgba(183, 28, 28, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="failed_icon"/></span>
-                <span v-if="row.status === 3" style="color: rgba(73, 93, 103, 1); margin-right: 8px;"><svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon"/></span>
+                <span v-if="row.status === 0" style="color: #e6a23c; margin-right: 8px;">
+                  <svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon" />
+                </span>
+                <span v-if="row.status === 1" style="color: rgba(67, 160, 71, 1); margin-right: 8px;">
+                  <svg-icon style="width: 20px;height: 20px;" svg-name="success_icon" />
+                </span>
+                <span v-if="row.status === 2" style="color: rgba(183, 28, 28, 1); margin-right: 8px;">
+                  <svg-icon style="width: 20px;height: 20px;" svg-name="failed_icon" />
+                </span>
+                <span v-if="row.status === 3" style="color: rgba(73, 93, 103, 1); margin-right: 8px;">
+                  <svg-icon style="width: 20px;height: 20px;" svg-name="loading_icon" />
+                </span>
 
                 <span v-if="row.status === 0" style="color: #495D67">{{ messageDict[row.status] }}</span>
                 <span v-if="row.status === 1" style="color: #495D67">{{ messageDict[row.status] }}</span>

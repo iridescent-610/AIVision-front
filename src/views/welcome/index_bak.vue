@@ -10,7 +10,7 @@
               <el-button type="primary"
                 style="margin-left: 0px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;"
                 @click="handleClickJump('task')">立即体验</el-button>
-              <a href="http://183.129.217.214:20182/10087" target="_blank">
+              <a href="/aivision/10087" target="_blank">
                 <el-button type="info"
                   style="margin-left: 20px; width: 128px; height: 45px; letter-spacing: 1px; font-size: 18px; font-weight: 500;">
                   使用文档</el-button>

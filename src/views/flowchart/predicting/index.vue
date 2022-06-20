@@ -287,11 +287,11 @@ export default {
       }
     );
 
-    if (this.flowchart_id == 167) this.demo_url = "183.129.217.214:20182/20167/aip";
+    if (this.flowchart_id == 167) this.demo_url = "/20167/aip";
     else if (this.flowchart_id == 168)
-      this.demo_url = "183.129.217.214:20182/20168/aip";
+      this.demo_url = "/20168/aip";
     else if (this.flowchart_id == 169)
-      this.demo_url = "183.129.217.214:20182/20169/aip";
+      this.demo_url = "/20169/aip";
   },
   methods: {
     getDatasets() {
@@ -400,7 +400,7 @@ export default {
       });
       setTimeout(() => {
         loading.close();
-        this.downloadFile("http://183.129.217.214:20182/8002/wrapper/aix-deploy-1.7.tar", false);
+        this.downloadFile("/8002/wrapper/aix-deploy-1.7.tar", false);
       }, 2000);
     },
     async downloadFile(url, new_window = true) {

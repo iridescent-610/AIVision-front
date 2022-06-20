@@ -171,7 +171,7 @@ export default {
       console.log(name);
 
       // localhost:15000
-      let routeUrl = "http://183.129.217.214:20182/netron/?modelFile=" + name;
+      let routeUrl = "/aivision/netron/?modelFile=" + name;
       // let routeUrl = this.$router.resolve({
       //   name: 'Multiple Task',
       //   params: { flowchart_id: this.chartId, node_id: model.id },

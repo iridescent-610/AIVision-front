@@ -29,7 +29,7 @@ const actions = {
 
     // commit('setMyFlowcharts', allChartData)
     // request.get(`/api/task/flowchart`, {
-    request.get(`http://183.129.217.214:20182/8002/flowchart/queryFlowchart`, {
+    request.get(`/8002/flowchart/queryFlowchart`, {
     })
       .then((response) => {
         const flowcharts = response.data.data;

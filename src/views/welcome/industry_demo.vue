@@ -43,10 +43,9 @@
       <div v-else-if="typeToDesc[industry_type].demo_type === 'VIDEO'" class="demo-block-video" linknav="true">
         <div class="demo-video-container">
           <div class="">
-            <el-upload class="avatar-uploader-video" action="http://183.129.217.214:20182/20202/demo"
-              v-bind:data="{ key: 'test' }" v-bind:on-progress="uploadVideoProcess"
-              v-bind:on-success="handleVideoSuccess" v-bind:before-upload="beforeUploadVideo"
-              v-bind:show-file-list="false">
+            <el-upload class="avatar-uploader-video" action="/aivision/20202/demo" v-bind:data="{ key: 'test' }"
+              v-bind:on-progress="uploadVideoProcess" v-bind:on-success="handleVideoSuccess"
+              v-bind:before-upload="beforeUploadVideo" v-bind:show-file-list="false">
               <video v-if="videoForm.showVideoPath != '' && !videoFlag" v-bind:src="videoForm.showVideoPath"
                 class="video-avatar" controls="controls">
                 您的浏览器不支持视频播放
@@ -300,20 +299,20 @@ export default {
       };
 
       if (this.industry_type === 'security_check') {
-        this.demo_url = "183.129.217.214:20182/20167/demo"
+        this.demo_url = "/20167/demo"
       } else if (this.industry_type === 'retail_detect') {
-        this.demo_url = "183.129.217.214:20182/20200/demo"
+        this.demo_url = "/20200/demo"
       } else if (this.industry_type === 'card_recognition') {
-        this.demo_url = "183.129.217.214:20182/20201/demo"
+        this.demo_url = "/20201/demo"
       } else if (this.industry_type === 'driver_action_recognition') {
-        this.demo_url = "183.129.217.214:20182/20202/demo"
+        this.demo_url = "/20202/demo"
       }
 
       if (!this.demo_url) {
         this.$message.error("请输入请求url!");
         return;
       }
-      detectDemo('http://' + this.demo_url, data).then((res) => {
+      detectDemo(this.demo_url, data).then((res) => {
         const pred = res.data.result
 
         const canvas = document.getElementById('canvas2')
